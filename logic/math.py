@@ -1,5 +1,12 @@
 from sympy import symbols, Eq, solve, sympify
 
+class Constants():
+    PI = 3.14159265358979323846
+    E = 2.71 # Euler
+    C = 299792458 # Light Speed
+    DEGREES_TO_RADIANS = 0.017453292519943295
+    RADIANS_TO_DEGREES = 57.29577951308232
+
 def solve_equation(*eq_given):
     try:
         eq_sym = []
