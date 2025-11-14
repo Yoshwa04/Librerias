@@ -13,21 +13,20 @@ class Constants():
     
     
 formula_list = {
-    
 }
 
 
-def solve_equation(*eq_given):
+def solve_equation(*eq_given : str):
     '''
         This method solves the given equation/s with the most exactitude possible. 
-        When theres no enough equations for the existing incognites in that equations it just reduces the lenght at its maximum.
+        When theres no enough equations for the existing incognites in that equations it just reduces the length at its maximum.
     '''
     
     try:
         eq_sym = []
         for i in eq_given:
-            izquierda, derecha = i.split("=")
-            eq = Eq(sympify(izquierda), sympify(derecha))
+            left, right = i.split("=")
+            eq = Eq(sympify(left), sympify(right))
             eq_sym.append(eq)
 
         var = sorted(set().union(*[eq.free_symbols for eq in eq_sym]), key=lambda l: l.name)
