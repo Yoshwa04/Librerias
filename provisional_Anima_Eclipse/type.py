@@ -8,7 +8,7 @@ class TypeA(Enum):
     '''Shadow'''
     FLUXOR = "Fluxor"
     '''Fluent'''
-    NEUTRA = "Neutra"
+    NEUTRO = "Neutro"
 
 class TypeB(Enum):   
     IGNIS = "Ignis"

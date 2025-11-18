@@ -1,6 +1,7 @@
 from enum import Enum
 
 class Arcana(Enum):
+    # Group
     SOL = "Sol"
     LUNA = "Luna"
     COMETA = "Cometa"
@@ -8,11 +9,14 @@ class Arcana(Enum):
     AURORA = "Aurora"
     ECLIPSIS = "Eclipsis"
     
+    # City
     ZENITH = "Zenith"
     UNDAE = "Undae"
     NEBULA = "Nebula"
     STELLA = "Stella"
     
+    # Enemy not enemy
     HALOS = "Halos"
     
+    # Rival enemy
     ABYSSUS = "Abyssus"
