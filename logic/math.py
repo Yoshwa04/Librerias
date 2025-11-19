@@ -35,7 +35,8 @@ def solve_equation(*eq_given : str):
     except Exception as e:
         return f"Error: {e}"
 
-
+def give_just_one_solution(solutions: list, solution: str) :
+    return solutions[0][symbols(solution)]
 # res = solve_equation("x = 643/2")
 # x = symbols('x')
 

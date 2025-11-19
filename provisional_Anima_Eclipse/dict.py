@@ -1,8 +1,20 @@
+from collections import defaultdict
 from typing import Dict
 from arcana import Arcana
 from type import TypeA, TypeB
 from nature import Nature
 
+
+def animadex_base_stats_model(hp: int, atk: int, sp_atk: int, _def: int, sp_def: int, spe: int) -> Dict[str, int]:
+    '''This method just returns a dict of the stats given its value'''
+    return {
+        "hp" : hp,
+        "atk" : atk,
+        "sp_atk" : sp_atk,
+        "def" : _def,
+        "sp_def" : sp_def,
+        "spe" : spe  
+    }
 
 
 growth_dict = {
@@ -18,12 +30,12 @@ formula_dict = {
     "stat": "stat = (5 + (lvl/100 * ((stat_base*2) + potential))) * nature",
     "catch": "catch = (hp_max*3 - hp_now*2) * catch_ratio * ball_ratio/hp_max*3 * status ",
     "damage": "damage = 1/100 * stab * eff * v * ((2/10 * lvl + 1) * atq * power/25 * def + 2)",
-    "exp": "exp_given = (exp_base_given*lvl/participants/5) * ((2*lvl+10)**(5/2)) / ((lvl+ally_lvl+10)**(5/2)) + 1) * combat_type * object_modifier",
+    "exp_given": "exp_given = (exp_base_given*lvl/participants/5) * ((2*lvl+10)**(5/2)) / ((lvl+ally_lvl+10)**(5/2)) + 1) * combat_type * object_modifier",
     "growth": growth_dict
 }
 '''A bunch of formulas'''
 
-natures_dict = {
+nature_dict = {
     Nature.BERSERKER:   {"+": "atk", "-": "def"},
     Nature.GLADIADOR:   {"+": "atk", "-": "sp_def"},
     Nature.ASALTANTE:   {"+": "atk", "-": "spe"},
@@ -53,45 +65,94 @@ natures_dict = {
 }
 '''The dictionary of which stats increase or decrease for each nature'''
 
+effectiveness_chart = {
+    TypeA.ESSENTIA: defaultdict(lambda: 1,{TypeA.UMBRA: 2, TypeA.FORMA: 0.5,}),
+    TypeA.FORMA: defaultdict(lambda: 1,{TypeA.UMBRA: 0.5, TypeA.ESSENTIA: 2,}),
+    TypeA.UMBRA: defaultdict(lambda: 1,{TypeA.FORMA: 2, TypeA.ESSENTIA: 0.5,}),
+    
+    TypeB.IGNIS: defaultdict(lambda: 1,{TypeB.PLANTA: 2, TypeB.GLACIES: 2, TypeB.METALLUM: 2, TypeB.AQUA: 0.5, TypeB.RUPES: 0.5, TypeB.TERRA: 0.5,}),
+    TypeB.AQUA: defaultdict(lambda: 1,{TypeB.IGNIS: 2, TypeB.RUPES: 2, TypeB.TERRA: 2, TypeB.PLANTA: 0.5,}),
+    TypeB.PLANTA: defaultdict(lambda: 1,{TypeB.AQUA: 2, TypeB.RUPES: 2, TypeB.TERRA: 2, TypeB.SINISTER: 2, TypeB.IGNIS: 0.5, TypeB.METALLUM: 0.5, TypeB.VENENUM: 0.5,}),
+    TypeB.ELECTRITAS: defaultdict(lambda: 1,{TypeB.AQUA: 2, TypeB.VENTUS: 2, TypeB.PLANTA: 0.5, TypeB.METALLUM: 0.5, TypeB.TERRA: 0}),
+    TypeB.GLACIES: defaultdict(lambda: 1,{TypeB.PLANTA: 2, TypeB.VENTUS: 2, TypeB.TERRA: 2, TypeB.METALLUM: 0.5,}),
+    TypeB.TERRA: defaultdict(lambda: 1,{TypeB.IGNIS: 2, TypeB.ELECTRITAS: 2, TypeB.METALLUM: 2, TypeB.VENTUS: 0,}),
+    TypeB.VENTUS: defaultdict(lambda: 1,{TypeB.PLANTA: 2, TypeB.TERRA: 2,TypeB.ELECTRITAS: 0.5, TypeB.IGNIS: 0.5, TypeB.METALLUM: 0.5,}),
+    TypeB.VENENUM: defaultdict(lambda: 1,{TypeB.PLANTA: 2, TypeB.LUX: 2,TypeB.GLACIES: 0.5,  TypeB.TERRA: 0.5,TypeB.METALLUM: 0,}),
+    TypeB.METALLUM: defaultdict(lambda: 1,{TypeB.GLACIES: 2, TypeB.RUPES: 2, TypeB.LUX: 0.5, TypeB.ELECTRITAS: 0.5, TypeB.AQUA: 0.5, TypeB.TERRA: 0.5, TypeB.SINISTER: 0.5,}),
+    TypeB.LUX: defaultdict(lambda: 1,{TypeB.SINISTER: 2, TypeB.VENENUM: 0.5,}),
+    TypeB.SINISTER: defaultdict(lambda: 1,{TypeB.LUX: 2, TypeB.PLANTA: 0.5,}),
+    TypeB.RUPES: defaultdict(lambda: 1,{TypeB.IGNIS: 2, TypeB.GLACIES: 2, TypeB.METALLUM: 0.5,}),
+}
+'''A dictionary that contains the effectiveness of each type against others'''
 
-# NOMBRE PROVISIONAL
-def generate_base_stats(hp: int, atk: int, sp_atk: int, _def: int, sp_def: int, spe: int) -> Dict[str, int]:
-    '''This method just returns a dict of the stats given its value'''
-    return {
-        "hp" : hp,
-        "atk" : atk,
-        "sp_atk" : sp_atk,
-        "def" : _def,
-        "sp_def" : sp_def,
-        "spe" : spe  
-    }
+movedex = {
+    "000": { #Ejemplo
+        "name": "a",
+        "power": 1,
+        "move_type": TypeA.UMBRA,
+        "category": "physical",
+        "accuracy": 100,
+        "pp": 15,
+        "secondary_effects": None,
+    },
+}
 animadex = {
     "000": { #Ejemplo
         "name": "a",
-        "types": ["typeA", "typeB"],
+        "types": [TypeA.ESSENTIA, TypeB.NEUTRO],
         "ability": "ab",
         "arcana": "ar",
         "growth": "g",
         "exp_base_given": 1,
         "catch_rate" : 255,
         "evolves": None,
-        "base_stats" : generate_base_stats(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
+        "base_stats" : animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
         "move_learning": {
-            4: "move",
+            4: movedex["000"],   
+        },
+        "assisted_techinques": {
+            "001" : movedex["000"],
         }
-    },
-    "001": {
-        "name": "starter1",
+    }, 
+    "001": { 
+        "name": "starter", 
         "types": [TypeA.ESSENTIA, TypeB.NEUTRO],
         "ability": "",
         "arcana": Arcana.TERRA,
         "growth": "parabolic",
+        "exp_base_given": 1,
         "catch_rate" : 45,
-        "evolves": "002",
-        "base_stats" : generate_base_stats(44, 40, 58, 62, 61, 49),
+        "evolves": {"lvl" : 20, "to": "002"},
+        "base_stats" : animadex_base_stats_model(44, 40, 58, 62, 61, 49),
         "move_learning": {
+            
+        },
+        "assisted_techinques": {
+            "001" : movedex["000"],
             
         }     
     },
+    "002": { 
+        "name": "evolved_starter",
+        "types": [TypeA.ESSENTIA, TypeB.NEUTRO],
+        "ability": "",
+        "arcana": Arcana.TERRA,
+        "growth": "parabolic",
+        "exp_base_given": 1,
+        "catch_rate" : 45,
+        "evolves": None,
+        "base_stats" : animadex_base_stats_model(64, 60, 78, 82, 81, 69),
+        "move_learning": {
+            
+        },
+        "assisted_techinques": {
+            "001" : movedex["000"],
+            
+        }
+    },
 }
 '''A dictionary of every single Anima with its information that never changes'''
+
+anssanj = animadex["000"]
+
+# print(anssanj["move_learning"])
