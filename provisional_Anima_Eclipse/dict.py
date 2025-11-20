@@ -3,6 +3,7 @@ from typing import Dict
 from arcana import Arcana
 from type import TypeA, TypeB
 from nature import Nature
+from ability import Ability
 
 
 def animadex_base_stats_model(hp: int, atk: int, sp_atk: int, _def: int, sp_def: int, spe: int) -> Dict[str, int]:
@@ -16,6 +17,14 @@ def animadex_base_stats_model(hp: int, atk: int, sp_atk: int, _def: int, sp_def:
         "spe" : spe  
     }
 
+def animadex_abilitys_model(ability1: Ability, ability2: Ability, hidden: Ability) -> Dict[str, str]:
+    '''This method just returns a dict of the abilitys given'''
+    
+    return {
+        "001" : ability1,
+        "002" : ability2,
+        "00H" : hidden  
+    }
 
 growth_dict = {
     "fast": "growth = 4 * lvl**3 / 5",
@@ -96,11 +105,11 @@ movedex = {
         "secondary_effects": None,
     },
 }
-animadex = {
+animadex = { 
     "000": { #Ejemplo
         "name": "a",
-        "types": [TypeA.ESSENTIA, TypeB.NEUTRO],
-        "ability": "ab",
+        "types": [TypeA.NEUTRO, TypeB.NEUTRO],
+        "abilitys": animadex_abilitys_model(Ability.PHYSICAL_POWER, Ability.MAGIC_POWER, Ability.EXAMPLE_ABILITY),
         "arcana": "ar",
         "growth": "g",
         "exp_base_given": 1,
@@ -117,13 +126,13 @@ animadex = {
     "001": { 
         "name": "starter", 
         "types": [TypeA.ESSENTIA, TypeB.NEUTRO],
-        "ability": "",
+        "abilitys": "",
         "arcana": Arcana.TERRA,
         "growth": "parabolic",
-        "exp_base_given": 1,
-        "catch_rate" : 45,
+        "exp_base_given": 64,
+        "catch_rate": 45,
         "evolves": {"lvl" : 20, "to": "002"},
-        "base_stats" : animadex_base_stats_model(44, 40, 58, 62, 61, 49),
+        "base_stats": animadex_base_stats_model(44, 40, 58, 62, 61, 49),
         "move_learning": {
             
         },
@@ -134,14 +143,32 @@ animadex = {
     },
     "002": { 
         "name": "evolved_starter",
-        "types": [TypeA.ESSENTIA, TypeB.NEUTRO],
-        "ability": "",
+        "types": [TypeA.ESSENTIA, TypeB.LUX],
+        "abilitys": "",
         "arcana": Arcana.TERRA,
         "growth": "parabolic",
-        "exp_base_given": 1,
+        "exp_base_given": 141,
         "catch_rate" : 45,
+        "evolves": {"lvl": 38, "to": "003"},
+        "base_stats": animadex_base_stats_model(58, 54, 72, 79, 77, 56),
+        "move_learning": {
+            
+        },
+        "assisted_techinques": {
+            "001" : movedex["000"],
+            
+        },
+    },
+    "003": { 
+        "name": "final_starter",
+        "types": [TypeA.ESSENTIA, TypeB.LUX],
+        "abilitys": "",
+        "arcana": Arcana.TERRA,
+        "growth": "parabolic",
+        "exp_base_given": 208,
+        "catch_rate": 45,
         "evolves": None,
-        "base_stats" : animadex_base_stats_model(64, 60, 78, 82, 81, 69),
+        "base_stats": animadex_base_stats_model(80, 68, 90, 121, 90, 70),
         "move_learning": {
             
         },
@@ -150,6 +177,55 @@ animadex = {
             
         }
     },
+    "004": { # Poner las stats bien
+        "name": "rival_starter",
+        "types": [TypeA.UMBRA, TypeB.NEUTRO],
+        "abilitys": "",
+        "arcana": Arcana.ABYSSUS,
+        "growth": "parabolic",
+        "exp_base_given": 64,
+        "catch_rate": 45,
+        "evolves": {"lvl" : 20, "to": "005"},
+        "base_stats": animadex_base_stats_model(hp=61, atk=70, sp_atk=54, _def=74, sp_def=77, spe=60),
+        "move_learning": {
+        },
+        "assisted_techinques": {
+            "001" : movedex["000"],
+        }
+    },
+    "005": { 
+        "name": "evolved_rival_starter",
+        "types": [TypeA.UMBRA, TypeB.SINISTER],
+        "abilitys": "",
+        "arcana": Arcana.ABYSSUS,
+        "growth": "parabolic",
+        "exp_base_given": 141,
+        "catch_rate": 45,
+        "evolves": {"lvl": 38, "to": "006"},
+        "base_stats": animadex_base_stats_model(hp=85, atk=88, sp_atk=67, _def=95, sp_def=97, spe=75),
+        "move_learning": {
+        },
+        "assisted_techinques": {
+            "001" : movedex["000"],
+        }
+    },
+    "006": { 
+        "name": "final_rival_starter",
+        "types": [TypeA.UMBRA, TypeB.SINISTER],
+        "abilitys": "",
+        "arcana": Arcana.ABYSSUS,
+        "growth": "parabolic",
+        "exp_base_given": 208,
+        "catch_rate": 45,
+        "evolves": None,
+        "base_stats": animadex_base_stats_model(hp=105, atk=112, sp_atk=85, _def=130, sp_def=95, spe=90),
+        "move_learning": {
+        },
+        "assisted_techinques": {
+            "001" : movedex["000"],
+        }
+    },
+    
 }
 '''A dictionary of every single Anima with its information that never changes'''
 

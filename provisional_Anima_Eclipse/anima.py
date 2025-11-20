@@ -25,7 +25,7 @@ class Anima:
         
         self.type_a = animadex[nAnimadex]["types"][0]
         self.type_b = animadex[nAnimadex]["types"][1]
-        self.ability = animadex[nAnimadex]["ability"]
+        self.ability = animadex[nAnimadex]["abilitys"]["00H"] if random.randint(1, 100) == 100 else random.choice([animadex[nAnimadex]["abilitys"]["001"], animadex[nAnimadex]["abilitys"]["002"]])
         self.arcana = animadex[nAnimadex]["arcana"]
         self.move_learning = animadex[nAnimadex]["move_learning"]
         self.growth = animadex[nAnimadex]["growth"]
@@ -62,7 +62,7 @@ class Anima:
         self.sp_def = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {lvl}", f"stat_base = {self.base_stats['sp_def']}", f"potential = {self.sp_def_potential}", f"nature = {sp_def_modifier}"), "stat"))
         self.spe = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {lvl}", f"stat_base = {self.base_stats['spe']}", f"potential = {self.spe_potential}", f"nature = {spe_modifier}"), "stat"))
         
-        self.exp_needed_next_lvl = 0 if lvl == 100 else int(give_just_one_solution(solve_equation(formula_dict["growth"][self.growth], f"lvl = {lvl}"), "growth")) # Decidir si quiero que se trunque a 0 como esta ahora o que se redondee hacia arriba/abajo.
+        # self.exp_needed_next_lvl = -1 if lvl == 100 else int(give_just_one_solution(solve_equation(formula_dict["growth"][self.growth], f"lvl = {lvl}"), "growth")) # Decidir si quiero que se trunque a 0 como esta ahora o que se redondee hacia arriba/abajo.
         
     def _random_potentials(self):
         self.hp_potential = random.randint(1, 35)
@@ -76,7 +76,7 @@ class Anima:
         return random.choice(list(Nature))
         
     def recieve_damage(self, damage: int):
-        self.hp_now -= damage
+        self.hp_now -= damage 
         
     def cure_anima(self):
         self.hp_now = self.hp_max
@@ -84,8 +84,8 @@ class Anima:
         self.status2 = status2.GOOD
 
 
-ani = Anima("001", 99)
+ani = Anima("000", 99)
 
 
 
-print(ani.exp_needed_next_lvl)
+print(ani.ability)
