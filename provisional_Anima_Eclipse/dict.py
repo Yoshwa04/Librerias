@@ -118,7 +118,7 @@ animadex = {
         "exp_base_given": 1,
         "catch_rate" : 255,
         "evolves": None,
-        "base_stats" : animadex_base_stats_model(hp=80, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
+        "base_stats" : animadex_base_stats_model(hp=250, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
         "move_learning": {
             4: movedex["000"],   
         },

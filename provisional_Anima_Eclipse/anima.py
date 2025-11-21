@@ -91,37 +91,31 @@ class Anima:
         self.status2 = status2.GOOD
 
 
-ani = Anima("000", 50)
+ani = Anima("000", 100)
 
 
-# '''Esto es en batalla'''
+# '''Esto es en batalla - Ejemlplo de como se aplicarian los modificadores de stats en batalla'''
 
-# # Esto al iniciar la pelea
-# atk_btl_increase = 1
-# atk_btl_decrease = 1
-# atk_btl_mod = 1
+# Esto al iniciar la pelea
+atk_btl_increase = 1
+atk_btl_decrease = 1
+atk_btl_mod = 1
 
-    
-# atk_btl_mod *= atk_btl_increase * atk_btl_decrease * 0.5 if "burned" else 1
 
-# # Imaginamos que el rival nos a dado y se ha activado el efecto de bajarnos el atk
-# if atk_btl_decrease == 0.25:
-#     pass #Mensaje de que no se baja mas 
-# elif atk_btl_decrease == 1:
-#     atk_btl_decrease = 0.75
-# elif atk_btl_decrease == 0.75:
-#     atk_btl_decrease = 0.5 
-# else:
-#     atk_btl_decrease = 0.25
-    
-# if atk_btl_increase == 1.75:
-#     pass #Mensaje de que no se sube mas
-# elif atk_btl_increase == 1:
-#     atk_btl_increase = 1.25
-# elif atk_btl_increase == 1.25:
-#     atk_btl_increase = 1.5
-# else:
-#     atk_btl_increase = 1.75
+# Imaginamos que el rival nos a dado y se ha activado el efecto de bajarnos el atk
+if atk_btl_decrease > 0.25:
+    atk_btl_decrease -= 0.25
+else:
+    pass # Ya no puede bajar más
+
+# Imaginamos que hemos usado un movimiento que nos sube el atk
+if atk_btl_increase < 1.75:
+    atk_btl_increase += 0.25
+else:
+    pass # Ya no puede subir más
+
+atk_btl_mod = atk_btl_increase * atk_btl_decrease * 0.5 if "burned" else 1
+damage_dealt = 1 * atk_btl_mod
 
 
 print(ani.hp_now, ani.hp_max)
