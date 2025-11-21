@@ -4,6 +4,7 @@ from arcana import Arcana
 from type import TypeA, TypeB
 from nature import Nature
 from ability import Ability
+from constants import INCREASE, DECREASE
 
 
 def animadex_base_stats_model(hp: int, atk: int, sp_atk: int, _def: int, sp_def: int, spe: int) -> Dict[str, int]:
@@ -17,7 +18,7 @@ def animadex_base_stats_model(hp: int, atk: int, sp_atk: int, _def: int, sp_def:
         "spe" : spe  
     }
 
-def animadex_abilitys_model(ability1: Ability, ability2: Ability, hidden: Ability) -> Dict[str, str]:
+def animadex_abilitys_model(ability1: Ability, ability2: Ability, hidden: Ability) -> Dict[str, Ability]:
     '''This method just returns a dict of the abilitys given'''
     
     return {
@@ -44,33 +45,34 @@ formula_dict = {
 }
 '''A bunch of formulas'''
 
+
 nature_dict = {
-    Nature.BERSERKER:   {"+": "atk", "-": "def"},
-    Nature.GLADIADOR:   {"+": "atk", "-": "sp_def"},
-    Nature.ASALTANTE:   {"+": "atk", "-": "spe"},
-    Nature.BRUTO:       {"+": "atk", "-": "sp_atk"},
+    Nature.BERSERKER:   {INCREASE: "atk", DECREASE: "def"},
+    Nature.GLADIADOR:   {INCREASE: "atk", DECREASE: "sp_def"},
+    Nature.ASALTANTE:   {INCREASE: "atk", DECREASE: "spe"},
+    Nature.BRUTO:       {INCREASE: "atk", DECREASE: "sp_atk"},  
     
-    Nature.GUARDIA:     {"+": "def", "-": "atk"},
-    Nature.MURALLA:     {"+": "def", "-": "sp_atk"},
-    Nature.CENTINELA:   {"+": "def", "-": "dp_def"},
-    Nature.FORTIFICADO: {"+": "def", "-": "spe"},
+    Nature.GUARDIA:     {INCREASE: "def", DECREASE: "atk"},
+    Nature.MURALLA:     {INCREASE: "def", DECREASE: "sp_atk"},
+    Nature.CENTINELA:   {INCREASE: "def", DECREASE: "dp_def"},
+    Nature.FORTIFICADO: {INCREASE: "def", DECREASE: "spe"},
     
-    Nature.HECHICERO:   {"+": "sp_atk", "-": "atk"},
-    Nature.ORACULO:     {"+": "sp_atk", "-": "def"},
-    Nature.MISTICO:     {"+": "sp_atk", "-": "sp_def"},
-    Nature.ERUDITO:     {"+": "sp_atk", "-": "spe"},
+    Nature.HECHICERO:   {INCREASE: "sp_atk", DECREASE: "atk"},
+    Nature.ORACULO:     {INCREASE: "sp_atk", DECREASE: "def"},
+    Nature.MISTICO:     {INCREASE: "sp_atk", DECREASE: "sp_def"},
+    Nature.ERUDITO:     {INCREASE: "sp_atk", DECREASE: "spe"},
     
-    Nature.MONJE:       {"+": "sp_def", "-": "atk"},
-    Nature.ILUMINADO:   {"+": "sp_def", "-": "sp_atk"},
-    Nature.ADIVINO:     {"+": "sp_def", "-": "def"},
-    Nature.ESPIRITUAL:  {"+": "sp_def", "-": "spe"},
+    Nature.MONJE:       {INCREASE: "sp_def", DECREASE: "atk"},
+    Nature.ILUMINADO:   {INCREASE: "sp_def", DECREASE: "sp_atk"},
+    Nature.ADIVINO:     {INCREASE: "sp_def", DECREASE: "def"},
+    Nature.ESPIRITUAL:  {INCREASE: "sp_def", DECREASE: "spe"},  
     
-    Nature.EXPLORADOR:  {"+": "spe", "-": "def"},
-    Nature.CAZADOR:     {"+": "spe", "-": "sp_def"},
-    Nature.BROMISTA:    {"+": "spe", "-": "atk"},
-    Nature.ESPADACHIN:  {"+": "spe", "-": "sp_atk"},
+    Nature.EXPLORADOR:  {INCREASE: "spe", DECREASE: "def"},
+    Nature.CAZADOR:     {INCREASE: "spe", DECREASE: "sp def"},
+    Nature.BROMISTA:    {INCREASE: "spe", DECREASE: "atk"},
+    Nature.ESPADACHIN:  {INCREASE: "spe", DECREASE: "sp_atk"},
     
-    Nature.NEUTRA:      {"+": None, "-": None}
+    Nature.NEUTRA:      {INCREASE: None, DECREASE: None},
 }
 '''The dictionary of which stats increase or decrease for each nature'''
 
@@ -105,17 +107,18 @@ movedex = {
         "secondary_effects": None,
     },
 }
+
 animadex = { 
     "000": { #Ejemplo
         "name": "a",
         "types": [TypeA.NEUTRO, TypeB.NEUTRO],
         "abilitys": animadex_abilitys_model(Ability.PHYSICAL_POWER, Ability.MAGIC_POWER, Ability.EXAMPLE_ABILITY),
         "arcana": "ar",
-        "growth": "g",
+        "growth": "parabolic",
         "exp_base_given": 1,
         "catch_rate" : 255,
         "evolves": None,
-        "base_stats" : animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
+        "base_stats" : animadex_base_stats_model(hp=80, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
         "move_learning": {
             4: movedex["000"],   
         },
@@ -164,7 +167,7 @@ animadex = {
         "types": [TypeA.ESSENTIA, TypeB.LUX],
         "abilitys": "",
         "arcana": Arcana.TERRA,
-        "growth": "parabolic",
+        "growth": "fast",
         "exp_base_given": 208,
         "catch_rate": 45,
         "evolves": None,
@@ -177,7 +180,7 @@ animadex = {
             
         }
     },
-    "004": { # Poner las stats bien
+    "004": {
         "name": "rival_starter",
         "types": [TypeA.UMBRA, TypeB.NEUTRO],
         "abilitys": "",
@@ -186,7 +189,7 @@ animadex = {
         "exp_base_given": 64,
         "catch_rate": 45,
         "evolves": {"lvl" : 20, "to": "005"},
-        "base_stats": animadex_base_stats_model(hp=61, atk=70, sp_atk=54, _def=74, sp_def=77, spe=60),
+        "base_stats": animadex_base_stats_model(hp=49, atk=55, sp_atk=44, _def=60, sp_def=60, spe=53),
         "move_learning": {
         },
         "assisted_techinques": {
@@ -202,7 +205,7 @@ animadex = {
         "exp_base_given": 141,
         "catch_rate": 45,
         "evolves": {"lvl": 38, "to": "006"},
-        "base_stats": animadex_base_stats_model(hp=85, atk=88, sp_atk=67, _def=95, sp_def=97, spe=75),
+        "base_stats": animadex_base_stats_model(hp=61, atk=70, sp_atk=59, _def=81, sp_def=74, spe=61),
         "move_learning": {
         },
         "assisted_techinques": {
@@ -218,7 +221,7 @@ animadex = {
         "exp_base_given": 208,
         "catch_rate": 45,
         "evolves": None,
-        "base_stats": animadex_base_stats_model(hp=105, atk=112, sp_atk=85, _def=130, sp_def=95, spe=90),
+        "base_stats": animadex_base_stats_model(hp=90, atk=92, sp_atk=61, _def=100, sp_def=113, spe=72),
         "move_learning": {
         },
         "assisted_techinques": {

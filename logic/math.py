@@ -26,6 +26,8 @@ def solve_equation(*eq_given : str):
         eq_sym = []
         for i in eq_given:
             left, right = i.split("=")
+            left = left.strip()
+            right = right.strip()
             eq = Eq(sympify(left), sympify(right))
             eq_sym.append(eq)
 

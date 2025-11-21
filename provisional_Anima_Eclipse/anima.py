@@ -35,8 +35,25 @@ class Anima:
         self.base_stats = animadex[nAnimadex]["base_stats"]
         
         self.nature = nature if nature else self._random_nature()
-        nature_effects = nature_dict[self.nature]
         self._random_potentials()
+        
+        self.calculate_stats(first=True)
+        
+        
+        
+    def _random_potentials(self):
+        self.hp_potential = random.randint(1, 35)
+        self.atk_potential = random.randint(1, 35)
+        self.sp_atk_potential = random.randint(1, 35)
+        self.def_potential = random.randint(1, 35)
+        self.sp_def_potential = random.randint(1, 35)
+        self.spe_potential = random.randint(1, 35)
+        
+    def _random_nature(self):
+        return random.choice(list(Nature))
+    
+    def calculate_stats(self, first: bool = False):
+        nature_effects = nature_dict[self.nature]
         
         atk_modifier =      ("1.2" if nature_effects["+"] == "atk" else 
                              "0.8" if nature_effects["-"] == "atk" else 
@@ -54,27 +71,17 @@ class Anima:
                              "0.8" if nature_effects["-"] == "spe" else
                              "1.0")
         
-        self.hp_max = int(give_just_one_solution(solve_equation(formula_dict["hp"], f"lvl = {lvl}", f"stat_base = {self.base_stats['hp']}", f"potential = {self.hp_potential}"), "hp"))
-        self.hp_now = self.hp_max
-        self.atk = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {lvl}", f"stat_base = {self.base_stats['atk']}", f"potential = {self.atk_potential}", f"nature = {atk_modifier}"), "stat"))
-        self.sp_atk = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {lvl}", f"stat_base = {self.base_stats['sp_atk']}", f"potential = {self.sp_atk_potential}", f"nature = {sp_atk_modifier}"), "stat"))
-        self.defense = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {lvl}", f"stat_base = {self.base_stats['def']}", f"potential = {self.def_potential}", f"nature = {def_modifier}"), "stat"))
-        self.sp_def = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {lvl}", f"stat_base = {self.base_stats['sp_def']}", f"potential = {self.sp_def_potential}", f"nature = {sp_def_modifier}"), "stat"))
-        self.spe = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {lvl}", f"stat_base = {self.base_stats['spe']}", f"potential = {self.spe_potential}", f"nature = {spe_modifier}"), "stat"))
+        self.hp_max = int(give_just_one_solution(solve_equation(formula_dict["hp"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['hp']}", f"potential = {self.hp_potential}"), "hp"))
+        if first:
+            self.hp_now = self.hp_max
+        self.atk = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['atk']}", f"potential = {self.atk_potential}", f"nature = {atk_modifier}"), "stat"))
+        self.sp_atk = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['sp_atk']}", f"potential = {self.sp_atk_potential}", f"nature = {sp_atk_modifier}"), "stat"))
+        self.defense = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['def']}", f"potential = {self.def_potential}", f"nature = {def_modifier}"), "stat"))
+        self.sp_def = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['sp_def']}", f"potential = {self.sp_def_potential}", f"nature = {sp_def_modifier}"), "stat"))
+        self.spe = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['spe']}", f"potential = {self.spe_potential}", f"nature = {spe_modifier}"), "stat"))
         
-        # self.exp_needed_next_lvl = -1 if lvl == 100 else int(give_just_one_solution(solve_equation(formula_dict["growth"][self.growth], f"lvl = {lvl}"), "growth")) # Decidir si quiero que se trunque a 0 como esta ahora o que se redondee hacia arriba/abajo.
-        
-    def _random_potentials(self):
-        self.hp_potential = random.randint(1, 35)
-        self.atk_potential = random.randint(1, 35)
-        self.sp_atk_potential = random.randint(1, 35)
-        self.def_potential = random.randint(1, 35)
-        self.sp_def_potential = random.randint(1, 35)
-        self.spe_potential = random.randint(1, 35)
-        
-    def _random_nature(self):
-        return random.choice(list(Nature))
-        
+        self.exp_needed_to_lvl_up = int(give_just_one_solution(solve_equation(formula_dict["growth"][self.growth], f"lvl = {self.lvl + 1}"), "growth")) - int(give_just_one_solution(solve_equation(formula_dict["growth"][self.growth], f"lvl = {self.lvl}"), "growth"))
+    
     def recieve_damage(self, damage: int):
         self.hp_now -= damage 
         
@@ -84,8 +91,37 @@ class Anima:
         self.status2 = status2.GOOD
 
 
-ani = Anima("000", 99)
+ani = Anima("000", 50)
 
 
+# '''Esto es en batalla'''
 
-print(ani.ability)
+# # Esto al iniciar la pelea
+# atk_btl_increase = 1
+# atk_btl_decrease = 1
+# atk_btl_mod = 1
+
+    
+# atk_btl_mod *= atk_btl_increase * atk_btl_decrease * 0.5 if "burned" else 1
+
+# # Imaginamos que el rival nos a dado y se ha activado el efecto de bajarnos el atk
+# if atk_btl_decrease == 0.25:
+#     pass #Mensaje de que no se baja mas 
+# elif atk_btl_decrease == 1:
+#     atk_btl_decrease = 0.75
+# elif atk_btl_decrease == 0.75:
+#     atk_btl_decrease = 0.5 
+# else:
+#     atk_btl_decrease = 0.25
+    
+# if atk_btl_increase == 1.75:
+#     pass #Mensaje de que no se sube mas
+# elif atk_btl_increase == 1:
+#     atk_btl_increase = 1.25
+# elif atk_btl_increase == 1.25:
+#     atk_btl_increase = 1.5
+# else:
+#     atk_btl_increase = 1.75
+
+
+print(ani.hp_now, ani.hp_max)

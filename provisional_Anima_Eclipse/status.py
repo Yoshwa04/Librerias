@@ -10,6 +10,7 @@ class status1(Enum):
     POISONED = "Poisoned"
     FROZEN = "Frozen"
     WET = "Wet"
+    ASLPEEP = "Asleep"
     PROTECTED = "Protected"
     
     
@@ -19,5 +20,6 @@ class status2(Enum):
     CONFUSED = "Confused"
     ANGRY = "Angry"
     ENAMORED = "Enamored"
+    BLINDED = "Blinded"
     FLINTCHED = "Flintched"
     PROTECTED = "Protected"
