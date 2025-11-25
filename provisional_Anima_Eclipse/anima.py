@@ -2,13 +2,17 @@ from typing import Optional
 import random
 import os, sys
 from sympy import symbols
+
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from dict import animadex, formula_dict, nature_dict
+from constants import INCREASE, DECREASE
+from dict import animadex, formula_dict, nature_dict, critical_index_dict
 from status import status1, status2
 from type import TypeA, TypeB
 from arcana import Arcana
 from nature import Nature
+from technique import Technique
 
 from logic.math import solve_equation, give_just_one_solution
 
@@ -52,23 +56,30 @@ class Anima:
     def _random_nature(self):
         return random.choice(list(Nature))
     
-    def calculate_stats(self, first: bool = False):
+    def _reset_type(self):
+        self.type_a = animadex[self.animadex]["types"][0]    
+        
+    def change_lvl(self, min:int, max :int):
+        self.lvl = random.randint(min, max)
+        self.calculate_stats(True)
+        
+    def calculate_stats(self, first: Optional[bool] = False):
         nature_effects = nature_dict[self.nature]
         
-        atk_modifier =      ("1.2" if nature_effects["+"] == "atk" else 
-                             "0.8" if nature_effects["-"] == "atk" else 
+        atk_modifier =      ("1.2" if nature_effects[INCREASE] == "atk" else 
+                             "0.8" if nature_effects[DECREASE] == "atk" else 
                              "1.0")
-        sp_atk_modifier =   ("1.2" if nature_effects["+"] == "sp_atk" else
-                             "0.8" if nature_effects["-"] == "sp_atk" else 
+        sp_atk_modifier =   ("1.2" if nature_effects[INCREASE] == "sp_atk" else
+                             "0.8" if nature_effects[DECREASE] == "sp_atk" else 
                              "1.0")
-        def_modifier =      ("1.2" if nature_effects["+"] == "def" else
-                             "0.8" if nature_effects["-"] == "def" else
+        def_modifier =      ("1.2" if nature_effects[INCREASE] == "def" else
+                             "0.8" if nature_effects[DECREASE] == "def" else
                              "1.0")
-        sp_def_modifier =   ("1.2" if nature_effects["+"] == "sp_def" else
-                             "0.8" if nature_effects["-"] == "sp_def" else 
+        sp_def_modifier =   ("1.2" if nature_effects[INCREASE] == "sp_def" else
+                             "0.8" if nature_effects[DECREASE] == "sp_def" else 
                              "1.0")
-        spe_modifier =      ("1.2" if nature_effects["+"] == "spe" else
-                             "0.8" if nature_effects["-"] == "spe" else
+        spe_modifier =      ("1.2" if nature_effects[INCREASE] == "spe" else
+                             "0.8" if nature_effects[DECREASE] == "spe" else
                              "1.0")
         
         self.hp_max = int(give_just_one_solution(solve_equation(formula_dict["hp"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['hp']}", f"potential = {self.hp_potential}"), "hp"))
@@ -80,7 +91,7 @@ class Anima:
         self.sp_def = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['sp_def']}", f"potential = {self.sp_def_potential}", f"nature = {sp_def_modifier}"), "stat"))
         self.spe = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['spe']}", f"potential = {self.spe_potential}", f"nature = {spe_modifier}"), "stat"))
         
-        self.exp_needed_to_lvl_up = int(give_just_one_solution(solve_equation(formula_dict["growth"][self.growth], f"lvl = {self.lvl + 1}"), "growth")) - int(give_just_one_solution(solve_equation(formula_dict["growth"][self.growth], f"lvl = {self.lvl}"), "growth"))
+        self.exp_needed_to_lvl_up = -1 if self.lvl == 100 else int(give_just_one_solution(solve_equation(formula_dict["growth"][self.growth], f"lvl = {self.lvl + 1}"), "growth")) - int(give_just_one_solution(solve_equation(formula_dict["growth"][self.growth], f"lvl = {self.lvl}"), "growth"))
     
     def recieve_damage(self, damage: int):
         self.hp_now -= damage 
@@ -90,32 +101,49 @@ class Anima:
         self.status1 = status1.GOOD
         self.status2 = status2.GOOD
 
+    # Esto no se si ira aqui o en los metodos de combate
+    def change_fluxor_type(self, technique: Technique):
+        if technique.type == TypeA.UMBRA and self.type_a != TypeA.UMBRA:
+            self.type_a = TypeA.UMBRA
+        elif technique.type == TypeA.ESSENTIA and self.type_a != TypeA.ESSENTIA:
+            self.type_a = TypeA.ESSENTIA
 
-ani = Anima("000", 100)
+
+ani = Anima("001", 5, Nature.ADIVINO) 
 
 
-# '''Esto es en batalla - Ejemlplo de como se aplicarian los modificadores de stats en batalla'''
+# '''Esto es en batalla - Ejemplo de como se aplicarian los modificadores de stats en batalla'''
 
 # Esto al iniciar la pelea
-atk_btl_increase = 1
-atk_btl_decrease = 1
+atk_btl_increase_decrease = 1
 atk_btl_mod = 1
-
+crit_index = critical_index_dict[0] # Indice de crítico
+critical = True
 
 # Imaginamos que el rival nos a dado y se ha activado el efecto de bajarnos el atk
-if atk_btl_decrease > 0.25:
-    atk_btl_decrease -= 0.25
+if atk_btl_increase_decrease > 0.25:
+    atk_btl_increase_decrease -= 0.25
 else:
     pass # Ya no puede bajar más
 
 # Imaginamos que hemos usado un movimiento que nos sube el atk
-if atk_btl_increase < 1.75:
-    atk_btl_increase += 0.25
+if atk_btl_increase_decrease < 1.75:
+    atk_btl_increase_decrease += 0.25
 else:
     pass # Ya no puede subir más
 
-atk_btl_mod = atk_btl_increase * atk_btl_decrease * 0.5 if "burned" else 1
+critical = True if random.randint(1, 100) <= crit_index else False
+
+if critical:
+    if atk_btl_increase_decrease < 1:
+        atk_btl_increase_decrease = 1
+    atk_btl_mod = atk_btl_increase_decrease * 1.5
+else:
+    atk_btl_mod = atk_btl_increase_decrease
+
+atk_btl_mod *=  0.5 if "burned" else 1
+daññño = 100 / (50 if not critical else 100) # Representacion de la parte de la formula del daño que ignora la subida de def del rival en caso de crítico
 damage_dealt = 1 * atk_btl_mod
 
 
-print(ani.hp_now, ani.hp_max)
+print(ani.exp_needed_to_lvl_up)

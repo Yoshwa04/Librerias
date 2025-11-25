@@ -1,6 +1,7 @@
 from collections import defaultdict
 from typing import Dict
 from arcana import Arcana
+from category import Category
 from type import TypeA, TypeB
 from nature import Nature
 from ability import Ability
@@ -77,59 +78,69 @@ nature_dict = {
 '''The dictionary of which stats increase or decrease for each nature'''
 
 effectiveness_chart = {
-    TypeA.ESSENTIA: defaultdict(lambda: 1,{TypeA.UMBRA: 2, TypeA.FORMA: 0.5,}),
-    TypeA.FORMA: defaultdict(lambda: 1,{TypeA.UMBRA: 0.5, TypeA.ESSENTIA: 2,}),
-    TypeA.UMBRA: defaultdict(lambda: 1,{TypeA.FORMA: 2, TypeA.ESSENTIA: 0.5,}),
+    TypeA.ESSENTIA:     defaultdict(lambda: 1,{TypeA.UMBRA: 2, TypeA.FORMA: 0.5,}),
+    TypeA.FORMA:        defaultdict(lambda: 1,{TypeA.UMBRA: 0.5, TypeA.ESSENTIA: 2,}),
+    TypeA.UMBRA:        defaultdict(lambda: 1,{TypeA.FORMA: 2, TypeA.ESSENTIA: 0.5,}),
     
-    TypeB.IGNIS: defaultdict(lambda: 1,{TypeB.PLANTA: 2, TypeB.GLACIES: 2, TypeB.METALLUM: 2, TypeB.AQUA: 0.5, TypeB.RUPES: 0.5, TypeB.TERRA: 0.5,}),
-    TypeB.AQUA: defaultdict(lambda: 1,{TypeB.IGNIS: 2, TypeB.RUPES: 2, TypeB.TERRA: 2, TypeB.PLANTA: 0.5,}),
-    TypeB.PLANTA: defaultdict(lambda: 1,{TypeB.AQUA: 2, TypeB.RUPES: 2, TypeB.TERRA: 2, TypeB.SINISTER: 2, TypeB.IGNIS: 0.5, TypeB.METALLUM: 0.5, TypeB.VENENUM: 0.5,}),
-    TypeB.ELECTRITAS: defaultdict(lambda: 1,{TypeB.AQUA: 2, TypeB.VENTUS: 2, TypeB.PLANTA: 0.5, TypeB.METALLUM: 0.5, TypeB.TERRA: 0}),
-    TypeB.GLACIES: defaultdict(lambda: 1,{TypeB.PLANTA: 2, TypeB.VENTUS: 2, TypeB.TERRA: 2, TypeB.METALLUM: 0.5,}),
-    TypeB.TERRA: defaultdict(lambda: 1,{TypeB.IGNIS: 2, TypeB.ELECTRITAS: 2, TypeB.METALLUM: 2, TypeB.VENTUS: 0,}),
-    TypeB.VENTUS: defaultdict(lambda: 1,{TypeB.PLANTA: 2, TypeB.TERRA: 2,TypeB.ELECTRITAS: 0.5, TypeB.IGNIS: 0.5, TypeB.METALLUM: 0.5,}),
-    TypeB.VENENUM: defaultdict(lambda: 1,{TypeB.PLANTA: 2, TypeB.LUX: 2,TypeB.GLACIES: 0.5,  TypeB.TERRA: 0.5,TypeB.METALLUM: 0,}),
-    TypeB.METALLUM: defaultdict(lambda: 1,{TypeB.GLACIES: 2, TypeB.RUPES: 2, TypeB.LUX: 0.5, TypeB.ELECTRITAS: 0.5, TypeB.AQUA: 0.5, TypeB.TERRA: 0.5, TypeB.SINISTER: 0.5,}),
-    TypeB.LUX: defaultdict(lambda: 1,{TypeB.SINISTER: 2, TypeB.VENENUM: 0.5,}),
-    TypeB.SINISTER: defaultdict(lambda: 1,{TypeB.LUX: 2, TypeB.PLANTA: 0.5,}),
-    TypeB.RUPES: defaultdict(lambda: 1,{TypeB.IGNIS: 2, TypeB.GLACIES: 2, TypeB.METALLUM: 0.5,}),
+    TypeB.IGNIS:        defaultdict(lambda: 1,{TypeB.PLANTA: 2, TypeB.GLACIES: 2, TypeB.METALLUM: 2, TypeB.AQUA: 0.5, TypeB.RUPES: 0.5, TypeB.TERRA: 0.5,}),
+    TypeB.AQUA:         defaultdict(lambda: 1,{TypeB.IGNIS: 2, TypeB.RUPES: 2, TypeB.TERRA: 2, TypeB.PLANTA: 0.5,}),
+    TypeB.PLANTA:       defaultdict(lambda: 1,{TypeB.AQUA: 2, TypeB.RUPES: 2, TypeB.TERRA: 2, TypeB.SINISTER: 2, TypeB.IGNIS: 0.5, TypeB.METALLUM: 0.5, TypeB.VENENUM: 0.5,}),
+    TypeB.ELECTRITAS:   defaultdict(lambda: 1,{TypeB.AQUA: 2, TypeB.VENTUS: 2, TypeB.PLANTA: 0.5, TypeB.METALLUM: 0.5, TypeB.TERRA: 0}),
+    TypeB.GLACIES:      defaultdict(lambda: 1,{TypeB.PLANTA: 2, TypeB.VENTUS: 2, TypeB.TERRA: 2, TypeB.METALLUM: 0.5,}),
+    TypeB.TERRA:        defaultdict(lambda: 1,{TypeB.IGNIS: 2, TypeB.ELECTRITAS: 2, TypeB.METALLUM: 2, TypeB.VENTUS: 0,}),
+    TypeB.VENTUS:       defaultdict(lambda: 1,{TypeB.PLANTA: 2, TypeB.TERRA: 2,TypeB.ELECTRITAS: 0.5, TypeB.IGNIS: 0.5, TypeB.METALLUM: 0.5,}),
+    TypeB.VENENUM:      defaultdict(lambda: 1,{TypeB.PLANTA: 2, TypeB.LUX: 2,TypeB.GLACIES: 0.5,  TypeB.TERRA: 0.5,TypeB.METALLUM: 0,}),
+    TypeB.METALLUM:     defaultdict(lambda: 1,{TypeB.GLACIES: 2, TypeB.RUPES: 2, TypeB.LUX: 0.5, TypeB.ELECTRITAS: 0.5, TypeB.AQUA: 0.5, TypeB.TERRA: 0.5, TypeB.SINISTER: 0.5,}),
+    TypeB.LUX:          defaultdict(lambda: 1,{TypeB.SINISTER: 2, TypeB.VENENUM: 0.5,}),
+    TypeB.SINISTER:     defaultdict(lambda: 1,{TypeB.LUX: 2, TypeB.PLANTA: 0.5,}),
+    TypeB.RUPES:        defaultdict(lambda: 1,{TypeB.IGNIS: 2, TypeB.GLACIES: 2, TypeB.METALLUM: 0.5,}),
 }
 '''A dictionary that contains the effectiveness of each type against others'''
 
-movedex = {
+critical_index_dict = {   
+    0: 6.25,
+    1: 12.5,
+    2: 25,
+    3: 33.3,
+    4: 50,
+}
+'''A dictionary that contains the critical hit chance percentages based on the index'''
+
+techdex = {
     "000": { #Ejemplo
         "name": "a",
         "power": 1,
-        "move_type": TypeA.UMBRA,
-        "category": "physical",
+        "type": TypeA.UMBRA,
+        "category": Category.PHYSICAL,
         "accuracy": 100,
         "pp": 15,
         "secondary_effects": None,
     },
 }
+'''A dictionary of every single Technique with its information that never changes'''
 
 animadex = { 
     "000": { #Ejemplo
         "name": "a",
         "types": [TypeA.NEUTRO, TypeB.NEUTRO],
         "abilitys": animadex_abilitys_model(Ability.PHYSICAL_POWER, Ability.MAGIC_POWER, Ability.EXAMPLE_ABILITY),
-        "arcana": "ar",
+        "arcana": Arcana.ABYSSUS,
         "growth": "parabolic",
         "exp_base_given": 1,
         "catch_rate" : 255,
         "evolves": None,
         "base_stats" : animadex_base_stats_model(hp=250, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
-        "move_learning": {
-            4: movedex["000"],   
+        "technique_learning": {
+            4: techdex["000"],   
         },
         "assisted_techinques": {
-            "001" : movedex["000"],
+            "001" : techdex["000"],
         }
     }, 
     "001": { 
         "name": "starter", 
         "types": [TypeA.ESSENTIA, TypeB.NEUTRO],
-        "abilitys": "",
+        "abilitys": animadex_abilitys_model(Ability.PHYSICAL_POWER, Ability.MAGIC_POWER, Ability.EXAMPLE_ABILITY),
         "arcana": Arcana.TERRA,
         "growth": "parabolic",
         "exp_base_given": 64,
@@ -140,7 +151,7 @@ animadex = {
             
         },
         "assisted_techinques": {
-            "001" : movedex["000"],
+            "001" : techdex["000"],
             
         }     
     },
@@ -158,7 +169,7 @@ animadex = {
             
         },
         "assisted_techinques": {
-            "001" : movedex["000"],
+            "001" : techdex["000"],
             
         },
     },
@@ -176,7 +187,7 @@ animadex = {
             
         },
         "assisted_techinques": {
-            "001" : movedex["000"],
+            "001" : techdex["000"],
             
         }
     },
@@ -193,7 +204,7 @@ animadex = {
         "move_learning": {
         },
         "assisted_techinques": {
-            "001" : movedex["000"],
+            "001" : techdex["000"],
         }
     },
     "005": { 
@@ -209,7 +220,7 @@ animadex = {
         "move_learning": {
         },
         "assisted_techinques": {
-            "001" : movedex["000"],
+            "001" : techdex["000"],
         }
     },
     "006": { 
@@ -225,13 +236,14 @@ animadex = {
         "move_learning": {
         },
         "assisted_techinques": {
-            "001" : movedex["000"],
+            "001" : techdex["000"],
         }
     },
     
 }
 '''A dictionary of every single Anima with its information that never changes'''
 
-anssanj = animadex["000"]
+
+tfug = effectiveness_chart[TypeA.ESSENTIA][TypeA.UMBRA]
 
 # print(anssanj["move_learning"])

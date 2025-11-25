@@ -1,3 +1,4 @@
+from typing import List, Dict, Union, Any
 from sympy import symbols, Eq, solve, sympify
 
 class Constants():
@@ -16,11 +17,12 @@ formula_list = {
 }
 
 
-def solve_equation(*eq_given : str):
-    '''
-        This method solves the given equation/s with the most exactitude possible. 
-        When theres no enough equations for the existing incognites in that equations it just reduces the length at its maximum.
-    '''
+def solve_equation(*eq_given : str) -> Union[List[Dict[str, Any]], str]:
+    """This method solves the given equation/s with the most exactitude possible. When theres no enough equations for the existing incognites in that equations it just reduces the length at its maximum.
+
+    Returns:
+          Union[List[Dict[str, Any]], str]: A list of solution dictionaries or an error message.
+    """
     
     try:
         eq_sym = []
@@ -37,11 +39,17 @@ def solve_equation(*eq_given : str):
     except Exception as e:
         return f"Error: {e}"
 
-def give_just_one_solution(solutions: list, solution: str) :
+def give_just_one_solution(solutions: list[Dict[Any, Any]], solution: str) -> Any:
+    """Returns the value of a specific variable from the first solution in a list of SymPy solutions.
+
+    Args:
+        solutions (list[Dict[Any, Any]]): A list of solution dictionaries.
+        solution (str): The name of the variable whose value should be extracted. 
+
+    Returns:
+        Any: The value associated with the requested variable in the first solution. 
+            The returned type depends on SymPy and may be an integer, float, Rational, 
+            symbolic expression, or any other SymPy-compatible type.
+    """
+
     return solutions[0][symbols(solution)]
-# res = solve_equation("x = 643/2")
-# x = symbols('x')
-
-# value = res[0][x]
-
-# print(int(value))
