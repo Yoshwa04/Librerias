@@ -1,7 +1,13 @@
+import os, sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from collections import defaultdict
 from typing import Dict
 from arcana import Arcana
 from category import Category
+from anima import Anima
+from secondary_effect import SecondaryEffect
+from status import Status1, Status2
 from type import TypeA, TypeB
 from nature import Nature
 from ability import Ability
@@ -19,9 +25,8 @@ def animadex_base_stats_model(hp: int, atk: int, sp_atk: int, _def: int, sp_def:
         "spe" : spe  
     }
 
-def animadex_abilitys_model(ability1: Ability, ability2: Ability, hidden: Ability) -> Dict[str, Ability]:
+def animadex_abilitys_model(ability1: str, ability2: str, hidden: str) -> Dict[str, Ability]:
     '''This method just returns a dict of the abilitys given'''
-    
     return {
         "001" : ability1,
         "002" : ability2,
@@ -42,7 +47,8 @@ formula_dict = {
     "catch": "catch = (hp_max*3 - hp_now*2) * catch_ratio * ball_ratio/hp_max*3 * status ",
     "damage": "damage = 1/100 * stab * eff * v * ((2/10 * lvl + 1) * atq * power/25 * def + 2)",
     "exp_given": "exp_given = (exp_base_given*lvl/participants/5) * ((2*lvl+10)**(5/2)) / ((lvl+ally_lvl+10)**(5/2)) + 1) * combat_type * object_modifier",
-    "growth": growth_dict
+    "growth": growth_dict,
+    "hit_chance": "hit_chance = move_accuracy/100 * (attacker_accuracy/defender_evasion)", # move_acuracy: si es 80 por ej. seria 0.8 | Si hot_chance es mayor a 1 entonces acierta.
 }
 '''A bunch of formulas'''
 
@@ -106,7 +112,7 @@ critical_index_dict = {
 }
 '''A dictionary that contains the critical hit chance percentages based on the index'''
 
-techdex = {
+techdex = { # Guardar tambien -> prioridad? curacion? objetivo?
     "000": { #Ejemplo
         "name": "a",
         "power": 1,
@@ -115,15 +121,73 @@ techdex = {
         "accuracy": 100,
         "pp": 15,
         "secondary_effects": None,
+        "priority": False,
+        "heal": False,
+        "objective": "self / enemy / all / all_enemys"
     },
+    "001": {
+        "name": "Strike",
+        "power": 40,
+        "type": TypeB.NEUTRO,
+        "category": Category.PHYSICAL,
+        "accuracy": 100,
+        "pp": 30,
+        "secondary_effects": None,
+    },
+    "002": {
+        "name": "Double Punch",
+        "power": 20,
+        "type": TypeB.NEUTRO,
+        "category": Category.PHYSICAL,
+        "accuracy": 90,
+        "pp": 10,
+        "secondary_effects": None,  
+    },
+    "003": {
+        "name": "Mega Punch",
+        "power": 80,
+        "type": TypeB.NEUTRO,
+        "category": Category.PHYSICAL,
+        "accuracy": 80,
+        "pp": 10,
+        "secondary_effects": None
+    },
+    "004": {
+        "name": "Swift",
+        "power": 60,
+        "type": TypeB.NEUTRO,
+        "category": Category.SPECIAL,
+        "accuracy": "always",
+        "pp": 20,
+        "secondary_effects": None
+    },
+    "005": {
+        "name": "Tri Attack",
+        "power": 80,
+        "type": TypeB.NEUTRO,
+        "category": Category.SPECIAL,
+        "accuracy": 100,
+        "pp": 15,
+        "secondary_effects": {SecondaryEffect.BURN: 33, SecondaryEffect.FREEZE: 66, SecondaryEffect.PARALIZE: 100}
+    },
+    "006": {
+        "name": "Restore",
+        "power": None,
+        "type": TypeB.NEUTRO,
+        "category": Category.STATUS,
+        "accuracy": "always",
+        "pp": 5,
+        "secondary_effects": None
+    }        
 }
 '''A dictionary of every single Technique with its information that never changes'''
+
 
 animadex = { 
     "000": { #Ejemplo
         "name": "a",
         "types": [TypeA.NEUTRO, TypeB.NEUTRO],
-        "abilitys": animadex_abilitys_model(Ability.PHYSICAL_POWER, Ability.MAGIC_POWER, Ability.EXAMPLE_ABILITY),
+        "abilitys": animadex_abilitys_model("000", "000", "000"),
         "arcana": Arcana.ABYSSUS,
         "growth": "parabolic",
         "exp_base_given": 1,
@@ -147,10 +211,10 @@ animadex = {
         "catch_rate": 45,
         "evolves": {"lvl" : 20, "to": "002"},
         "base_stats": animadex_base_stats_model(44, 40, 58, 62, 61, 49),
-        "move_learning": {
+        "technique_learning": {
             
         },
-        "assisted_techinques": {
+        "assisted_techniques": {
             "001" : techdex["000"],
             
         }     
@@ -165,10 +229,10 @@ animadex = {
         "catch_rate" : 45,
         "evolves": {"lvl": 38, "to": "003"},
         "base_stats": animadex_base_stats_model(58, 54, 72, 79, 77, 56),
-        "move_learning": {
+        "technique_learning": {
             
         },
-        "assisted_techinques": {
+        "assisted_techniques": {
             "001" : techdex["000"],
             
         },
@@ -183,12 +247,11 @@ animadex = {
         "catch_rate": 45,
         "evolves": None,
         "base_stats": animadex_base_stats_model(80, 68, 90, 121, 90, 70),
-        "move_learning": {
+        "technique_learning": {
             
         },
-        "assisted_techinques": {
+        "assisted_techniques": {
             "001" : techdex["000"],
-            
         }
     },
     "004": {
@@ -201,9 +264,9 @@ animadex = {
         "catch_rate": 45,
         "evolves": {"lvl" : 20, "to": "005"},
         "base_stats": animadex_base_stats_model(hp=49, atk=55, sp_atk=44, _def=60, sp_def=60, spe=53),
-        "move_learning": {
+        "technique_learning": {
         },
-        "assisted_techinques": {
+        "assisted_techniques": {
             "001" : techdex["000"],
         }
     },
@@ -217,9 +280,9 @@ animadex = {
         "catch_rate": 45,
         "evolves": {"lvl": 38, "to": "006"},
         "base_stats": animadex_base_stats_model(hp=61, atk=70, sp_atk=59, _def=81, sp_def=74, spe=61),
-        "move_learning": {
+        "technique_learning": {
         },
-        "assisted_techinques": {
+        "assisted_techniques": {
             "001" : techdex["000"],
         }
     },
@@ -233,9 +296,26 @@ animadex = {
         "catch_rate": 45,
         "evolves": None,
         "base_stats": animadex_base_stats_model(hp=90, atk=92, sp_atk=61, _def=100, sp_def=113, spe=72),
-        "move_learning": {
+        "technique_learning": {
+            
         },
-        "assisted_techinques": {
+        "assisted_techniques": {
+            "001" : techdex["000"],
+        }
+    },
+    "007": {
+        "name": "antagonist_starter",
+        "types": [TypeA.FORMA, TypeB.NEUTRO],
+        "abilitys": "",
+        "arcana": Arcana.HALOS,
+        "growth": "parabolic",
+        "exp_base_given": 64,
+        "evolves": {20: "008"},
+        "base_stats": animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), # modificar
+        "technique_learning": {
+            
+        },
+        "assisted_techniques": {
             "001" : techdex["000"],
         }
     },
@@ -244,6 +324,4 @@ animadex = {
 '''A dictionary of every single Anima with its information that never changes'''
 
 
-tfug = effectiveness_chart[TypeA.ESSENTIA][TypeA.UMBRA]
-
-# print(anssanj["move_learning"])
+anima = Anima("001", 5, 5)

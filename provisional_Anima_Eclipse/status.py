@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class status1(Enum):
+class Status1(Enum):
     GOOD = "Good"
     INVULNERABLE = "Invulnerable"
     FAINTED = "Fainted"
@@ -14,12 +14,12 @@ class status1(Enum):
     PROTECTED = "Protected"
     
     
-class status2(Enum):
+class Status2(Enum):
     GOOD = "Good"
     INVULNERABLE = "Invulnerable"    
     CONFUSED = "Confused"
     ANGRY = "Angry"
     ENAMORED = "Enamored"
     BLINDED = "Blinded"
-    FLINTCHED = "Flintched"
+    FLINCHED = "Flinched"
     PROTECTED = "Protected"
