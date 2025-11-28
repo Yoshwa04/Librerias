@@ -10,7 +10,7 @@ from secondary_effect import SecondaryEffect
 from status import Status1, Status2
 from type import TypeA, TypeB
 from nature import Nature
-from ability import Ability
+from ability import Ability, abilitydex
 from constants import INCREASE, DECREASE
 
 
@@ -25,7 +25,7 @@ def animadex_base_stats_model(hp: int, atk: int, sp_atk: int, _def: int, sp_def:
         "spe" : spe  
     }
 
-def animadex_abilitys_model(ability1: str, ability2: str, hidden: str) -> Dict[str, Ability]:
+def animadex_abilitys_model(ability1, ability2, hidden) -> Dict[str, Ability]:
     '''This method just returns a dict of the abilitys given'''
     return {
         "001" : ability1,
@@ -48,7 +48,7 @@ formula_dict = {
     "damage": "damage = 1/100 * stab * eff * v * ((2/10 * lvl + 1) * atq * power/25 * def + 2)",
     "exp_given": "exp_given = (exp_base_given*lvl/participants/5) * ((2*lvl+10)**(5/2)) / ((lvl+ally_lvl+10)**(5/2)) + 1) * combat_type * object_modifier",
     "growth": growth_dict,
-    "hit_chance": "hit_chance = move_accuracy/100 * (attacker_accuracy/defender_evasion)", # move_acuracy: si es 80 por ej. seria 0.8 | Si hot_chance es mayor a 1 entonces acierta.
+    "hit_chance": "hit_chance = move_accuracy/100 * (attacker_accuracy/defender_evasion)", # move_acuracy: si es 80 por ej. seria 0.8 | Si hit_chance es mayor a 1 entonces acierta.
 }
 '''A bunch of formulas'''
 
@@ -168,7 +168,7 @@ techdex = { # Guardar tambien -> prioridad? curacion? objetivo?
         "category": Category.SPECIAL,
         "accuracy": 100,
         "pp": 15,
-        "secondary_effects": {SecondaryEffect.BURN: 33, SecondaryEffect.FREEZE: 66, SecondaryEffect.PARALIZE: 100}
+        "secondary_effects": {SecondaryEffect.BURN: 33, SecondaryEffect.FREEZE: 66, SecondaryEffect.PARALIZE: 100} # revisar
     },
     "006": {
         "name": "Restore",
@@ -187,7 +187,7 @@ animadex = {
     "000": { #Ejemplo
         "name": "a",
         "types": [TypeA.NEUTRO, TypeB.NEUTRO],
-        "abilitys": animadex_abilitys_model("000", "000", "000"),
+        "abilitys": animadex_abilitys_model(abilitydex["000"], abilitydex["000"], abilitydex["000"]),
         "arcana": Arcana.ABYSSUS,
         "growth": "parabolic",
         "exp_base_given": 1,
