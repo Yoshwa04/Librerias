@@ -25,7 +25,7 @@ def animadex_base_stats_model(hp: int, atk: int, sp_atk: int, _def: int, sp_def:
         "spe" : spe  
     }
 
-def animadex_abilitys_model(ability1, ability2, hidden) -> Dict[str, Ability]:
+def animadex_abilitys_model(ability1: str, ability2: str, hidden: str) -> Dict[str, Ability]:
     '''This method just returns a dict of the abilitys given'''
     return {
         "001" : ability1,
@@ -44,9 +44,9 @@ growth_dict = {
 formula_dict = {
     "hp": "hp = (lvl/100 * ((stat_base*2) + potential)) + lvl",
     "stat": "stat = (5 + (lvl/100 * ((stat_base*2) + potential))) * nature",
-    "catch": "catch = (hp_max*3 - hp_now*2) * catch_ratio * ball_ratio/hp_max*3 * status ",
+    "catch": "catch = (hp_max*3 - hp_now*2) * catch_ratio * ball_ratio/hp_max*3 * status",
     "damage": "damage = 1/100 * stab * eff * v * ((2/10 * lvl + 1) * atq * power/25 * def + 2)",
-    "exp_given": "exp_given = (exp_base_given*lvl/participants/5) * ((2*lvl+10)**(5/2)) / ((lvl+ally_lvl+10)**(5/2)) + 1) * combat_type * object_modifier",
+    "exp_given": "exp_given = (exp_base_given*lvl/participants/5) * ((2*lvl+10)**(5/2)) / ((lvl+ally_lvl+10)**(5/2)) + 1) * combat_type * object_modifier", # si es wild 1 si no 1.5
     "growth": growth_dict,
     "hit_chance": "hit_chance = move_accuracy/100 * (attacker_accuracy/defender_evasion)", # move_acuracy: si es 80 por ej. seria 0.8 | Si hit_chance es mayor a 1 entonces acierta.
 }
@@ -178,7 +178,7 @@ techdex = { # Guardar tambien -> prioridad? curacion? objetivo?
         "accuracy": "always",
         "pp": 5,
         "secondary_effects": None
-    }        
+    },        
 }
 '''A dictionary of every single Technique with its information that never changes'''
 
@@ -310,13 +310,45 @@ animadex = {
         "arcana": Arcana.HALOS,
         "growth": "parabolic",
         "exp_base_given": 64,
-        "evolves": {20: "008"},
+        "evolves": {"lvl": 20, "to": "008"},
         "base_stats": animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), # modificar
         "technique_learning": {
             
         },
         "assisted_techniques": {
             "001" : techdex["000"],
+        }
+    },
+    "008": {
+        "name": "antagonist_evolved_starter",
+        "types": [TypeA.FORMA, TypeB.PLANTA],
+        "abilities": "",
+        "arcana": Arcana.HALOS,
+        "growth": "parabolic",
+        "exp_base_given": 141,
+        "evolves": {"lvl": 40, "to": "009"},
+        "base_stats": animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
+        "technique_learning": {
+            
+        },
+        "assisted_techniques": {
+            
+        }
+    },
+    "009": {
+        "name": "antagonist_final_starter",
+        "types": [TypeA.FORMA, TypeB.PLANTA],
+        "abilities": "",
+        "arcana": Arcana.HALOS,
+        "growth": "parabolic",
+        "exp_base_given": 208,
+        "evolves": None,
+        "base_stats": animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
+        "technique_learning": {
+            
+        },
+        "assisted_techniques": {
+            
         }
     },
     
