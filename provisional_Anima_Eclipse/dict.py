@@ -185,7 +185,7 @@ techdex = { # Guardar tambien -> prioridad? curacion? objetivo?
 
 animadex = { 
     "000": { #Ejemplo
-        "name": "a",
+        "name": "a",    
         "types": [TypeA.NEUTRO, TypeB.NEUTRO],
         "abilitys": animadex_abilitys_model(abilitydex["000"], abilitydex["000"], abilitydex["000"]),
         "arcana": Arcana.ABYSSUS,
