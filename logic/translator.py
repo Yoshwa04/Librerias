@@ -16,10 +16,10 @@ class Translator():
         """
         
         self.language = language
-        self.str = self.__load_json(json_file)
+        self.str = self._load_json(json_file)
         
     
-    def __load_json(self, json_file: str):
+    def _load_json(self, json_file: str) -> dict:
         try:
             with open(f"traduction_files\\{json_file.strip()}", "r", encoding="utf-8") as file:
                 return json.load(file)
@@ -27,7 +27,7 @@ class Translator():
             raise ValueError(f"Error loading the file: {ex}")
     
     
-    def translate(self, key: str):
+    def translate(self, key: str) -> str:
         """
         Translates the key given.
 

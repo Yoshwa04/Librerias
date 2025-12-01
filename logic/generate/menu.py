@@ -1,7 +1,10 @@
+import os
+import sys
 from typing import Optional
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from translator import Translator
 
-class MenuGenerator():
+class Menu():
     """
     This class generates console menus
     """
@@ -43,7 +46,7 @@ class MenuGenerator():
                 else opt for opt in str_options
             ]
             self._methods = methods
-            self.__def_menu_str_output()
+            self._def_menu_str_output()
         
     def menu_logic(self):
         """
@@ -52,14 +55,14 @@ class MenuGenerator():
         
         self._user_option = -1
         
-        while self._user_option != len(self._str_options) - 1:
+        while self._user_option != len(self._str_options) - 2:
             try:
-                self.__ask_option_and_print_menu_output()
+                self._ask_option_and_print_menu_output()
             
                 if 0 <= self._user_option < len(self._methods) and self._user_option >= 1:
                     if self._methods[self._user_option] is not None:
                         self._methods[self._user_option]()
-                    elif self._user_option == len(self._str_options) - 1:
+                    elif self._user_option == len(self._str_options) - 2:
                         print(
                             self._translator.translate("exiting") if self._str_options[-1] == self._translator.translate("exit") 
                             else self._translator.translate("going_back")
@@ -70,10 +73,10 @@ class MenuGenerator():
                 print(self._translator.translate("invalid_option"))
         
 
-    def __def_menu_str_output(self):
-        menu_output = f"--------------------------\n"
+    def _def_menu_str_output(self):
+        menu_output = f"--------------------------\n{self._str_options[0]}\n"
         
-        for i in range(1, len(self._str_options)):
+        for i in range(1, len(self._str_options) - 1):
             menu_output += f"{i} - {self._str_options[i]}\n"
             
         menu_output += f"--------------------------"
@@ -81,8 +84,8 @@ class MenuGenerator():
         self._menu_output = menu_output
     
     
-    def __ask_option_and_print_menu_output(self):
-        self._user_option = int(input(f"{self._menu_output}\n{self._str_options[0]}"))
+    def _ask_option_and_print_menu_output(self):
+        self._user_option = int(input(f"{self._menu_output}\n{self._str_options[len(self._str_options)-1]}: "))
 
 
 def uno():
@@ -99,15 +102,14 @@ def tres():
 
 
 
-"""
-Exemple:
 
-o = ["menu_title", "option_1", "option_2", "option_3", "exit"]
+# Exemple:
+
+o = ["Menu", "Uno", "Dos", "Tres", "Salir", "Seleccione una opción"]
 m = [None, uno, lambda: dos(5), tres, None]
 
-g = MenuGenerator(o, m, json_options="menu_test.json", language="en")
+g = Menu(o, m, None, language="es")
 
 g.menu_logic()
-"""
     
 
