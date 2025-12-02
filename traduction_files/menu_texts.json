@@ -1,0 +1,18 @@
+{
+    "es": {
+        "provisional": "PROVISIONAL",
+        "options": "Opciones",
+        "choose_language": "Elige un idioma",
+        "spanish": "Español",
+        "english": "Inglés",
+        "back": "Atrás"
+    },
+    "en": {
+        "provisional": "PROVISIONAL",
+        "options": "Options",
+        "choose_language": "Choose a language",
+        "spanish": "Spanish",
+        "english": "English",
+        "back": "Back"
+    }
+}

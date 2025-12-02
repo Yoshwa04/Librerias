@@ -1,5 +1,6 @@
 import json
 import tkinter as tk
+from tkinter import ttk
 
 class Translator():
     """
@@ -39,7 +40,3 @@ class Translator():
         """
         
         return self.str.get(self.language, {}).get(key, key)
-    
-t = Translator("menu_self_texts.json", "es")
-
-print(t.translate("exiting"))

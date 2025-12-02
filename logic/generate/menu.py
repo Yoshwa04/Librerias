@@ -91,6 +91,3 @@ class Menu:
 
 # menu = Menu(methods, options, "es")
 # menu.show()
-
-
-
