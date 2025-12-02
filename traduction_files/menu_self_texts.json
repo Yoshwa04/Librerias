@@ -1,0 +1,17 @@
+{
+    "en": {
+        "choose_option": "Choose an option: ",
+        "must_be_number": "You must enter a number.",
+        "invalid_option": "Invalid option.",
+        "exit": "Exiting...",
+        "go_back": "Going back..."
+    },
+    "es": {
+        "choose_option": "Elija la opción: ",
+        "must_be_number": "Debe ingresar un número.",
+        "invalid_option": "Opción inválida.",
+        "exit": "Saliendo...",
+        "go_back": "Retrocediendo"
+    }
+}
+  

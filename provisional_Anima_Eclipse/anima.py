@@ -99,6 +99,7 @@ class Anima:
             self.hp_now = self.hp_max
             self.exp = 0
             self.atk_inc_dec, self.sp_atk_inc_dec, self.def_inc_dec, self.sp_def_inc_dec, self.spe_inc_dec = 1
+            self.acc, self.eva = 0
         self.atk = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['atk']}", f"potential = {self.atk_potential}", f"nature = {atk_modifier}"), "stat"))
         self.sp_atk = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['sp_atk']}", f"potential = {self.sp_atk_potential}", f"nature = {sp_atk_modifier}"), "stat"))
         self.def_ = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['def']}", f"potential = {self.def_potential}", f"nature = {def_modifier}"), "stat"))
