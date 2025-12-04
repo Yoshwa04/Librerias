@@ -1,0 +1,59 @@
+{
+    "es": {
+        "title": "ANIMA ECLIPSE",
+        "subtitle": "El eclipse de las almas",
+
+        "new_game": "Nueva Partida",
+        "load_game": "Cargar Partida",
+        "options": "Opciones",
+        "back": "Atrás",
+        "apply": "Aplicar",
+
+        "choose_slot": "Elegir ranura",
+        "slot_empty": "Vacío",
+        "slot": "Ranura",
+
+        "language": "Lenguaje",
+        "language_spanish": "Español",
+
+        "text_speed": "Velocidad de texto",
+        "text_speed_fast": "Rápida",
+        "text_speed_normal": "Normal",
+        "text_speed_slow": "Lenta",
+
+        "volume_music": "Volumen música",
+        "volume_effects": "Volumen efectos",
+        "volume_anima": "Sonido Anima",
+
+        "select": "Seleccionar"
+    },
+
+    "en": {
+        "title": "ANIMA ECLIPSE",
+        "subtitle": "The eclipse of souls",
+
+        "new_game": "New Game",
+        "load_game": "Load Game",
+        "options": "Options",
+        "back": "Back",
+        "apply": "Apply",
+
+        "choose_slot": "Choose slot",
+        "slot_empty": "Empty",
+        "slot": "Slot",
+
+        "language": "Language",
+        "language_spanish": "Spanish",
+
+        "text_speed": "Text speed",
+        "text_speed_fast": "Fast",
+        "text_speed_normal": "Normal",
+        "text_speed_slow": "Slow",
+
+        "volume_music": "Music volume",
+        "volume_effects": "Effects volume",
+        "volume_anima": "Anima sound",
+
+        "select": "Select"
+    }
+}

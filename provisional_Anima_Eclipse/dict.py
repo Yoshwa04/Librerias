@@ -22,7 +22,7 @@ def animadex_base_stats_model(hp: int, atk: int, sp_atk: int, _def: int, sp_def:
         "sp_atk" : sp_atk,
         "def" : _def,
         "sp_def" : sp_def,
-        "spe" : spe  
+        "spe" : spe,  
     }
 
 def animadex_abilitys_model(ability1: str, ability2: str, hidden: str) -> Dict[str, Ability]:
@@ -30,14 +30,15 @@ def animadex_abilitys_model(ability1: str, ability2: str, hidden: str) -> Dict[s
     return {
         "001" : ability1,
         "002" : ability2,
-        "00H" : hidden  
+        "00H" : hidden,  
     }
+
 
 growth_dict = {
     "fast": "growth = 4 * lvl**3 / 5",
     "normal": "growth = lvl**3",
     "slow": "growth = 5 * lvl**3 / 4",
-    "parabolic": "growth = 6 * lvl**3 / 5 - 15 * lvl**2 + 100 * lvl -140"
+    "parabolic": "growth = 6 * lvl**3 / 5 - 15 * lvl**2 + 100 * lvl -140",
 }
 '''Possible growth forms for the Animas'''
 
@@ -46,12 +47,13 @@ formula_dict = {
     "stat": "stat = (5 + (lvl/100 * ((stat_base*2) + potential))) * nature",
     "catch": "catch = (hp_max*3 - hp_now*2) * catch_ratio * ball_ratio/hp_max*3 * status",
     "damage": "damage = 1/100 * stab * eff * v * ((2/10 * lvl + 1) * atq * power/25 * def + 2)",
-    "exp_given": "exp_given = (exp_base_given*lvl/participants/5) * ((2*lvl+10)**(5/2)) / ((lvl+ally_lvl+10)**(5/2)) + 1) * combat_type * object_modifier", # si es wild 1 si no 1.5
+    "exp_given": "exp_given = (exp_base_given*lvl/participants/5) * ((2*lvl+10)**(5/2)) / ((lvl+ally_lvl+10)**(5/2)) + 1) * combat_type * object_mod * arcana_mod", 
+                 # combat_type: si es wild 1 si no 1.5
     "growth": growth_dict,
-    "hit_chance": "hit_chance = move_accuracy/100 * (attacker_accuracy/defender_evasion)", # move_acuracy: si es 80 por ej. seria 0.8 | Si hit_chance es mayor a 1 entonces acierta.
+    "hit_chance": "hit_chance = move_accuracy/100 * (attacker_accuracy/defender_evasion)", 
+                  # move_acuracy: si es 80 por ej. seria 0.8 | Si hit_chance es mayor a 1 entonces acierta?.
 }
 '''A bunch of formulas'''
-
 
 nature_dict = {
     Nature.BERSERKER:   {INCREASE: "atk", DECREASE: "def"},
@@ -123,7 +125,7 @@ techdex = { # Guardar tambien -> prioridad? curacion? objetivo?
         "secondary_effects": None,
         "priority": False,
         "heal": False,
-        "objective": "self / enemy / all / all_enemys"
+        "objective": "self / enemy / all / all_enemys",
     },
     "001": {
         "name": "Strike",
@@ -141,7 +143,7 @@ techdex = { # Guardar tambien -> prioridad? curacion? objetivo?
         "category": Category.PHYSICAL,
         "accuracy": 90,
         "pp": 10,
-        "secondary_effects": None,  
+        "secondary_effects": None,
     },
     "003": {
         "name": "Mega Punch",
@@ -150,7 +152,7 @@ techdex = { # Guardar tambien -> prioridad? curacion? objetivo?
         "category": Category.PHYSICAL,
         "accuracy": 80,
         "pp": 10,
-        "secondary_effects": None
+        "secondary_effects": None,
     },
     "004": {
         "name": "Swift",
@@ -159,7 +161,7 @@ techdex = { # Guardar tambien -> prioridad? curacion? objetivo?
         "category": Category.SPECIAL,
         "accuracy": "always",
         "pp": 20,
-        "secondary_effects": None
+        "secondary_effects": None,
     },
     "005": {
         "name": "Tri Attack",
@@ -177,7 +179,7 @@ techdex = { # Guardar tambien -> prioridad? curacion? objetivo?
         "category": Category.STATUS,
         "accuracy": "always",
         "pp": 5,
-        "secondary_effects": None
+        "secondary_effects": None,
     },        
 }
 '''A dictionary of every single Technique with its information that never changes'''
@@ -197,14 +199,14 @@ animadex = {
         "technique_learning": {
             4: techdex["000"],   
         },
-        "assisted_techinques": {
+        "assisted_techinques": { # Darle una vuelta a como poner esto, la key en orden 001, 002... o con la misma que en la techdex? oooo con la instancia/referencia de la at directamente
             "001" : techdex["000"],
-        }
+        },
     }, 
     "001": { 
         "name": "starter", 
         "types": [TypeA.ESSENTIA, TypeB.NEUTRO],
-        "abilitys": animadex_abilitys_model(Ability.PHYSICAL_POWER, Ability.MAGIC_POWER, Ability.EXAMPLE_ABILITY),
+        "abilitys": animadex_abilitys_model("", "", ""),
         "arcana": Arcana.TERRA,
         "growth": "parabolic",
         "exp_base_given": 64,
@@ -212,12 +214,10 @@ animadex = {
         "evolves": {"lvl" : 20, "to": "002"},
         "base_stats": animadex_base_stats_model(44, 40, 58, 62, 61, 49),
         "technique_learning": {
-            
         },
         "assisted_techniques": {
             "001" : techdex["000"],
-            
-        }     
+        },     
     },
     "002": { 
         "name": "evolved_starter",
@@ -230,11 +230,9 @@ animadex = {
         "evolves": {"lvl": 38, "to": "003"},
         "base_stats": animadex_base_stats_model(58, 54, 72, 79, 77, 56),
         "technique_learning": {
-            
         },
         "assisted_techniques": {
             "001" : techdex["000"],
-            
         },
     },
     "003": { 
@@ -252,7 +250,7 @@ animadex = {
         },
         "assisted_techniques": {
             "001" : techdex["000"],
-        }
+        },
     },
     "004": {
         "name": "rival_starter",
@@ -268,7 +266,7 @@ animadex = {
         },
         "assisted_techniques": {
             "001" : techdex["000"],
-        }
+        },
     },
     "005": { 
         "name": "evolved_rival_starter",
@@ -284,7 +282,7 @@ animadex = {
         },
         "assisted_techniques": {
             "001" : techdex["000"],
-        }
+        },
     },
     "006": { 
         "name": "final_rival_starter",
@@ -297,11 +295,10 @@ animadex = {
         "evolves": None,
         "base_stats": animadex_base_stats_model(hp=90, atk=92, sp_atk=61, _def=100, sp_def=113, spe=72),
         "technique_learning": {
-            
         },
         "assisted_techniques": {
             "001" : techdex["000"],
-        }
+        },
     },
     "007": {
         "name": "antagonist_starter",
@@ -313,11 +310,10 @@ animadex = {
         "evolves": {"lvl": 20, "to": "008"},
         "base_stats": animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), # modificar
         "technique_learning": {
-            
         },
         "assisted_techniques": {
             "001" : techdex["000"],
-        }
+        },
     },
     "008": {
         "name": "antagonist_evolved_starter",
@@ -329,11 +325,9 @@ animadex = {
         "evolves": {"lvl": 40, "to": "009"},
         "base_stats": animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
         "technique_learning": {
-            
         },
         "assisted_techniques": {
-            
-        }
+        },
     },
     "009": {
         "name": "antagonist_final_starter",
@@ -345,15 +339,9 @@ animadex = {
         "evolves": None,
         "base_stats": animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
         "technique_learning": {
-            
         },
-        "assisted_techniques": {
-            
-        }
+        "assisted_techniques": {            
+        },
     },
-    
 }
 '''A dictionary of every single Anima with its information that never changes'''
-
-
-anima = Anima("001", 5, 5)

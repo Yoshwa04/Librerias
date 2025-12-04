@@ -1,6 +1,6 @@
 import os
 import sys
-from typing import List, Optional
+from typing import List
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from translator import Translator
 
@@ -13,7 +13,7 @@ class Menu:
         lan: str = "en", 
         json_file: str = None,
     ):
-        """_summary_
+        """This class generates the logic of a menu given methods. Supports submenus.
 
         Args:
             methods_list (List): list with the methods for each option
@@ -74,20 +74,20 @@ class Menu:
                     self.methods[opt]()
                     continue
             elif opt is len(self.methods) - 1:
-                print(self.system_translator.translate("exit")) if self.options[-1] == "Exit" or self.options[-1] == "Salir" else print(self.system_translator.translate("go_back"))
+                print(self.system_translator.translate("exit")) if self.options[-1].lower() in ("exit", "salir") else print(self.system_translator.translate("go_back"))
                 return
                 
                 
-# def opcion1():
-#     print("Has elegido la opción 1")
+def opcion1():
+    print("Has elegido la opción 1")
     
-# options2 = ["Menú 2", "Opción 1", "Retroceder"]
-# methods2 = [None, opcion1, None]
-# menu2 = Menu(methods2, options2, "es")
+options2 = ["Menú 2", "Opción 1", "Retroceder"]
+methods2 = [None, opcion1, None]
+menu2 = Menu(methods2, options2, "es")
 
 
-# methods = [None, opcion1, lambda: menu2.show(), None]
-# options = ["Menú Principal", "Opción 1", "Submenú", "Salir"]
+methods = [None, opcion1, lambda: menu2.show(), None]
+options = ["Menú Principal", "Opción 1", "Submenú", "Salir"]
 
-# menu = Menu(methods, options, "es")
-# menu.show()
+menu = Menu(methods, options, "es")
+menu.show()
