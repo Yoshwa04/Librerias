@@ -3,7 +3,8 @@ from enum import Enum
 
 class Status1(Enum):
     GOOD = "Good"
-    INVULNERABLE = "Invulnerable"
+    INVULNERABLE = "Invulnerable" # no status1 damage
+    HIIDEN = "Hidden" # fly, dig... 0 damage
     FAINTED = "Fainted"
     BURNED = "Burned"
     PARALIZED = "Paralized"
@@ -11,15 +12,14 @@ class Status1(Enum):
     FROZEN = "Frozen"
     WET = "Wet"
     ASLPEEP = "Asleep"
-    PROTECTED = "Protected"
+    PROTECTED = "Protected" # 0 damage
     
     
 class Status2(Enum):
     GOOD = "Good"
-    INVULNERABLE = "Invulnerable"    
+    INVULNERABLE = "Invulnerable" # no status2 damage 
     CONFUSED = "Confused"
     ANGRY = "Angry"
     ENAMORED = "Enamored"
     BLINDED = "Blinded"
-    FLINCHED = "Flinched"
-    PROTECTED = "Protected"
+    FLINCHED = "Flinched" # can't atack

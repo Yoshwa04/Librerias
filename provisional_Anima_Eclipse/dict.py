@@ -4,10 +4,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from collections import defaultdict
 from typing import Dict
 from arcana import Arcana
-from category import Category
-from anima import Anima
-from secondary_effect import SecondaryEffect
-from status import Status1, Status2
+from technique import techdex
 from type import TypeA, TypeB
 from nature import Nature
 from ability import Ability, abilitydex
@@ -114,76 +111,6 @@ critical_index_dict = {
 }
 '''A dictionary that contains the critical hit chance percentages based on the index'''
 
-techdex = { # Guardar tambien -> prioridad? curacion? objetivo?
-    "000": { #Ejemplo
-        "name": "a",
-        "power": 1,
-        "type": TypeA.UMBRA,
-        "category": Category.PHYSICAL,
-        "accuracy": 100,
-        "pp": 15,
-        "secondary_effects": None,
-        "priority": False,
-        "heal": False,
-        "objective": "self / enemy / all / all_enemys",
-    },
-    "001": {
-        "name": "Strike",
-        "power": 40,
-        "type": TypeB.NEUTRO,
-        "category": Category.PHYSICAL,
-        "accuracy": 100,
-        "pp": 30,
-        "secondary_effects": None,
-    },
-    "002": {
-        "name": "Double Punch",
-        "power": 20,
-        "type": TypeB.NEUTRO,
-        "category": Category.PHYSICAL,
-        "accuracy": 90,
-        "pp": 10,
-        "secondary_effects": None,
-    },
-    "003": {
-        "name": "Mega Punch",
-        "power": 80,
-        "type": TypeB.NEUTRO,
-        "category": Category.PHYSICAL,
-        "accuracy": 80,
-        "pp": 10,
-        "secondary_effects": None,
-    },
-    "004": {
-        "name": "Swift",
-        "power": 60,
-        "type": TypeB.NEUTRO,
-        "category": Category.SPECIAL,
-        "accuracy": "always",
-        "pp": 20,
-        "secondary_effects": None,
-    },
-    "005": {
-        "name": "Tri Attack",
-        "power": 80,
-        "type": TypeB.NEUTRO,
-        "category": Category.SPECIAL,
-        "accuracy": 100,
-        "pp": 15,
-        "secondary_effects": {SecondaryEffect.BURN: 33, SecondaryEffect.FREEZE: 66, SecondaryEffect.PARALIZE: 100} # revisar
-    },
-    "006": {
-        "name": "Restore",
-        "power": None,
-        "type": TypeB.NEUTRO,
-        "category": Category.STATUS,
-        "accuracy": "always",
-        "pp": 5,
-        "secondary_effects": None,
-    },        
-}
-'''A dictionary of every single Technique with its information that never changes'''
-
 
 animadex = { 
     "000": { #Ejemplo
@@ -227,7 +154,7 @@ animadex = {
         "growth": "parabolic",
         "exp_base_given": 141,
         "catch_rate" : 45,
-        "evolves": {"lvl": 38, "to": "003"},
+        "evolves": {"lvl": 40, "to": "003"},
         "base_stats": animadex_base_stats_model(58, 54, 72, 79, 77, 56),
         "technique_learning": {
         },
@@ -276,7 +203,7 @@ animadex = {
         "growth": "parabolic",
         "exp_base_given": 141,
         "catch_rate": 45,
-        "evolves": {"lvl": 38, "to": "006"},
+        "evolves": {"lvl": 40, "to": "006"},
         "base_stats": animadex_base_stats_model(hp=61, atk=70, sp_atk=59, _def=81, sp_def=74, spe=61),
         "technique_learning": {
         },
@@ -342,6 +269,57 @@ animadex = {
         },
         "assisted_techniques": {            
         },
+    },
+    "010": {
+      "name": "bird1",
+      "types": [TypeA.NEUTRO, TypeB.VENTUS],
+      "abilities": "",
+      "arcana": Arcana.AURORA,
+      "growth": "parabolic",
+      "exp_base_given": 0,
+      "catch_rate": 255,
+      "evolves": {"lvl": 18, "to":"011"},
+      "base_stats": animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
+      "technique_learning": {
+          
+      },
+      "assisted_techniques": {
+          
+      } 
+    },
+    "011": {
+      "name": "bird1.2",
+      "types": [TypeA.NEUTRO, TypeB.VENTUS],
+      "abilities": "",
+      "arcana": Arcana.AURORA,
+      "growth": "parabolic",
+      "exp_base_given": 0,
+      "catch_rate": 255,
+      "evolves": {"lvl": 34, "to": "012"},
+      "base_stats": animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
+      "technique_learning": {
+          
+      },
+      "assisted_techniques": {
+          
+      } 
+    },
+    "012": {
+      "name": "bird1.3",
+      "types": [TypeA.NEUTRO, TypeB.VENTUS],
+      "abilities": "",
+      "arcana": Arcana.AURORA,
+      "growth": "parabolic",
+      "exp_base_given": 0,
+      "catch_rate": 255,
+      "evolves": "011",
+      "base_stats": animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
+      "technique_learning": {
+          
+      },
+      "assisted_techniques": {
+          
+      } 
     },
 }
 '''A dictionary of every single Anima with its information that never changes'''
