@@ -87,18 +87,76 @@ effectiveness_chart = {
     TypeA.FORMA:        defaultdict(lambda: 1,{TypeA.UMBRA: 0.5, TypeA.ESSENTIA: 2,}),
     TypeA.UMBRA:        defaultdict(lambda: 1,{TypeA.FORMA: 2, TypeA.ESSENTIA: 0.5,}),
     
-    TypeB.IGNIS:        defaultdict(lambda: 1,{TypeB.PLANTA: 2, TypeB.GLACIES: 2, TypeB.METALLUM: 2, TypeB.AQUA: 0.5, TypeB.RUPES: 0.5, TypeB.TERRA: 0.5,}),
-    TypeB.AQUA:         defaultdict(lambda: 1,{TypeB.IGNIS: 2, TypeB.RUPES: 2, TypeB.TERRA: 2, TypeB.PLANTA: 0.5,}),
-    TypeB.PLANTA:       defaultdict(lambda: 1,{TypeB.AQUA: 2, TypeB.RUPES: 2, TypeB.TERRA: 2, TypeB.SINISTER: 2, TypeB.IGNIS: 0.5, TypeB.METALLUM: 0.5, TypeB.VENENUM: 0.5,}),
-    TypeB.ELECTRITAS:   defaultdict(lambda: 1,{TypeB.AQUA: 2, TypeB.VENTUS: 2, TypeB.PLANTA: 0.5, TypeB.METALLUM: 0.5, TypeB.TERRA: 0}),
-    TypeB.GLACIES:      defaultdict(lambda: 1,{TypeB.PLANTA: 2, TypeB.VENTUS: 2, TypeB.TERRA: 2, TypeB.METALLUM: 0.5,}),
-    TypeB.TERRA:        defaultdict(lambda: 1,{TypeB.IGNIS: 2, TypeB.ELECTRITAS: 2, TypeB.METALLUM: 2, TypeB.VENTUS: 0,}),
-    TypeB.VENTUS:       defaultdict(lambda: 1,{TypeB.PLANTA: 2, TypeB.TERRA: 2,TypeB.ELECTRITAS: 0.5, TypeB.IGNIS: 0.5, TypeB.METALLUM: 0.5,}),
-    TypeB.VENENUM:      defaultdict(lambda: 1,{TypeB.PLANTA: 2, TypeB.LUX: 2,TypeB.GLACIES: 0.5,  TypeB.TERRA: 0.5,TypeB.METALLUM: 0,}),
-    TypeB.METALLUM:     defaultdict(lambda: 1,{TypeB.GLACIES: 2, TypeB.RUPES: 2, TypeB.LUX: 0.5, TypeB.ELECTRITAS: 0.5, TypeB.AQUA: 0.5, TypeB.TERRA: 0.5, TypeB.SINISTER: 0.5,}),
-    TypeB.LUX:          defaultdict(lambda: 1,{TypeB.SINISTER: 2, TypeB.VENENUM: 0.5,}),
-    TypeB.SINISTER:     defaultdict(lambda: 1,{TypeB.LUX: 2, TypeB.PLANTA: 0.5,}),
-    TypeB.RUPES:        defaultdict(lambda: 1,{TypeB.IGNIS: 2, TypeB.GLACIES: 2, TypeB.METALLUM: 0.5,}),
+    TypeB.IGNIS:        defaultdict(lambda: 1,{
+        TypeB.PLANTA: 2, TypeB.GLACIES: 2, TypeB.INSECTUM: 2, TypeB.METALLUM: 2,
+        TypeB.RUPES: 0.5, TypeB.TERRA: 0.5, TypeB.AQUA: 0.5, TypeB.IGNIS: 0.5
+        }),
+    TypeB.AQUA:         defaultdict(lambda: 1,{
+        TypeB.IGNIS: 2, TypeB.TERRA: 2, TypeB.RUPES: 2,
+        TypeB.PLANTA: 0.5, TypeB.METALLUM: 0.5, TypeB.AQUA:0.5
+        }),
+    TypeB.PLANTA:       defaultdict(lambda: 1,{
+        TypeB.AQUA: 2, TypeB.TERRA: 2, TypeB.RUPES: 2,
+        TypeB.IGNIS: 0.5, TypeB.METALLUM: 0.5, TypeB.INSECTUM: 0.5, TypeB.PLANTA: 0.5, TypeB.VENENUM: 0.5
+        }),
+    TypeB.ELECTRITAS:   defaultdict(lambda: 1,{
+        TypeB.AQUA: 2, TypeB.VENTUS: 2,
+        TypeB.RUPES: 0.5, TypeB.ELECTRITAS: 0.5, TypeB.PLANTA: 0.5,
+        TypeB.TERRA: 0
+        }),
+    TypeB.INSECTUM:     defaultdict(lambda: 1,{
+        TypeB.PLANTA: 2, TypeB.SINISTER: 2, TypeB.PSYCHICUS: 2,
+        TypeB.IGNIS: 0.5, TypeB.METALLUM: 0.5, TypeB.VENTUS: 0.5, TypeB.RUPES: 0.5, TypeB.PUGNA: 0.5
+        }),
+    TypeB.VENTUS:       defaultdict(lambda: 1,{
+        TypeB.PLANTA: 2, TypeB.INSECTUM: 2, TypeB.PUGNA: 2,
+        TypeB.RUPES: 0.5, TypeB.METALLUM: 0.5, TypeB.ELECTRITAS: 0.5
+        }),
+    TypeB.GLACIES:      defaultdict(lambda: 1,{
+        TypeB.VENTUS: 2, TypeB.INSECTUM: 2, TypeB.PLANTA: 2, TypeB.TERRA: 2,
+        TypeB.RUPES: 0.5, TypeB.METALLUM: 0.5, TypeB.GLACIES: 0.5
+        }),
+    TypeB.VENENUM:      defaultdict(lambda: 1,{
+        TypeB.PLANTA: 2, TypeB.LUX: 2,
+        TypeB.VENENUM: 0.5, TypeB.TERRA: 0.5, TypeB.RUPES: 0.5,
+        TypeB.METALLUM: 0
+        }),
+    TypeB.RUPES:        defaultdict(lambda: 1,{
+        TypeB.GLACIES: 2, TypeB.VENTUS: 2, TypeB.INSECTUM: 2, TypeB.IGNIS: 2,
+        TypeB.TERRA: 0.5, TypeB.METALLUM: 0.5, TypeB.PUGNA: 0.5, TypeB.AQUA: 0.5
+        }),
+    TypeB.TERRA:        defaultdict(lambda: 1,{
+        TypeB.IGNIS: 2, TypeB.VENENUM: 2, TypeB.RUPES: 2, TypeB.METALLUM: 2, TypeB.ELECTRITAS: 2,
+        TypeB.INSECTUM: 0.5, TypeB.PLANTA: 0.5,
+        TypeB.VENTUS: 0
+        }),
+    TypeB.LUX:          defaultdict(lambda: 1,{
+        TypeB.SINISTER: 2, TypeB.PUGNA: 2,
+        TypeB.VENENUM: 0.5
+        }),
+    TypeB.SINISTER:     defaultdict(lambda: 1,{
+        TypeB.LUX: 2, TypeB.PHANTASMA: 2,
+        TypeB.PSYCHICUS: 0.5
+        }),
+    TypeB.PHANTASMA:    defaultdict(lambda: 1,{
+        TypeB.PSYCHICUS: 2, TypeB.PHANTASMA: 2,
+        TypeB.SINISTER: 0.5,
+        TypeB.PUGNA: 0
+        }),
+    TypeB.PSYCHICUS:    defaultdict(lambda: 1,{
+        TypeB.VENENUM: 2, TypeB.PUGNA: 2,
+        TypeB.METALLUM: 0.5, TypeB.PSYCHICUS: 0.5,
+        TypeB.SINISTER: 0
+        }),
+    TypeB.PUGNA:        defaultdict(lambda: 1,{
+        TypeB.METALLUM: 2, TypeB.RUPES: 2, TypeB.GLACIES: 2, TypeB.SINISTER: 2,
+        TypeB.INSECTUM: 0.5, TypeB.LUX: 0.5, TypeB.PSYCHICUS: 0.5, TypeB.VENTUS: 0.5, TypeB.VENENUM: 0.5,
+        TypeB.PHANTASMA: 0
+        }),
+    TypeB.METALLUM:     defaultdict(lambda: 1,{
+        TypeB.GLACIES: 2, TypeB.RUPES: 2,
+        TypeB.METALLUM: 0.5, TypeB.AQUA: 0.5, TypeB.ELECTRITAS: 0.5, TypeB.IGNIS: 0.5
+        }),
 }
 '''A dictionary that contains the effectiveness of each type against others'''
 
@@ -142,7 +200,7 @@ animadex = {
         "base_stats": animadex_base_stats_model(44, 40, 58, 62, 61, 49),
         "technique_learning": {
         },
-        "assisted_techniques": {
+        "technique_capsules": {
             "001" : techdex["000"],
         },     
     },
@@ -164,7 +222,7 @@ animadex = {
     },
     "003": { 
         "name": "final_starter",
-        "types": [TypeA.ESSENTIA, TypeB.LUX],
+        "types": [TypeA.ESSENTIA, TypeB.LUX, TypeB.IGNIS],
         "abilitys": "",
         "arcana": Arcana.TERRA,
         "growth": "fast",
@@ -213,7 +271,7 @@ animadex = {
     },
     "006": { 
         "name": "final_rival_starter",
-        "types": [TypeA.UMBRA, TypeB.SINISTER],
+        "types": [TypeA.UMBRA, TypeB.SINISTER, TypeB.AQUA],
         "abilitys": "",
         "arcana": Arcana.ABYSSUS,
         "growth": "parabolic",
@@ -244,7 +302,7 @@ animadex = {
     },
     "008": {
         "name": "antagonist_evolved_starter",
-        "types": [TypeA.FORMA, TypeB.PLANTA],
+        "types": [TypeA.FORMA, TypeB.VENENUM],
         "abilities": "",
         "arcana": Arcana.HALOS,
         "growth": "parabolic",
@@ -258,7 +316,7 @@ animadex = {
     },
     "009": {
         "name": "antagonist_final_starter",
-        "types": [TypeA.FORMA, TypeB.PLANTA],
+        "types": [TypeA.FORMA, TypeB.VENENUM, TypeB.PLANTA],
         "abilities": "",
         "arcana": Arcana.HALOS,
         "growth": "parabolic",
@@ -306,7 +364,7 @@ animadex = {
     },
     "012": {
       "name": "bird1.3",
-      "types": [TypeA.NEUTRO, TypeB.VENTUS],
+      "types": [TypeA.NEUTRO, TypeB.VENTUS, TypeB.GLACIES],
       "abilities": "",
       "arcana": Arcana.AURORA,
       "growth": "parabolic",
@@ -321,5 +379,73 @@ animadex = {
           
       } 
     },
+    "013": {
+        "name": "bug1",
+        "types": [TypeA.FORMA, TypeB.INSECTUM, TypeB.TERRA],
+        "abilities": "",
+        "arcana": Arcana.TERRA,
+        "growth": "fast",
+        "exp_base_given": 0,
+        "catch_rate": 255,
+        "evolves": "011",
+        "base_stats": animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
+        "technique_learning": {
+            
+        },
+        "assisted_techniques": {
+            
+        }
+    },
+    "014": {
+        "name": "bug1.2",
+        "types": [TypeA.FORMA, TypeB.INSECTUM, TypeB.TERRA],
+        "abilities": "",
+        "arcana": Arcana.TERRA,
+        "growth": "fast",
+        "exp_base_given": 0,
+        "catch_rate": 255,
+        "evolves": "011",
+        "base_stats": animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
+        "technique_learning": {
+            
+        },
+        "assisted_techniques": {
+            
+        }
+    },
+    "015": {
+        "name": "bug1.3.1",
+        "types": [TypeA.FORMA, TypeB.INSECTUM, TypeB.TERRA],
+        "abilities": "",
+        "arcana": Arcana.TERRA,
+        "growth": "fast",
+        "exp_base_given": 0,
+        "catch_rate": 255,
+        "evolves": "011",
+        "base_stats": animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
+        "technique_learning": {
+            
+        },
+        "assisted_techniques": {
+            
+        }
+    },
+    "016": {
+        "name": "bug1.3.2",
+        "types": [TypeA.FORMA, TypeB.INSECTUM, TypeB.RUPES],
+        "abilities": "",
+        "arcana": Arcana.TERRA,
+        "growth": "fast",
+        "exp_base_given": 0,
+        "catch_rate": 255,
+        "evolves": "011",
+        "base_stats": animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
+        "technique_learning": {
+            
+        },
+        "assisted_techniques": {
+            
+        }
+    }
 }
 '''A dictionary of every single Anima with its information that never changes'''

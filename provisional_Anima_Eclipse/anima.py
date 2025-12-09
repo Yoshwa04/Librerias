@@ -28,7 +28,8 @@ class Anima:
         
         
         self.type_a = animadex[nAnimadex]["types"][0]
-        self.type_b = animadex[nAnimadex]["types"][1]
+        self.type_b1 = animadex[nAnimadex]["types"][1]
+        self.type_b2 = animadex[nAnimadex]["types"][2] if len(animadex[nAnimadex]["types"]) > 2 else None
         self.ability = animadex[nAnimadex]["abilitys"]["00H"] if random.randint(1, 100) == 100 else random.choice([animadex[nAnimadex]["abilitys"]["001"], animadex[nAnimadex]["abilitys"]["002"]])
         self.arcana = animadex[nAnimadex]["arcana"]
         self.technique_learning = animadex[nAnimadex]["technique_learning"]
@@ -40,7 +41,7 @@ class Anima:
         self.base_stats = animadex[nAnimadex]["base_stats"]
         
         self.nature = nature if nature else self._random_nature()
-        self.object = object if object is not None else "" # Por implementar
+        self.object = object  # Por implementar
         self._random_potentials()
         
         self.calculate_stats(first=True)
@@ -66,7 +67,9 @@ class Anima:
         self.spe_potential = spe
         
     def _random_nature(self):
-        return random.choice(list(Nature))
+        if random.randint(1, 5) == 5:
+            return Nature.NEUTRA
+        return random.choice([n for n in Nature if n != Nature.NEUTRA])
     
     def _reset_type(self):
         self.type_a = animadex[self.animadex]["types"][0]    
@@ -98,8 +101,8 @@ class Anima:
         if first:
             self.hp_now = self.hp_max
             self.exp = 0
-            self.atk_inc_dec, self.sp_atk_inc_dec, self.def_inc_dec, self.sp_def_inc_dec, self.spe_inc_dec = 1
-            self.acc, self.eva = 0
+            self.atk_inc_dec, self.sp_atk_inc_dec, self.def_inc_dec, self.sp_def_inc_dec, self.spe_inc_dec,self.acc_inc_dec, self.eva_inc_dec = 1
+            self.crit = 0
         self.atk = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['atk']}", f"potential = {self.atk_potential}", f"nature = {atk_modifier}"), "stat"))
         self.sp_atk = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['sp_atk']}", f"potential = {self.sp_atk_potential}", f"nature = {sp_atk_modifier}"), "stat"))
         self.def_ = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['def']}", f"potential = {self.def_potential}", f"nature = {def_modifier}"), "stat"))
@@ -109,7 +112,7 @@ class Anima:
         self.exp_needed_to_lvl_up = -1 if self.lvl == 100 else int(give_just_one_solution(solve_equation(formula_dict["growth"][self.growth], f"lvl = {self.lvl + 1}"), "growth")) - int(give_just_one_solution(solve_equation(formula_dict["growth"][self.growth], f"lvl = {self.lvl}"), "growth"))
     
     def lvl_up(self):
-        if self.exp >= self.exp_needed_to_lvl_up:
+        if self.exp >= self.exp_needed_to_lvl_up and self.exp_needed_to_lvl_up != -1:
             self.lvl += 1
             self.exp -= self.exp_needed_to_lvl_up
             

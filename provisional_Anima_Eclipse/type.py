@@ -17,6 +17,8 @@ class TypeB(Enum):
     '''Water'''
     PLANTA = "Planta"
     '''Grass'''
+    INSECTUM = "Insectum"
+    '''Bug'''
     ELECTRITAS = "Electritas"
     '''Electric'''
     TERRA = "Terra"
@@ -33,6 +35,12 @@ class TypeB(Enum):
     '''Light'''
     SINISTER = "Sinister"
     '''Dark'''
+    PHANTASMA = "Phantasma"
+    '''Ghost'''
+    PSYCHICUS = "Psychicus"
+    '''Psyquic'''
     RUPES = "Rupes"
     '''Rock'''
+    PUGNA = "Pugna"
+    '''Fighting'''
     NEUTRO = "Neutro"
