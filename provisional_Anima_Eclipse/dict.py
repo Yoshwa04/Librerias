@@ -182,7 +182,7 @@ animadex = {
         "evolves": None,
         "base_stats" : animadex_base_stats_model(hp=250, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
         "technique_learning": {
-            4: techdex["000"],   
+            4: techdex["000"],
         },
         "assisted_techinques": { # Darle una vuelta a como poner esto, la key en orden 001, 002... o con la misma que en la techdex? oooo con la instancia/referencia de la at directamente
             "001" : techdex["000"],
@@ -387,7 +387,7 @@ animadex = {
         "growth": "fast",
         "exp_base_given": 0,
         "catch_rate": 255,
-        "evolves": "011",
+        "evolves": "014",
         "base_stats": animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
         "technique_learning": {
             
@@ -404,7 +404,7 @@ animadex = {
         "growth": "fast",
         "exp_base_given": 0,
         "catch_rate": 255,
-        "evolves": "011",
+        "evolves": ["015", "016"],
         "base_stats": animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
         "technique_learning": {
             
@@ -421,7 +421,7 @@ animadex = {
         "growth": "fast",
         "exp_base_given": 0,
         "catch_rate": 255,
-        "evolves": "011",
+        "evolves": None,
         "base_stats": animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
         "technique_learning": {
             
@@ -438,7 +438,7 @@ animadex = {
         "growth": "fast",
         "exp_base_given": 0,
         "catch_rate": 255,
-        "evolves": "011",
+        "evolves": None,
         "base_stats": animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
         "technique_learning": {
             
@@ -446,6 +446,41 @@ animadex = {
         "assisted_techniques": {
             
         }
-    }
+    },
+    "017": {
+        "name": "bug2",
+        "types": [TypeA.UMBRA, TypeB.INSECTUM],
+        "abilities": "",
+        "arcana": Arcana.ECLIPSIS,
+        "growth": "normal",
+        "exp_base_given": 0,
+        "catch_rate": 255,
+        "evolves": "018",
+        "base_stats": animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
+        "technique_learning": {
+            
+        },
+        "assisted_techniques": {
+            
+        }
+    },
+    "018": {
+        "name": "bug2.2",
+        "types": [TypeA.UMBRA, TypeB.INSECTUM, TypeB.PLANTA],
+        "abilities": "",
+        "arcana": Arcana.ECLIPSIS,
+        "growth": "normal",
+        "exp_base_given": 0,
+        "catch_rate": 255,
+        "evolves": None,
+        "base_stats": animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
+        "technique_learning": {
+            
+        },
+        "assisted_techniques": {
+            
+        }
+    },
+    
 }
 '''A dictionary of every single Anima with its information that never changes'''

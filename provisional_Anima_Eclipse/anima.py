@@ -33,21 +33,22 @@ class Anima:
         self.ability = animadex[nAnimadex]["abilitys"]["00H"] if random.randint(1, 100) == 100 else random.choice([animadex[nAnimadex]["abilitys"]["001"], animadex[nAnimadex]["abilitys"]["002"]])
         self.arcana = animadex[nAnimadex]["arcana"]
         self.technique_learning = animadex[nAnimadex]["technique_learning"]
-        self.assisted_techniques = animadex[nAnimadex]["assisted_techniques"]
+        self.assisted_techniques = animadex[nAnimadex]["technique_capsules"]
         self.growth = animadex[nAnimadex]["growth"]
         self.exp_base_given = animadex[nAnimadex]["exp_base_given"]
         self.catch_rate = animadex[nAnimadex]["catch_rate"]
         self.evolves = animadex[nAnimadex]["evolves"]
         self.base_stats = animadex[nAnimadex]["base_stats"]
         
-        self.nature = nature if nature else self._random_nature()
-        self.object = object  # Por implementar
-        self._random_potentials()
+        self.object = object
         
+        self.nature = nature if nature else self._random_nature()  
+        self._random_potentials()
         self.calculate_stats(first=True)
         
-        self.technique_set: Dict[str, dict] = {}
-        self.ability_uses: int = 0
+        self._init_technique_set()
+        
+        self.ability_uses: int = 0 # ?
         
         
     def _random_potentials(self):
@@ -57,6 +58,23 @@ class Anima:
         self.def_potential = random.randint(1, 35)
         self.sp_def_potential = random.randint(1, 35)
         self.spe_potential = random.randint(1, 35)
+    
+    def _init_technique_set(self):
+        learned = []
+        
+        for lvl, tech in self.technique_learning.items():
+            if lvl <= self.lvl:
+                learned.append((lvl, tech))
+                
+        learned.sort(key=lambda x: x[0])
+        
+        learned = learned[-4:]
+        
+        self.technique_set = {}
+        
+        for i, (_, tech) in enumerate(learned, start=1):
+            slot = f"{i:03}"
+            self.technique_set[slot] = tech
      
     def _change_potentials(self, hp, atk, spatk, _def, spdef, spe):
         self.hp_potential = hp

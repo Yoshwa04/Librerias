@@ -26,51 +26,59 @@ class Technique(TypedDict):
     battle_method: Callable
 
 
-def just_damage(atack_anima: Anima, defense_Anima: Anima, tech_type: TypeA | TypeB, tech_power: int, tech_category: Category):
-    stab = "stab = 1.5" if tech_type in (atack_anima.type_a, atack_anima.type_b) else "stab = 1"
-    eff = f"eff = {effectiveness_chart[tech_type][defense_Anima.type_a if isinstance(tech_type, TypeA) else defense_Anima.type_b]}"
-    v = f"v = {randint(75, 100)}"
+def just_damage(atack_anima: Anima, defense_Anima: Anima, tech: Technique): 
+    if isinstance(tech.type, TypeA):
+        eff = effectiveness_chart[tech.type][defense_Anima.type_a]
+    else:
+        eff = effectiveness_chart[tech.type][defense_Anima.type_b1]
+        if defense_Anima.type_b2 is not None:
+            eff2 = effectiveness_chart[tech.type][defense_Anima.type_b2]
+            eff *= eff2
+    
+    stab = "stab = 1.5" if tech.type in (atack_anima.type_a, atack_anima.type_b1, atack_anima.type_b2) else "stab = 1"        
+    eff = f"eff = {eff}"      
+    v = f"v = {randint(75, 100)}" # Me gustaria que si sale 75 ponga min damage y si sale 100 ponga max damage
     lvl = f"lvl = {atack_anima.lvl}"
-    atq = f"atq = {atack_anima.atk if tech_category is Category.PHYSICAL else atack_anima.sp_atk}"
-    def_ = f"def = {defense_Anima.def_ if tech_category is Category.PHYSICAL else defense_Anima.sp_def}"
-    power = f"power = {tech_power}"
+    atq = f"atq = {atack_anima.atk if tech.category is Category.PHYSICAL else atack_anima.sp_atk}"
+    def_ = f"def = {defense_Anima.def_ if tech.category is Category.PHYSICAL else defense_Anima.sp_def}"
+    power = f"power = {tech.power}"
     
     return int(give_just_one_solution(solve_equation(formula_dict["damage"], stab, eff, v, lvl, atq, power, def_), "damage"))
+     
+     
+''' Orden movimientos en combate 
+an1 = 0
+an2 = 0
+mov1 = True
+mov2 = True
 
-     
-     
-     
-# an1 = 0
-# an2 = 0
-# mov1 = True
-# mov2 = True
-
-# if mov1.priority and !mov2.priority:
-#     pass
-#     #mov1()
-#     #mov2()
-# elif mov2.priority and !mov1.priority:
-#     pass
-#     #mov2()
-#     #mov1()
-# else:
-#     if an1.spe > an2.spe:
-#         pass
-#         #mov1()
-#         #mov2()
-#     elif an2.spe > an1.spe:
-#         pass
-#         #mov2()
-#         #mov1()
-#     else:
-#         if fifty_fifty():
-#             pass
-#             #mov1()
-#             #mov2()
-#         else:
-#             pass
-#             #mov2()
-#             #mov1()
+if mov1.priority and !mov2.priority:
+    pass
+    #mov1()
+    #mov2()
+elif mov2.priority and !mov1.priority:
+    pass
+    #mov2()
+    #mov1()
+else:
+    if an1.spe > an2.spe:
+        pass
+        #mov1()
+        #mov2()
+    elif an2.spe > an1.spe:
+        pass
+        #mov2()
+        #mov1()
+    else:
+        if fifty_fifty():
+            pass
+            #mov1()
+            #mov2()
+        else:
+            pass
+            #mov2()
+            #mov1()
+'''
 
 
         

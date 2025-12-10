@@ -1,0 +1,50 @@
+Combate:
+
+Es eficaz
+Es supereficaz
+No es eficaz
+Es superineficaz
+No afecta a X
+¡Golpe crítico!
+Ha sido daño máximo
+Ha sido daño mínimo
+X hace el ataque Y
+X está confuso, quemado...
+X está tan confuso que se hiere a si mismo
+X está tan enamorado que no es capaz de atacar
+X pierde vida por la quemadura, veneno...
+X se queda paralizado y no es capaz de atacar
+X se ha debilitado
+Entrenador/Recluta... X te desafia
+Desafias a X
+Anima salvaje aparece
+Entrenador X saca a Y 
+Entrenador X cambia a Y 
+Entrenador X usa objeto Y 
+X utiliza objeto Y 
+X se prepara para atacar/acumula energia...
+X necesita descansar este turno
+X tambien se hace daño por el objeto/recoil...
+La stat de X ha subido - ha subido mucho - ha subido muchisimo
+La stat de X ha bajado - ha bajado mucho - ha bajado muchisimo
+La stat de X no puede subir/bajar mas
+X ha huido
+Has huido
+No has podido huir
+Algo te impide huir - Algo te impide cambiar de Anima
+No puedes huir de un combate contra un rival
+X está protegido y evita el daño
+X ha fallado
+X evita el ataque
+X sube de nivel
+
+
+Fuera del combate
+
+Has obtenido X
+X te entrega Y 
+Está cerrado
+¿Quieres activar la palanca/mecanismo/boton...?
+Parece que tu vínculo con X se fortalecerá/no pronto, ¿quieres pasar el rato con X?
+El anima de la arcana X aumenta tu afinidad con Y 
+
