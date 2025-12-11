@@ -43,12 +43,12 @@ formula_dict = {
     "hp": "hp = (lvl/100 * ((stat_base*2) + potential)) + lvl",
     "stat": "stat = (5 + (lvl/100 * ((stat_base*2) + potential))) * nature",
     "catch": "catch = (hp_max*3 - hp_now*2) * catch_ratio * ball_ratio/hp_max*3 * status",
-    "damage": "damage = 1/100 * stab * eff * v * ((2/10 * lvl + 1) * atq * power/25 * def + 2)",
+    "damage": f"damage = 1/100 * stab * eff * v * ((2/10 * lvl + 1) * atq * power/25 * def + 2)",
     "exp_given": "exp_given = (exp_base_given*lvl/participants/5) * ((2*lvl+10)**(5/2)) / ((lvl+ally_lvl+10)**(5/2)) + 1) * combat_type * object_mod * arcana_mod", 
                  # combat_type: si es wild 1 si no 1.5
     "growth": growth_dict,
-    "hit_chance": "hit_chance = move_accuracy/100 * (attacker_accuracy/defender_evasion)", 
-                  # move_acuracy: si es 80 por ej. seria 0.8 | Si hit_chance es mayor a 1 entonces acierta?.
+    "hit_chance": "hit_chance = move_accuracy * (attacker_accuracy/defender_evasion)", 
+                  # Este número sera el que se use cuando se verifique en combate, con uno random del 1 al 100, si es mayor o igual a ese random entonces le da
 }
 '''A bunch of formulas'''
 
@@ -60,7 +60,7 @@ nature_dict = {
     
     Nature.GUARDIA:     {INCREASE: "def", DECREASE: "atk"},
     Nature.MURALLA:     {INCREASE: "def", DECREASE: "sp_atk"},
-    Nature.CENTINELA:   {INCREASE: "def", DECREASE: "dp_def"},
+    Nature.CENTINELA:   {INCREASE: "def", DECREASE: "sp_def"},
     Nature.FORTIFICADO: {INCREASE: "def", DECREASE: "spe"},
     
     Nature.HECHICERO:   {INCREASE: "sp_atk", DECREASE: "atk"},
@@ -74,7 +74,7 @@ nature_dict = {
     Nature.ESPIRITUAL:  {INCREASE: "sp_def", DECREASE: "spe"},  
     
     Nature.EXPLORADOR:  {INCREASE: "spe", DECREASE: "def"},
-    Nature.CAZADOR:     {INCREASE: "spe", DECREASE: "sp def"},
+    Nature.CAZADOR:     {INCREASE: "spe", DECREASE: "sp_def"},
     Nature.BROMISTA:    {INCREASE: "spe", DECREASE: "atk"},
     Nature.ESPADACHIN:  {INCREASE: "spe", DECREASE: "sp_atk"},
     
@@ -160,12 +160,31 @@ effectiveness_chart = {
 }
 '''A dictionary that contains the effectiveness of each type against others'''
 
+stat_increases_decreases_dict = {
+    -6: 2/8,
+    -5: 2/7,
+    -4: 2/6,
+    -3: 2/5,
+    -2: 2/4,
+    -1: 2/3,
+    0: 2/2,
+    1: 3/2,
+    2: 4/2,
+    3: 5/2,
+    4: 6/2,
+    5: 7/2,
+    6: 8/2,
+}
+'''A dictionary that contains the min and max increases/decreases a regular stat can have (atk, sp atk, def, sp def, spe)'''
+
 critical_index_dict = {   
     0: 6.25,
     1: 12.5,
     2: 25,
     3: 33.3,
     4: 50,
+    5: 75,
+    6: 100
 }
 '''A dictionary that contains the critical hit chance percentages based on the index'''
 
@@ -174,7 +193,7 @@ animadex = {
     "000": { #Ejemplo
         "name": "a",    
         "types": [TypeA.NEUTRO, TypeB.NEUTRO],
-        "abilitys": animadex_abilitys_model(abilitydex["000"], abilitydex["000"], abilitydex["000"]),
+        "abilities": animadex_abilitys_model(abilitydex["000"], abilitydex["000"], abilitydex["000"]), # Importante, poner abilities no abilitys
         "arcana": Arcana.ABYSSUS,
         "growth": "parabolic",
         "exp_base_given": 1,
@@ -184,7 +203,7 @@ animadex = {
         "technique_learning": {
             4: techdex["000"],
         },
-        "assisted_techinques": { # Darle una vuelta a como poner esto, la key en orden 001, 002... o con la misma que en la techdex? oooo con la instancia/referencia de la at directamente
+        "technique_capsules": { # Darle una vuelta a como poner esto, la key en orden 001, 002... o con la misma que en la techdex? oooo con la instancia/referencia de la capsula directamente
             "001" : techdex["000"],
         },
     }, 
