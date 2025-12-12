@@ -1,3 +1,4 @@
+import random
 import os, sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -43,12 +44,13 @@ formula_dict = {
     "hp": "hp = (lvl/100 * ((stat_base*2) + potential)) + lvl",
     "stat": "stat = (5 + (lvl/100 * ((stat_base*2) + potential))) * nature",
     "catch": "catch = (hp_max*3 - hp_now*2) * catch_ratio * ball_ratio/hp_max*3 * status",
-    "damage": f"damage = 1/100 * stab * eff * v * ((2/10 * lvl + 1) * atq * power/25 * def + 2)",
+    "damage": f"damage = 1/100 * stab * eff * {random.randint(75, 100)} * ((2/10 * lvl + 1) * atq * power/25 * def + 2)",
     "exp_given": "exp_given = (exp_base_given*lvl/participants/5) * ((2*lvl+10)**(5/2)) / ((lvl+ally_lvl+10)**(5/2)) + 1) * combat_type * object_mod * arcana_mod", 
                  # combat_type: si es wild 1 si no 1.5
     "growth": growth_dict,
     "hit_chance": "hit_chance = move_accuracy * (attacker_accuracy/defender_evasion)", 
                   # Este número sera el que se use cuando se verifique en combate, con uno random del 1 al 100, si es mayor o igual a ese random entonces le da
+    
 }
 '''A bunch of formulas'''
 

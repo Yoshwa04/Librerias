@@ -1,5 +1,5 @@
 
-from typing import Callable, TypedDict
+from typing import Callable, Literal, TypedDict
 
 from category import Category
 from anima import Anima
@@ -17,12 +17,12 @@ class Technique(TypedDict):
     power: int
     type: TypeA | TypeB
     category: Category
-    accuracy: int
+    accuracy: int | Literal["always"] # Un número o "always"
     pp: int
-    secondary_effects: SecondaryEffect
+    secondary_effects: SecondaryEffect | None
     priority: bool
     heal: bool
-    objective: str
+    objective: Literal["self", "one", "all", "only_enemies"]   
     battle_method: Callable
 
 
@@ -82,18 +82,18 @@ else:
 
 
         
-techdex = { # Guardar tambien -> prioridad? curacion? objetivo? metodo?
+techdex: dict[str, Technique] = { # Guardar tambien -> prioridad? curacion? objetivo? metodo?
     "000": { #Ejemplo
         "name": "a",
         "power": 1,
         "type": TypeA.UMBRA,
         "category": Category.PHYSICAL,
-        "accuracy": 100,
+        "accuracy": 100, # un numero o un str = "always"
         "pp": 15,
         "secondary_effects": None,
         "priority": False,
         "heal": False,
-        "objective": "self / enemy / all / all_enemys",
+        "objective": "self",
     },
     "001": {
         "name": "Strike",
