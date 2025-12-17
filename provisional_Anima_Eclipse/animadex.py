@@ -36,9 +36,6 @@ class Animadex(TypedDict):
             "002" : ability2,
             "00H" : hidden,  
         }
-    
-    def _animadex_technique_learning_model(*technique: str) -> dict[int, Technique]: # PENSAR COMO HACER ESTO
-        pass
         
     def _animadex_entry_model(
         name: str, 
@@ -70,29 +67,10 @@ class Animadex(TypedDict):
 
 animadex: dict[str, Animadex] = {
     # Ejemplo usando el metodo
-    "00000": Animadex._animadex_entry_model(
+    "000": Animadex._animadex_entry_model(
         "ejemplo", (TypeA.ESSENTIA, TypeB.AQUA), Animadex._animadex_abilities_model("001", "001", "001"), Arcana.ABYSSUS, "fast", 1, 255, None, 
         Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
     ),
-        
-        
-    "000": { #Ejemplo
-        "name": "a",    
-        "types": (TypeA.NEUTRO, TypeB.NEUTRO, None), # Cambiar todos a tuple
-        "abilities": Animadex._animadex_abilities_model(abilitydex["000"], abilitydex["000"], abilitydex["000"]), # Importante, poner abilities no abilitys
-        "arcana": Arcana.ABYSSUS,
-        "growth": "parabolic",
-        "exp_base_given": 1,
-        "catch_rate" : 255,
-        "evolves": None,
-        "base_stats" : Animadex._animadex_base_stats_model(hp=250, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
-        "technique_learning": {
-            4: techdex["000"],
-        },
-        "technique_capsules": { # Darle una vuelta a como poner esto, la key en orden 001, 002... o con la misma que en la techdex? oooo con la instancia/referencia de la capsula directamente
-            "001" : techdex["000"],
-        },
-    }, 
     "001": { 
         "name": "starter", 
         "types": [TypeA.ESSENTIA, TypeB.NEUTRO],
