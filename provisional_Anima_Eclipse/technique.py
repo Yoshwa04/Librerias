@@ -13,6 +13,7 @@ from random import randint
 from dict import formula_dict
 from type import effectiveness_chart
 
+'''Deberia tener una clase Techdex y esta aparte como tengo con Anima y Animadex? Muchas preguntas, pocas respuestas'''
 class Technique(TypedDict): # Pensar que hacer con esto
     name: str
     power: int
@@ -25,91 +26,58 @@ class Technique(TypedDict): # Pensar que hacer con esto
     heal: bool
     objective: Literal["self", "one", "all", "only_enemies"]   
     battle_method: Callable # ?
+
     
-    def _techdex_entry_model(
-        name: str,
-        power: int,
-        type: TypeA | TypeB,
-        category: Category,
-        accuracy: int | Literal["always"], # Un número o "always"
-        pp: int,
-        secondary_effects: SecondaryEffect | None,
-        priority: bool,
-        heal: bool,
-        objective: Literal["self", "one", "all", "only_enemies"],
-        battle_method: Callable
-    ) -> dict[str, Technique]:
-        return {
-            "name": name,
-            "power": power,
-            "type": type,
-            "category": category,
-            "accuracy": accuracy,
-            "pp": pp,
-            "secondary_effects": secondary_effects,
-            "priority": priority,
-            "heal": heal,
-            "objective": objective, 
-            "battle_method": battle_method
-        }
+def _techdex_entry_model(
+    name: str,
+    power: int,
+    type: TypeA | TypeB,
+    category: Category,
+    accuracy: int | Literal["always"], # Un número o "always"
+    pp: int,
+    secondary_effects: SecondaryEffect | None,
+    priority: bool,
+    heal: bool,
+    objective: Literal["self", "one", "all", "only_enemies"],
+    battle_method: Callable
+) -> dict[str, Technique]:
+    return {
+        "name": name,
+        "power": power,
+        "type": type,
+        "category": category,
+        "accuracy": accuracy,
+        "pp": pp,
+        "secondary_effects": secondary_effects,
+        "priority": priority,
+        "heal": heal,
+        "objective": objective,
+        "battle_method": battle_method
+    }
 
-    def just_damage(atack_anima: Anima, defense_Anima: Anima, tech: Technique): # Tal vez esto no vaya aqui y ni guarde metodos en el techdex who knows
-        if isinstance(tech.type, TypeA):
-            eff = effectiveness_chart[tech.type][defense_Anima.type_a]
-        else:
-            eff = effectiveness_chart[tech.type][defense_Anima.type_b1]
-            if defense_Anima.type_b2 is not None:
-                eff2 = effectiveness_chart[tech.type][defense_Anima.type_b2]
-                eff *= eff2
-        
-        stab = "stab = 1.5" if tech.type in (atack_anima.type_a, atack_anima.type_b1, atack_anima.type_b2) else "stab = 1"        
-        eff = f"eff = {eff}"      
-        v = f"v = {randint(75, 100)}" # Me gustaria que si sale 75 ponga min damage y si sale 100 ponga max damage
-        lvl = f"lvl = {atack_anima.lvl}"
-        atq = f"atq = {atack_anima.atk if tech.category is Category.PHYSICAL else atack_anima.sp_atk}"
-        def_ = f"def = {defense_Anima.def_ if tech.category is Category.PHYSICAL else defense_Anima.sp_def}"
-        power = f"power = {tech.power}"
-        
-        return int(give_just_one_solution(solve_equation(formula_dict["damage"], stab, eff, v, lvl, atq, power, def_), "damage"))
-     
-     
-''' Orden movimientos en combate 
-an1 = 0
-an2 = 0
-mov1 = True
-mov2 = True
-
-if mov1.priority and !mov2.priority:
-    pass
-    #mov1()
-    #mov2()
-elif mov2.priority and !mov1.priority:
-    pass
-    #mov2()
-    #mov1()
-else:
-    if an1.spe > an2.spe:
-        pass
-        #mov1()
-        #mov2()
-    elif an2.spe > an1.spe:
-        pass
-        #mov2()
-        #mov1()
+def just_damage(atack_anima: Anima, defense_Anima: Anima, tech: Technique): # Tal vez esto no vaya aqui y ni guarde metodos en el techdex who knows
+    if isinstance(tech.type, TypeA):
+        eff = effectiveness_chart[tech.type][defense_Anima.type_a]
     else:
-        if fifty_fifty():
-            pass
-            #mov1()
-            #mov2()
-        else:
-            pass
-            #mov2()
-            #mov1()
-'''
+        eff = effectiveness_chart[tech.type][defense_Anima.type_b1]
+        if defense_Anima.type_b2 is not None:
+            eff2 = effectiveness_chart[tech.type][defense_Anima.type_b2]
+            eff *= eff2
+    
+    stab = "stab = 1.5" if tech.type in (atack_anima.type_a, atack_anima.type_b1, atack_anima.type_b2) else "stab = 1"        
+    eff = f"eff = {eff}"      
+    v = f"v = {randint(75, 100)}" # Me gustaria que si sale 75 ponga min damage y si sale 100 ponga max damage
+    lvl = f"lvl = {atack_anima.lvl}"
+    atq = f"atq = {atack_anima.atk if tech.category is Category.PHYSICAL else atack_anima.sp_atk}"
+    def_ = f"def = {defense_Anima.def_ if tech.category is Category.PHYSICAL else defense_Anima.sp_def}"
+    power = f"power = {tech.power}"
+    
+    return int(give_just_one_solution(solve_equation(formula_dict["damage"], stab, eff, v, lvl, atq, power, def_), "damage"))
+
 
 
 techdex: dict[str, Technique] = {
-    "000": Technique._techdex_entry_model("example", 10, TypeA.ESSENTIA, Category.SPECIAL, 100, 10, None, False, False, "one", Technique.just_damage), #()?
+    "000": _techdex_entry_model("example", 10, TypeA.ESSENTIA, Category.SPECIAL, 100, 10, None, False, False, "one", just_damage), #()?
     "001": {
         "name": "Strike",
         "power": 40,
@@ -166,3 +134,38 @@ techdex: dict[str, Technique] = {
     },        
 }
 '''A dictionary of every single Technique with its information that never changes'''
+
+
+''' Orden movimientos en combate 
+an1 = 0
+an2 = 0
+mov1 = True
+mov2 = True
+
+if mov1.priority and !mov2.priority:
+    pass
+    #mov1()
+    #mov2()
+elif mov2.priority and !mov1.priority:
+    pass
+    #mov2()
+    #mov1()
+else:
+    if an1.spe > an2.spe:
+        pass
+        #mov1()
+        #mov2()
+    elif an2.spe > an1.spe:
+        pass
+        #mov2()
+        #mov1()
+    else:
+        if fifty_fifty():
+            pass
+            #mov1()
+            #mov2()
+        else:
+            pass
+            #mov2()
+            #mov1()
+'''
