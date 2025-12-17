@@ -36,4 +36,7 @@ class SecondaryEffect(Enum):
     EVA_UP = "Evasion up"
     EVA_DOWN = "Evasion down"
     
+    CRIT_UP = "Critical up"
+    CRIT_DOWN = "Critical down"
+    
     

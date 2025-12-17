@@ -1,19 +1,20 @@
 import os, sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 from typing import Optional
 import random
-from sympy import Dict, symbols
-
-from constants import INCREASE, DECREASE, MAX_LVL, MAX_STAT_INCREASE
-from dict import  animadex, formula_dict, nature_dict, critical_index_dict
-from status import Status1, Status2
-from type import TypeA, TypeB
-from arcana import Arcana
-from nature import Nature
-from technique import Technique
 
 from logic.math import solve_equation, give_just_one_solution
+
+from arcana import Arcana
+from animadex import animadex
+from constants import INCREASE, DECREASE, MAX_LVL, MAX_STAT_INCREASE
+from dict import  formula_dict
+from nature import Nature, nature_dict
+from status import Status1, Status2
+from type import TypeA, TypeB
+from technique import Technique
+
+
 
 
 
@@ -22,23 +23,24 @@ class Anima:
     # Cosas que tiene que tener y aun hay que implementar: su moveset actual, la experiencia, item que lleva...
     def __init__(self, nAnimadex: str, min_lvl: int, max_lvl, nature: Optional[Nature] = None, object: Optional[str] = None):
         self.animadex = nAnimadex
+        
         self.lvl = random.randint(min_lvl, max_lvl)
         self.status1, self.status2 = Status1.GOOD, Status2.GOOD
-        self.name = animadex[nAnimadex]["name"]
+        self.name = animadex[self.animadex]["name"]
         
         
-        self.type_a = animadex[nAnimadex]["types"][0]
+        self.type_a = animadex[self.animadex]["types"][0]
         self.is_fluxor = True if self.type_a == TypeA.FLUXOR else False # Esto me servirá para no perder la info de que es fluxor cuando en combate se cambie a otro tipo
-        self.type_b1 = animadex[nAnimadex]["types"][1]
-        self.type_b2 = animadex[nAnimadex]["types"][2] if len(animadex[nAnimadex]["types"]) > 2 else None
-        self.ability = animadex[nAnimadex]["abilitys"]["00H"] if random.randint(1, 100) == 100 else random.choice([animadex[nAnimadex]["abilitys"]["001"], animadex[nAnimadex]["abilitys"]["002"]])
-        self.arcana = animadex[nAnimadex]["arcana"]
-        self.technique_learning = animadex[nAnimadex]["technique_learning"]
-        self.assisted_techniques = animadex[nAnimadex]["technique_capsules"]
-        self.growth = animadex[nAnimadex]["growth"]
-        self.exp_base_given = animadex[nAnimadex]["exp_base_given"]
-        self.catch_rate = animadex[nAnimadex]["catch_rate"]
-        self.evolves = animadex[nAnimadex]["evolves"]
+        self.type_b1 = animadex[self.animadex]["types"][1]
+        self.type_b2 = animadex[self.animadex]["types"][2] if len(animadex[self.animadex]["types"]) > 2 else None
+        self._random_ability()
+        self.arcana = animadex[self.animadex]["arcana"]
+        self.technique_learning = animadex[self.animadex]["technique_learning"]
+        self.assisted_techniques = animadex[self.animadex]["technique_capsules"]
+        self.growth = animadex[self.animadex]["growth"]
+        self.exp_base_given = animadex[self.animadex]["exp_base_given"]
+        self.catch_rate = animadex[self.animadex]["catch_rate"]
+        self.evolves = animadex[self.animadex]["evolves"]
         self.base_stats = animadex[nAnimadex]["base_stats"]
         
         self.object = object
@@ -97,14 +99,27 @@ class Anima:
     def _reset_type(self):
         self.type_a = animadex[self.animadex]["types"][0]    
         
+        # Esto no se si ira aqui o en los metodos de combate
+    def change_fluxor_type(self, technique: Technique):
+        if technique.type == TypeA.UMBRA and self.type_a != TypeA.UMBRA:
+            self.type_a = TypeA.UMBRA
+        elif technique.type == TypeA.ESSENTIA and self.type_a != TypeA.ESSENTIA:
+            self.type_a = TypeA.ESSENTIA    
+        
     def change_lvl(self, lvl):
         self.lvl = lvl
         self.calculate_stats(True)
+    
+    def _random_ability(self):
+        self.ability = animadex[self.animadex]["abilities"]["00H"] if random.randint(1, 100) == 100 else random.choice([animadex[self.animadex]["abilities"]["001"], animadex[self.animadex]["abilities"]["002"]])
+        
+    def change_ability(self, ability: str):
+        self.ability = self.animadex["abilities"][ability]  
         
     def calculate_stats(self, first: Optional[bool] = False):
         nature_effects = nature_dict[self.nature]
         
-        atk_modifier =      ("1.2" if nature_effects[INCREASE] == "atk" else 
+        atk_modifier =      ("1.2" if nature_effects[INCREASE] == "atk" else
                              "0.8" if nature_effects[DECREASE] == "atk" else
                              "1.0")
         sp_atk_modifier =   ("1.2" if nature_effects[INCREASE] == "sp_atk" else
@@ -123,7 +138,7 @@ class Anima:
         self.hp_max = int(give_just_one_solution(solve_equation(formula_dict["hp"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['hp']}", f"potential = {self.potentials['hp']}"), "hp"))
         if first:
             self.hp_now = self.hp_max
-            self.crit, self.exp, self.atk_inc_dec, self.sp_atk_inc_dec, self.def_inc_dec, self.sp_def_inc_dec, self.spe_inc_dec,self.acc_inc_dec, self.eva_inc_dec = 0
+            self.exp, self.atk_inc_dec, self.sp_atk_inc_dec, self.def_inc_dec, self.sp_def_inc_dec, self.spe_inc_dec,self.acc_inc_dec, self.eva_inc_dec, self.crit_inc_dec = 0
             
         self.atk = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['atk']}", f"potential = {self.potentials['atk']}", f"nature = {atk_modifier}"), "stat"))
         self.sp_atk = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['sp_atk']}", f"potential = {self.potentials['sp_atk']}", f"nature = {sp_atk_modifier}"), "stat"))
@@ -148,12 +163,7 @@ class Anima:
         self.status1 = Status1.GOOD
         self.status2 = Status2.GOOD
 
-    # Esto no se si ira aqui o en los metodos de combate
-    def change_fluxor_type(self, technique: Technique):
-        if technique.type == TypeA.UMBRA and self.type_a != TypeA.UMBRA:
-            self.type_a = TypeA.UMBRA
-        elif technique.type == TypeA.ESSENTIA and self.type_a != TypeA.ESSENTIA:
-            self.type_a = TypeA.ESSENTIA
+
 
 
 
