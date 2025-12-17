@@ -73,7 +73,7 @@ animadex: dict[str, Animadex] = {
     ),
     "001": { 
         "name": "starter", 
-        "types": [TypeA.ESSENTIA, TypeB.NEUTRO],
+        "types": [TypeA.ESSENTIA, TypeB.COMMUNIS],
         "abilitys": Animadex._animadex_abilities_model("", "", ""),
         "arcana": Arcana.TERRA,
         "growth": "parabolic",
@@ -122,7 +122,7 @@ animadex: dict[str, Animadex] = {
     },
     "004": {
         "name": "rival_starter",
-        "types": [TypeA.UMBRA, TypeB.NEUTRO],
+        "types": [TypeA.UMBRA, TypeB.COMMUNIS],
         "abilitys": "",
         "arcana": Arcana.ABYSSUS,
         "growth": "parabolic",
@@ -170,7 +170,7 @@ animadex: dict[str, Animadex] = {
     },
     "007": {
         "name": "antagonist_starter",
-        "types": [TypeA.FORMA, TypeB.NEUTRO],
+        "types": [TypeA.FORMA, TypeB.COMMUNIS],
         "abilitys": "",
         "arcana": Arcana.HALOS,
         "growth": "parabolic",

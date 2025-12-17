@@ -47,8 +47,20 @@ class Anima:
         
         self.nature = nature if nature else self._random_nature()
         self._random_potentials()
-        self.calculate_stats(first=True)
-        
+        self.calculate_stats()
+        self.hp_now = self.hp_max
+        self.stats_inc_dec = {
+            "atk_inc_dec": 0,
+            "sp_atk_inc_dec": 0,
+            "def_inc_dec": 0,
+            "sp_def_inc_dec": 0,
+            "spe_inc_dec": 0,
+            "sp_spe_inc_dec": 0,
+            "acc_inc_dec": 0,
+            "eva_inc_dec": 0,
+            "crit_inc_dec": 0
+        }
+        self.exp = 0
         self._init_technique_set()
         
         self.ability_uses: int = 0 # ?
@@ -136,9 +148,6 @@ class Anima:
                              "1.0")
         
         self.hp_max = int(give_just_one_solution(solve_equation(formula_dict["hp"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['hp']}", f"potential = {self.potentials['hp']}"), "hp"))
-        if first:
-            self.hp_now = self.hp_max
-            self.exp, self.atk_inc_dec, self.sp_atk_inc_dec, self.def_inc_dec, self.sp_def_inc_dec, self.spe_inc_dec,self.acc_inc_dec, self.eva_inc_dec, self.crit_inc_dec = 0
             
         self.atk = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['atk']}", f"potential = {self.potentials['atk']}", f"nature = {atk_modifier}"), "stat"))
         self.sp_atk = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['sp_atk']}", f"potential = {self.potentials['sp_atk']}", f"nature = {sp_atk_modifier}"), "stat"))

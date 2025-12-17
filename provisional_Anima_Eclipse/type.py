@@ -45,7 +45,8 @@ class TypeB(Enum):
     '''Rock'''
     PUGNA = "Pugna"
     '''Fighting'''
-    NEUTRO = "Neutro"
+    COMMUNIS = "Communis"
+    '''Comoun'''
     
     
 effectiveness_chart: dict[TypeA | TypeB, DefaultDict[TypeA | TypeB, float]] = {
