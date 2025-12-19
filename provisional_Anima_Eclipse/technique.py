@@ -1,6 +1,7 @@
 import os, sys
 from typing import Callable, Literal, TypedDict
 from functools import partial
+from itertools import count
 
 from category import Category
 from anima import Anima
@@ -13,11 +14,13 @@ from logic.generate.boolean import fifty_fifty
 from random import randint
 from dict import formula_dict
 from type import effectiveness_chart
+from status import Status1, Status2
 
+_techdex_index = count(0)
 '''Deberia tener una clase Techdex y esta aparte como tengo con Anima y Animadex? Muchas preguntas, pocas respuestas'''
 class Technique(TypedDict): # Pensar que hacer con esto
     name: str
-    power: int
+    power: int | None
     type: TypeA | TypeB
     category: Category
     accuracy: int | Literal["always"] # Un número o "always"
@@ -31,7 +34,7 @@ class Technique(TypedDict): # Pensar que hacer con esto
     
 def _techdex_entry_model(
     name: str,
-    power: int,
+    power: int | None,
     type: TypeA | TypeB,
     category: Category,
     accuracy: int | Literal["always"], # Un número o "always"
@@ -107,43 +110,89 @@ def _just_heal(anima: Anima): # Tal vez hay que poner algo mas idk
     anima.hp_now += (anima.hp_max/2)
 
 
-def _just_stat_debuff(*stats: str, n: int, anima: Anima):
+def _just_stat_debuff(*stats: str, anima: Anima):
     """En stats importante poner solo la stat (atk, def...)"""
     
     for stat in stats:
-        anima.stats_inc_dec[f"{stat}_inc_dec"] -= n
+        anima.stats_inc_dec[f"{stat}_inc_dec"] -= 1
     
-def _just_stat_buff(*stats: str, n: int, anima: Anima):
+def _just_stat_buff(*stats: str, anima: Anima):
     """En stats importante poner solo la stat (atk, def...)"""
     
     for stat in stats:
-        anima.stats_inc_dec[f"{stat}_inc_dec"] += n
+        anima.stats_inc_dec[f"{stat}_inc_dec"] += 1
+        
+
+def _just_protect(anima: Anima): # Esto aqui? No?
+    anima.status1 = Status1.PROTECTED
+
+
+
+def _next_techdex_key() -> str:
+    return str(next(_techdex_index)).zfill(3)
+
 
 techdex: dict[str, Technique] = {
-    "000": _techdex_entry_model("example", 10, TypeA.ESSENTIA, Category.SPECIAL, 100, 10, None, False, False, "one", _just_damage), #()?
+    _next_techdex_key(): _techdex_entry_model("example", 10, TypeA.FLUXOR, Category.SPECIAL, 100, 10, None, False, False, "one", _just_damage), #()?
     
-    "001": _techdex_entry_model("Strike", 40, TypeB.COMMUNIS, Category.PHYSICAL, 100, 30, None, False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Strike", 40, TypeB.COMMUNIS, Category.PHYSICAL, 100, 30, None, False, False, "one", _just_damage),
     
-    "002": _techdex_entry_model("Double Punch", 20, TypeB.COMMUNIS, Category.PHYSICAL, 90, 10, None, False, False, "one", _just_damage_multiple),
+    _next_techdex_key(): _techdex_entry_model("Double Punch", 20, TypeB.COMMUNIS, Category.PHYSICAL, 90, 10, None, False, False, "one", _just_damage_multiple),
     
-    "003": _techdex_entry_model("Mega Punch", 80, TypeB.COMMUNIS, Category.PHYSICAL, 80, 10, None, False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Mega Punch", 80, TypeB.COMMUNIS, Category.PHYSICAL, 80, 10, None, False, False, "one", _just_damage),
     
-    "004": _techdex_entry_model("Swift", 60, TypeB.COMMUNIS, Category.SPECIAL, "always", 20, None, False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Swift", 60, TypeB.COMMUNIS, Category.SPECIAL, "always", 20, None, False, False, "one", _just_damage),
     
-    "005": _techdex_entry_model("Tri Attack", 80, TypeB.COMMUNIS, Category.SPECIAL, 100, 15, _secondary_effects_model(50, (SecondaryEffect.BURN, SecondaryEffect.PARALIZE, SecondaryEffect.FREEZE)), False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Tri Attack", 80, TypeB.COMMUNIS, Category.SPECIAL, 100, 15, _secondary_effects_model(50, (SecondaryEffect.BURN, SecondaryEffect.PARALIZE, SecondaryEffect.FREEZE)), False, False, "one", _just_damage),
     
-    "006": _techdex_entry_model("Restore", None, TypeB.COMMUNIS, Category.STATUS, "always", 5, None, False, True, "self", _just_heal),
+    _next_techdex_key(): _techdex_entry_model("Restore", None, TypeB.COMMUNIS, Category.STATUS, "always", 5, None, False, True, "self", _just_heal),
     
-    "007": _techdex_entry_model("Leer", None, TypeB.COMMUNIS, Category.STATUS, 100, 20, None, False, False, "one", partial(_just_stat_debuff, "def", n=1)),
+    _next_techdex_key(): _techdex_entry_model("Leer", None, TypeB.COMMUNIS, Category.STATUS, 100, 20, None, False, False, "one", partial(_just_stat_debuff, "def")),
     
-    "008": _techdex_entry_model("Growl", None, TypeB.COMMUNIS, Category.STATUS, 100, 20, None, False, False, "one", partial(_just_stat_debuff, "atk", n=1)),
+    _next_techdex_key(): _techdex_entry_model("Growl", None, TypeB.COMMUNIS, Category.STATUS, 100, 20, None, False, False, "one", partial(_just_stat_debuff, "atk")),
     
-    "009": _techdex_entry_model("Roar", None, TypeB.COMMUNIS, Category.STATUS, 100, 20, None, False, False, "one", partial(_just_stat_debuff, "sp_atk", n=1)),
+    _next_techdex_key(): _techdex_entry_model("Roar", None, TypeB.COMMUNIS, Category.STATUS, 100, 20, None, False, False, "one", partial(_just_stat_debuff, "sp_atk")),
     
-    "010": _techdex_entry_model("Solid armor", None, TypeB.COMMUNIS, Category.STATUS, 100, 20, None, False, False, "one", partial(_just_stat_buff, "def", n=1)),
+    _next_techdex_key(): _techdex_entry_model("Solid armor", None, TypeB.COMMUNIS, Category.STATUS, 100, 20, None, False, False, "one", partial(_just_stat_buff, "def")),
+    
+    _next_techdex_key(): _techdex_entry_model("Sword Dance", None, TypeB.COMMUNIS, Category.STATUS, "always", 5, None, False, False, "self", partial(_just_stat_buff, "atk", "atk")),
+    
+    _next_techdex_key(): _techdex_entry_model("Fast Punch", 20, TypeB.COMMUNIS, Category.PHYSICAL, 100, 15, None, True, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Protect", None, TypeB.COMMUNIS, Category.STATUS, "always", 10, None, False, False, "self", _just_protect),
+    
+    _next_techdex_key(): _techdex_entry_model("Primal Flow", 120, TypeA.ESSENTIA, Category.SPECIAL, 85, 5, None, False, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Inner Ressonance", 65, TypeA.ESSENTIA, Category.SPECIAL, 100, 10, None, False, False, "only_enemies", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Being Rupture", 50, TypeA.ESSENTIA, Category.PHYSICAL, 90, 15, _secondary_effects_model(50, (SecondaryEffect.DEF_DOWN)), False, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Essence Burst", 40, TypeA.ESSENTIA, Category.SPECIAL, 100, 30, None, False, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Essence Expansion", None, TypeA.ESSENTIA, Category.STATUS, "always", 20, None, False, False, "self", partial(_just_stat_buff, "spe", "spe")),
+    
+    _next_techdex_key(): _techdex_entry_model("Soul Fragment", 60, TypeA.ESSENTIA, Category.PHYSICAL, 100, 20, _secondary_effects_model(30, (SecondaryEffect.CONFUSE)), False, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Pattern Slash", 60, TypeA.FORMA, Category.PHYSICAL, 100, 20, None, False, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Geometric Force", None, TypeA.FORMA, Category.STATUS, 100, 10, None, False, False, "only_enemies", partial(_just_stat_debuff, "spe")),
+    
+    _next_techdex_key(): _techdex_entry_model("Reshape", None, TypeA.FORMA, Category.STATUS, "always", 10, None, False, False, "self", partial(_just_stat_buff, "eva", "eva")),
+    
+    _next_techdex_key(): _techdex_entry_model("Structural Impact", 75, TypeA.FORMA, Category.PHYSICAL, 90, 10, None, False, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Adaptative Frame", 18, TypeA.FORMA, Category.SPECIAL, 90, 25, None, False, False, "one", _just_damage_multiple),
+    
+    _next_techdex_key(): _techdex_entry_model("Drain Mass", 75, 100, TypeA.FORMA, Category.PHYSICAL, 10, None, False, True, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Cosmic Power", 60, TypeA.FORMA, Category.SPECIAL, "always", 15, _secondary_effects_model(30, (SecondaryEffect.FLINCH)), False, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Resolve Strike", 40, TypeA.VOLUNTAS, Category.SPECIAL, 100, 30, None, False, False, "one", _just_damage),
 }
 '''A dictionary of every single Technique with its information that never changes'''
 
+
+tech = techdex["001"]
 
 ''' Orden movimientos en combate 
 an1 = 0

@@ -173,8 +173,12 @@ class Anima:
         self.status2 = Status2.GOOD
 
 
+    def reset_status(self): # Para cuando termina el turno
+        self.status1 = Status1.GOOD if self.status1 == Status1.PROTECTED else self.status1
 
-
+    def reset_stats_inc_dec(self): # Para cuando salen de combate y cuando termina el combate
+        for stat in self.stats_inc_dec:
+            self.stats_inc_dec[stat] = 0
 
 
 

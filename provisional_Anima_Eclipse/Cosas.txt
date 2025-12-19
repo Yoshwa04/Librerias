@@ -48,3 +48,43 @@ Está cerrado
 Parece que tu vínculo con X se fortalecerá/no pronto, ¿quieres pasar el rato con X?
 El anima de la arcana X aumenta tu afinidad con Y 
 
+
+
+
+
+
+
+
+
+
+---------------------------------------------------
+
+LISTA DE TODOS LOS POSIBLES MOVIMIENTOS PARA LOS TIPOS - ELEGIR DE ENTRE ESTOS EN CADA TIPO, NO USARLOS TODOS EN TODOS LOS TIPOS
+1 - 40 potencia
+2 - 60 potencia
+3 - 60 potencia + Efecto secundario -> 95 acc
+4 - 90 potencia -> 85 acc
+5 - 120 potencia + Efecto secundario? -> 80/70 acc
+6 - 100 potencia + Efecto secundario+ -> 50 acc
+7 - 30 potencia + prioridad -> 95 acc
+8 - Stat debuff 1
+9 - Stat debuff 1
+10 - Stat debuff 1
+11 - Stat debuff 1 
+12 - Stat buff 1 
+13 - Stat buff 1 
+14 - Stat buff 1 
+15 - Stat buff 1 
+16 - Stat debuff 2/3
+17 - Stat debuff 2/3 
+18 - Stat buff 2/3 
+19 - Stat buff 2/3 
+20 - Curacion
+21 - 40 potencia + curacion
+22 - 60 potencia + curacion -> 95 acc
+23 - 75 potencia + curacion -> 80 acc
+24 - Efecto de estado
+25 - Efecto de estado -> 75 acc
+26 - Efecto de estado -> 50 acc
+27 - 150 potencia -> 50 acc
+28 - 200 potencia -> 25 acc

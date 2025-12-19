@@ -122,7 +122,7 @@ animadex: dict[str, Animadex] = {
     },
     "004": {
         "name": "rival_starter",
-        "types": [TypeA.UMBRA, TypeB.COMMUNIS],
+        "types": [TypeA.FORMA, TypeB.COMMUNIS],
         "abilitys": "",
         "arcana": Arcana.ABYSSUS,
         "growth": "parabolic",
@@ -138,7 +138,7 @@ animadex: dict[str, Animadex] = {
     },
     "005": { 
         "name": "evolved_rival_starter",
-        "types": [TypeA.UMBRA, TypeB.SINISTER],
+        "types": [TypeA.FORMA, TypeB.SINISTER],
         "abilitys": "",
         "arcana": Arcana.ABYSSUS,
         "growth": "parabolic",
@@ -154,7 +154,7 @@ animadex: dict[str, Animadex] = {
     },
     "006": { 
         "name": "final_rival_starter",
-        "types": [TypeA.UMBRA, TypeB.SINISTER, TypeB.AQUA],
+        "types": [TypeA.FORMA, TypeB.SINISTER, TypeB.AQUA],
         "abilitys": "",
         "arcana": Arcana.ABYSSUS,
         "growth": "parabolic",
@@ -170,7 +170,7 @@ animadex: dict[str, Animadex] = {
     },
     "007": {
         "name": "antagonist_starter",
-        "types": [TypeA.FORMA, TypeB.COMMUNIS],
+        "types": [TypeA.VOLUNTAS, TypeB.COMMUNIS],
         "abilitys": "",
         "arcana": Arcana.HALOS,
         "growth": "parabolic",
@@ -185,7 +185,7 @@ animadex: dict[str, Animadex] = {
     },
     "008": {
         "name": "antagonist_evolved_starter",
-        "types": [TypeA.FORMA, TypeB.VENENUM],
+        "types": [TypeA.VOLUNTAS, TypeB.VENENUM],
         "abilities": "",
         "arcana": Arcana.HALOS,
         "growth": "parabolic",
@@ -199,7 +199,7 @@ animadex: dict[str, Animadex] = {
     },
     "009": {
         "name": "antagonist_final_starter",
-        "types": [TypeA.FORMA, TypeB.VENENUM, TypeB.PLANTA],
+        "types": [TypeA.VOLUNTAS, TypeB.VENENUM, TypeB.PLANTA],
         "abilities": "",
         "arcana": Arcana.HALOS,
         "growth": "parabolic",
@@ -332,7 +332,7 @@ animadex: dict[str, Animadex] = {
     },
     "017": {
         "name": "bug2",
-        "types": [TypeA.UMBRA, TypeB.INSECTUM],
+        "types": [TypeA.VOLUNTAS, TypeB.INSECTUM],
         "abilities": "",
         "arcana": Arcana.ECLIPSIS,
         "growth": "normal",
@@ -349,7 +349,7 @@ animadex: dict[str, Animadex] = {
     },
     "018": {
         "name": "bug2.2",
-        "types": [TypeA.UMBRA, TypeB.INSECTUM, TypeB.PLANTA],
+        "types": [TypeA.VOLUNTAS, TypeB.INSECTUM, TypeB.PLANTA],
         "abilities": "",
         "arcana": Arcana.ECLIPSIS,
         "growth": "normal",
