@@ -188,13 +188,35 @@ techdex: dict[str, Technique] = {
     _next_techdex_key(): _techdex_entry_model("Cosmic Power", 60, TypeA.FORMA, Category.SPECIAL, "always", 15, _secondary_effects_model(30, (SecondaryEffect.FLINCH)), False, False, "one", _just_damage),
     
     _next_techdex_key(): _techdex_entry_model("Resolve Strike", 40, TypeA.VOLUNTAS, Category.SPECIAL, 100, 30, None, False, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Will Power", 50, TypeA.VOLUNTAS, Category.PHYSICAL, 90, 20, None, True, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("", 80, TypeA.VOLUNTAS, Category.SPECIAL, 95, 10, None, False, False, "only_enemies", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("", 120, TypeA.VOLUNTAS, Category.SPECIAL, 75, 5, None, False, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("", 60, TypeA.VOLUNTAS, Category.PHYSICAL, 95, 15, None, False, True, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("", 200, TypeA.VOLUNTAS, Category.SPECIAL, 25, 10, None, False, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Ember", 40, TypeB.IGNIS, Category.SPECIAL, 100, 30, _secondary_effects_model(15, (SecondaryEffect.BURN)), False, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Fire Fist", 60, TypeB.IGNIS, Category.PHYSICAL, 95, 20, _secondary_effects_model(25, (SecondaryEffect.BURN)), False, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Fire Punch", 80, TypeB.IGNIS, Category.PHYSICAL, 100, 15, None, False, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Fire Wave", 80, TypeB.IGNIS, Category.SPECIAL, 95, 15, _secondary_effects_model(15, (SecondaryEffect.BURN)), False, False, "all", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Flamethrower", 100, TypeB.IGNIS, Category.SPECIAL, 90, 10, _secondary_effects_model(30, (SecondaryEffect.BURN)), False, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Lava Plume", 120, TypeB.IGNIS, Category.PHYSICAL, 85, 5, None, False, False, "only_enemies", _just_damage),
 }
 '''A dictionary of every single Technique with its information that never changes'''
 
 
 tech = techdex["001"]
 
-''' Orden movimientos en combate 
+''' Orden movimientos en combate: 
 an1 = 0
 an2 = 0
 mov1 = True

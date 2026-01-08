@@ -85,7 +85,7 @@ animadex: dict[str, Animadex] = {
         },
         "technique_capsules": {
             "001" : techdex["000"],
-        },     
+        },
     },
     "002": { 
         "name": "evolved_starter",

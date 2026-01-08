@@ -15,10 +15,6 @@ from type import TypeA, TypeB
 from technique import Technique
 
 
-
-
-
-
 class Anima:
     # Cosas que tiene que tener y aun hay que implementar: su moveset actual, la experiencia, item que lleva...
     def __init__(self, nAnimadex: str, min_lvl: int, max_lvl, nature: Optional[Nature] = None, object: Optional[str] = None):
@@ -160,7 +156,7 @@ class Anima:
     def lvl_up(self):
         if self.exp >= self.exp_next_lvl and self.exp_next_lvl != -1:
             self.lvl += 1
-            self.exp -= self.exp_next_lvl
+            self.exp -= self.exp_next_lvl # La resta es asi porque aún no se ha calculado la exp del sig lvl.
             
             self.calculate_stats(False)
     

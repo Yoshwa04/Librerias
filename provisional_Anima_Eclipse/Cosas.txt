@@ -59,7 +59,7 @@ El anima de la arcana X aumenta tu afinidad con Y
 
 ---------------------------------------------------
 
-LISTA DE TODOS LOS POSIBLES MOVIMIENTOS PARA LOS TIPOS - ELEGIR DE ENTRE ESTOS EN CADA TIPO, NO USARLOS TODOS EN TODOS LOS TIPOS
+LISTA DE TODOS LOS POSIBLES MOVIMIENTOS PARA LOS TIPOS - ELEGIR DE ENTRE ESTOS EN CADA TIPO, NO USARLOS TODOS EN TODOS LOS TIPOS, O Si
 1 - 40 potencia
 2 - 60 potencia
 3 - 60 potencia + Efecto secundario -> 95 acc
