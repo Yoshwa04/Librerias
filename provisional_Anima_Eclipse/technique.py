@@ -17,6 +17,10 @@ from type import effectiveness_chart
 from status import Status1, Status2
 
 _techdex_index = count(0)
+
+def _next_techdex_key() -> str:
+    return str(next(_techdex_index)).zfill(3)
+
 '''Deberia tener una clase Techdex y esta aparte como tengo con Anima y Animadex? Muchas preguntas, pocas respuestas'''
 class Technique(TypedDict): # Pensar que hacer con esto
     name: str
@@ -128,10 +132,6 @@ def _just_protect(anima: Anima): # Esto aqui? No?
 
 
 
-def _next_techdex_key() -> str:
-    return str(next(_techdex_index)).zfill(3)
-
-
 techdex: dict[str, Technique] = {
     _next_techdex_key(): _techdex_entry_model("example", 10, TypeA.FLUXOR, Category.SPECIAL, 100, 10, None, False, False, "one", _just_damage), #()?
     
@@ -210,6 +210,13 @@ techdex: dict[str, Technique] = {
     _next_techdex_key(): _techdex_entry_model("Flamethrower", 100, TypeB.IGNIS, Category.SPECIAL, 90, 10, _secondary_effects_model(30, (SecondaryEffect.BURN)), False, False, "one", _just_damage),
     
     _next_techdex_key(): _techdex_entry_model("Lava Plume", 120, TypeB.IGNIS, Category.PHYSICAL, 85, 5, None, False, False, "only_enemies", _just_damage),
+    
+    # Los de agua deberian tener el secondary effect? o no ya que todos mojan siempre?
+    _next_techdex_key(): _techdex_entry_model("Water Gun", 40, TypeB.AQUA, Category.SPECIAL, 100, 30, _secondary_effects_model(100, (SecondaryEffect.SOAK)), False, False, "one", _just_damage),
+    
+     _next_techdex_key(): _techdex_entry_model("Bubble", 40, TypeB.AQUA, Category.SPECIAL, 100, 30, _secondary_effects_model(100, (SecondaryEffect.SOAK)), False, False, "one", _just_damage),
+     
+      _next_techdex_key(): _techdex_entry_model("Water Pulse", 60, TypeB.AQUA, Category.SPECIAL, 100, 20, _secondary_effects_model(100, (SecondaryEffect.SOAK)), False, False, "one", _just_damage),
 }
 '''A dictionary of every single Technique with its information that never changes'''
 

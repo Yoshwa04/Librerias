@@ -2,8 +2,8 @@ Combate:
 
 Es eficaz
 Es supereficaz
-No es eficaz
-Es superineficaz
+Es poco eficaz
+Es muy poco eficaz
 No afecta a X
 ¡Golpe crítico!
 Ha sido daño máximo
@@ -36,7 +36,7 @@ No puedes huir de un combate contra un rival
 X está protegido y evita el daño
 X ha fallado
 X evita el ataque
-X sube de nivel
+
 
 
 Fuera del combate
@@ -46,7 +46,11 @@ X te entrega Y
 Está cerrado
 ¿Quieres activar la palanca/mecanismo/boton...?
 Parece que tu vínculo con X se fortalecerá/no pronto, ¿quieres pasar el rato con X?
-El anima de la arcana X aumenta tu afinidad con Y 
+El anima de la arcana X aumenta tu afinidad con Y
+X sube de nivel
+El anima X aprendió tal
+El anima X intenta aprender tal, quieres que olvide otro movimiento?
+El anima X olvidó tal
 
 
 
