@@ -244,7 +244,25 @@ techdex: dict[str, Technique] = {
     
     _next_techdex_key(): _techdex_entry_model("Spark shot", 75, TypeB.ELECTRITAS, Category.PHYSICAL, "always", 10, None, False, False, "one", _just_damage),
     
-    _next_techdex_key(): _techdex_entry_model(),
+    _next_techdex_key(): _techdex_entry_model("Electric Dance", None, TypeB.ELECTRITAS, Category.STATUS, 100, 30, None, False, False, "self", _just_stat_buff),
+    
+    _next_techdex_key(): _techdex_entry_model("Bug Bite", 20, TypeB.INSECTUM, Category.PHYSICAL, 100, 30, _secondary_effects_model(30, (SecondaryEffect.POSION)), False, False, "one", _just_damage_multiple), #2 times
+    
+    _next_techdex_key(): _techdex_entry_model("XScizor", 70, TypeB.INSECTUM, Category.PHYSICAL, 95, 15, None, False, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Buzz Wave", 60, TypeB.INSECTUM, Category.SPECIAL, 95, 10, None, False, False, "only_enemies", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Rapid Horn", 40, TypeB.INSECTUM, Category.PHYSICAL, "always", 20, None, True, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Quiver Dance", None, TypeB.INSECTUM, Category.STATUS, "always", 10, None, False, False, "self", _just_stat_buff),
+    
+    _next_techdex_key(): _techdex_entry_model(" Song", None, TypeB.INSECTUM, Category.STATUS, 100, 20, None, False, False, "one", _just_stat_debuff),
+    
+    _next_techdex_key(): _techdex_entry_model("Slow String", 30, TypeB.INSECTUM, Category.SPECIAL, 100, 30, _secondary_effects_model(50, (SecondaryEffect.SPE_DOWN)), False, False, "only_enemies", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Aerial Hit", 55, TypeB.VENTUS, Category.PHYSICAL, 100, 20, None,False, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Fly", 90, TypeB.VENTUS, Category.PHYSICAL, 100, 10, None, False, False, "one", "DAÑO 2 TURNOS"),
 }
 '''A dictionary of every single Technique with its information'''
 
