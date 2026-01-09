@@ -263,6 +263,10 @@ techdex: dict[str, Technique] = {
     _next_techdex_key(): _techdex_entry_model("Aerial Hit", 55, TypeB.VENTUS, Category.PHYSICAL, 100, 20, None,False, False, "one", _just_damage),
     
     _next_techdex_key(): _techdex_entry_model("Fly", 90, TypeB.VENTUS, Category.PHYSICAL, 100, 10, None, False, False, "one", "DAÑO 2 TURNOS"),
+    
+    _next_techdex_key(): _techdex_entry_model("Wind Strike", 70, TypeB.VENTUS, Category.SPECIAL, 90, 20, None, False, False, "all", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model(),
 }
 '''A dictionary of every single Technique with its information'''
 
