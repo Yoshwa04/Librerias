@@ -239,8 +239,14 @@ techdex: dict[str, Technique] = {
     _next_techdex_key(): _techdex_entry_model("Discharge", 90, TypeB.ELECTRITAS, Category.SPECIAL, 80, 10, _secondary_effects_model(20, (SecondaryEffect.PARALIZE)), False, False, "only_enemies", _just_damage),
     
     _next_techdex_key(): _techdex_entry_model("Electric Punch", 90, TypeB.ELECTRITAS, Category.PHYSICAL, 90, 15, None, False, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Bolt Strike", 110, TypeB.ELECTRITAS, Category.SPECIAL, 80, 5, _secondary_effects_model(40, (SecondaryEffect.PARALIZE)), False, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Spark shot", 75, TypeB.ELECTRITAS, Category.PHYSICAL, "always", 10, None, False, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model(),
 }
-'''A dictionary of every single Technique with its information that never changes'''
+'''A dictionary of every single Technique with its information'''
 
 
 tech = techdex["001"]
