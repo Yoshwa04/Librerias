@@ -33,7 +33,7 @@ class Technique(TypedDict): # Pensar que hacer con esto
     priority: bool
     heal: bool
     objective: Literal["self", "one", "all", "all_enemies"]   
-    battle_method: Callable # ?
+    battle_method: Callable # ? - Literal[...]?
 
     
 def _techdex_entry_model(
@@ -214,9 +214,31 @@ techdex: dict[str, Technique] = {
     # Los de agua deberian tener el secondary effect? o no ya que todos mojan siempre?
     _next_techdex_key(): _techdex_entry_model("Water Gun", 40, TypeB.AQUA, Category.SPECIAL, 100, 30, _secondary_effects_model(100, (SecondaryEffect.SOAK)), False, False, "one", _just_damage),
     
-     _next_techdex_key(): _techdex_entry_model("Bubble", 40, TypeB.AQUA, Category.SPECIAL, 100, 30, _secondary_effects_model(100, (SecondaryEffect.SOAK)), False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Bubble", 40, TypeB.AQUA, Category.SPECIAL, 100, 30, _secondary_effects_model(100, (SecondaryEffect.SOAK)), False, False, "one", _just_damage),
      
-      _next_techdex_key(): _techdex_entry_model("Water Pulse", 60, TypeB.AQUA, Category.SPECIAL, 100, 20, _secondary_effects_model(100, (SecondaryEffect.SOAK)), False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Water Pulse", 60, TypeB.AQUA, Category.SPECIAL, 100, 20, _secondary_effects_model(100, (SecondaryEffect.SOAK)), False, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Heat ", 110, TypeB.AQUA, Category.SPECIAL, 85, 5, _secondary_effects_model(30, (SecondaryEffect.BURN)), False, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Absorb", 40, TypeB.PLANTA, Category.SPECIAL, 100, 30, None, False, True, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Razor Leaf", 60, TypeB.PLANTA, Category.PHYSICAL, 100, 20, None, False, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Mega Absorb", 75, TypeB.PLANTA, Category.SPECIAL, 90, 10, None, False, True, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Petal Dance", 120, TypeB.PLANTA, Category.PHYSICAL, 80, 5, None, False, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Spore", None, TypeB.PLANTA, Category.STATUS, 100, 10, _secondary_effects_model(100, (SecondaryEffect.ASLEEP)), False, False, "one", "POR IMPLEMENTAR"),
+    
+    _next_techdex_key(): _techdex_entry_model("Drain Plant", None, TypeB.PLANTA, Category.STATUS, 90, 10, None, False, False, "one", "POR IMPLEMENTAR"),
+    
+    _next_techdex_key(): _techdex_entry_model("Paralizer", None, TypeB.PLANTA, Category.STATUS, 70, 20, _secondary_effects_model(100, (SecondaryEffect.PARALIZE)), False, False, "one", "POR IMPLEMENTAR"),
+    
+    _next_techdex_key(): _techdex_entry_model("Lightning", 60, TypeB.ELECTRITAS, Category.SPECIAL, 100, 20, _secondary_effects_model(30, (SecondaryEffect.PARALIZE)), False, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Discharge", 90, TypeB.ELECTRITAS, Category.SPECIAL, 80, 10, _secondary_effects_model(20, (SecondaryEffect.PARALIZE)), False, False, "only_enemies", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Electric Punch", 90, TypeB.ELECTRITAS, Category.PHYSICAL, 90, 15, None, False, False, "one", _just_damage),
 }
 '''A dictionary of every single Technique with its information that never changes'''
 

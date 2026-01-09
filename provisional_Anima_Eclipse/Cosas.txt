@@ -92,3 +92,19 @@ LISTA DE TODOS LOS POSIBLES MOVIMIENTOS PARA LOS TIPOS - ELEGIR DE ENTRE ESTOS E
 26 - Efecto de estado -> 50 acc
 27 - 150 potencia -> 50 acc
 28 - 200 potencia -> 25 acc
+
+
+
+
+------------------------------------------------
+
+DAÑO
+DAÑO MUTIPLE
+DAÑO VARIOS TURNOS?
+DAÑO E IRSE?
+DAÑO Y EFECTO
+DAÑO Y CURARSE
+SOLO CURARSE
+PROTEGERSE
+BUFO 1 - 2 - 3
+DEBUFO 1 - 2 - 3
