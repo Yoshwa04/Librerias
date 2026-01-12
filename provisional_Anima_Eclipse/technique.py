@@ -29,7 +29,7 @@ class Technique(): # Pensar que hacer con esto
     power: int | None
     type: TypeA | TypeB
     category: Category
-    accuracy: int | Literal["always"] # Un número o "always"
+    accuracy: int | Literal["always"] # Un número 1-100 o "always"
     pp: int
     secondary_effects: dict[str, int | tuple[SecondaryEffect]] | None
     priority: bool
@@ -135,9 +135,9 @@ def _just_protect(anima: Anima): # Esto aqui? No?
     anima.status1 = Status1.PROTECTED
 
 
-
+# Cambiar el metodo de callable a str
 techdex: dict[str, Technique] = {
-    _next_techdex_key(): _techdex_entry_model("example", 10, TypeA.FLUXOR, Category.SPECIAL, 100, 10, None, False, False, "one", _just_damage), #()?
+    _next_techdex_key(): _techdex_entry_model("example", 10, TypeA.FLUXOR, Category.SPECIAL, 100, 10, None, False, False, "one", _just_damage), 
     
     _next_techdex_key(): _techdex_entry_model("Strike", 40, TypeB.COMMUNIS, Category.PHYSICAL, 100, 30, None, False, False, "one", _just_damage),
     
@@ -319,6 +319,20 @@ techdex: dict[str, Technique] = {
     _next_techdex_key(): _techdex_entry_model("Dream Eater", 75, TypeB.PHANTASMA, Category.SPECIAL, 90, 10, None, False, True, "one", "damage_heal"),
     
     _next_techdex_key(): _techdex_entry_model("Horror Tale", None, TypeB.PHANTASMA, Category.STATUS, "always", 10, None, False, False, "one", "status"),
+    
+    _next_techdex_key(): _techdex_entry_model("Fake Slam", 35, TypeB.PHANTASMA, Category.PHYSICAL, 100, 25, None, False, False, "one", "damage_multiple"),
+    
+    _next_techdex_key(): _techdex_entry_model("Psyquic", 60, TypeB.PSYCHICUS, Category.SPECIAL, 100, 20, _secondary_effects_model(25, (SecondaryEffect.CONFUSE)), False, False, "one", "damage_effect"),
+    
+    _next_techdex_key(): _techdex_entry_model("Kinetic", 30, TypeB.PSYCHICUS, Category.PHYSICAL, "always", 25, None, True, False, "one", "damage"),
+    
+    _next_techdex_key(): _techdex_entry_model("Confussion", 90, TypeB.PSYCHICUS, Category.SPECIAL, 90, 10, _secondary_effects_model(50, (SecondaryEffect.CONFUSE)), False, False, "one", "damage_effect"),
+    
+    _next_techdex_key(): _techdex_entry_model("Mind Reading", None, TypeB.PSYCHICUS, Category.STATUS, "always", 10, None, False, False, "one", "debuff2"),
+    
+    _next_techdex_key(): _techdex_entry_model("", 100, TypeB.PSYCHICUS, Category.PHYSICAL, 85, 5, None, False, False, "all", "damage"),
+    
+    _next_techdex_key(): _techdex_entry_model(),
 }
 '''A dictionary of every single Technique with its information'''
 
