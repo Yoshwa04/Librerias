@@ -1,5 +1,6 @@
+from dataclasses import dataclass
 import os, sys
-from typing import Callable, Literal, TypedDict
+from typing import Literal
 from functools import partial
 from itertools import count
 
@@ -22,7 +23,8 @@ def _next_techdex_key() -> str:
     return str(next(_techdex_index)).zfill(3)
 
 '''Deberia tener una clase Techdex y esta aparte como tengo con Anima y Animadex? Muchas preguntas, pocas respuestas'''
-class Technique(TypedDict): # Pensar que hacer con esto
+@dataclass(slots=True)
+class Technique(): # Pensar que hacer con esto
     name: str
     power: int | None
     type: TypeA | TypeB
@@ -33,7 +35,9 @@ class Technique(TypedDict): # Pensar que hacer con esto
     priority: bool
     heal: bool
     objective: Literal["self", "one", "all", "all_enemies"]   
-    battle_method: Literal["damage", "damage_multiple", "damage_second_turn", "damage_recharge", "damage_go", "damage_effect", "damage_heal", "heal", "protect", "buff1", "buff2", "buff3", "debuff1", "debuff2", "debuff3", "status"]
+    battle_method: Literal[
+        "damage", "damage_multiple", "damage_second_turn", "damage_recharge", "damage_go", "damage_effect", "damage_heal", "heal", "protect", "buff1", "buff2", "buff3", "debuff1", "debuff2", "debuff3", "status"
+    ] # Protect podria ir en status? Ya que seria cambiar el propio status y ya... 
 
     
 def _techdex_entry_model(
@@ -49,19 +53,19 @@ def _techdex_entry_model(
     objective: Literal["self", "one", "all", "only_enemies"],
     battle_method: Literal["damage", "damage_multiple", "damage_second_turn", "damage_recharge", "damage_go", "damage_effect", "damage_heal", "heal", "protect", "buff1", "buff2", "buff3", "debuff1", "debuff2", "debuff3", "status"]
 ) -> dict[str, Technique]:
-    return {
-        "name": name,
-        "power": power,
-        "type": type,
-        "category": category,
-        "accuracy": accuracy,
-        "pp": pp,
-        "secondary_effects": secondary_effects,
-        "priority": priority,
-        "heal": heal,
-        "objective": objective,
-        "battle_method": battle_method
-    }
+    return Technique(
+        name=name,
+        power=power,
+        type=type,
+        category=category,
+        accuracy=accuracy,
+        pp=pp,
+        secondary_effects=secondary_effects,
+        priority=priority,
+        heal=heal,
+        objective=objective,
+        battle_method=battle_method,
+    )
 
 def _secondary_effects_model(prob: int, effects: tuple[SecondaryEffect]) -> dict[str, int | tuple[SecondaryEffect]]:
     return {
@@ -296,13 +300,25 @@ techdex: dict[str, Technique] = {
     
     _next_techdex_key(): _techdex_entry_model("Dark Pulse", 40, TypeB.SINISTER, Category.SPECIAL, 100, 20, None, False, False, "only_enemies", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("Pursuit", 50, TypeB.SINISTER, Category.PHYSICAL, "always", 10, None, True, False, "one", "damage_effect"),
+    _next_techdex_key(): _techdex_entry_model("Pursuit", 40, TypeB.SINISTER, Category.PHYSICAL, "always", 10, None, False, False, "one", "damage_effect"), #?
     
     _next_techdex_key(): _techdex_entry_model("Crunch", 80, TypeB.SINISTER, Category.PHYSICAL, 100, 15, _secondary_effects_model(50, (SecondaryEffect.DEF_DOWN)), False, False, "one", "damage_effect"),
     
     _next_techdex_key(): _techdex_entry_model("Night Slash", 70, TypeB.SINISTER, Category.PHYSICAL, 100, 15, None, False, False, "one", "damage"),
     
     _next_techdex_key(): _techdex_entry_model("Scary Face", None, TypeB.SINISTER, Category.STATUS, 100, 25, None, False, False, "only_enemies", "status"),
+    
+    _next_techdex_key(): _techdex_entry_model("Shadow Ball", 60, TypeB.PHANTASMA, Category.SPECIAL, 100, 20, _secondary_effects_model(40, (SecondaryEffect.SDEF_DOWN)), False, False, "one", "damage_effect"),
+    
+    _next_techdex_key(): _techdex_entry_model("Sneaky Punch", 75, TypeB.PHANTASMA, Category.PHYSICAL, 95, 15, None, False, False, "one", "damage"),
+    
+    _next_techdex_key(): _techdex_entry_model("Nightmare Rush", 90, TypeB.PHANTASMA, Category.PHYSICAL, 100, 10, None, False, False, "one", "damage_second_turn"),
+    
+    _next_techdex_key(): _techdex_entry_model("Death Beam", 120, TypeB.PHANTASMA, Category.SPECIAL, 80, 5, None, False, False, "one", "damage"),
+    
+    _next_techdex_key(): _techdex_entry_model("Dream Eater", 75, TypeB.PHANTASMA, Category.SPECIAL, 90, 10, None, False, True, "one", "damage_heal"),
+    
+    _next_techdex_key(): _techdex_entry_model("Horror Tale", None, TypeB.PHANTASMA, Category.STATUS, "always", 10, None, False, False, "one", "status"),
 }
 '''A dictionary of every single Technique with its information'''
 
