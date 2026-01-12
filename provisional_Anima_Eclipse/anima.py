@@ -43,6 +43,7 @@ class Anima:
         
         self.nature = nature if nature else self._random_nature()
         self._random_potentials()
+        self._assign_nature_effects()
         self.calculate_stats()
         self.hp_now = self.hp_max
         self.stats_inc_dec = {
@@ -56,6 +57,7 @@ class Anima:
             "eva_inc_dec": 0,
             "crit_inc_dec": 0
         }
+        
         self.exp = 0
         self._init_technique_set()
         
@@ -108,6 +110,7 @@ class Anima:
         self.type_a = animadex[self.animadex]["types"][0]    
         
         # Esto no se si ira aqui o en los metodos de combate
+    
     def change_fluxor_type(self, technique: Technique):
         if technique.type == TypeA.UMBRA and self.type_a != TypeA.UMBRA:
             self.type_a = TypeA.UMBRA
@@ -123,33 +126,34 @@ class Anima:
         
     def change_ability(self, ability: str):
         self.ability = self.animadex["abilities"][ability]  
-        
-    def calculate_stats(self, first: Optional[bool] = False):
+    
+    def _assign_nature_effects(self):
         nature_effects = nature_dict[self.nature]
         
-        atk_modifier =      ("1.2" if nature_effects[INCREASE] == "atk" else
-                             "0.8" if nature_effects[DECREASE] == "atk" else
-                             "1.0")
-        sp_atk_modifier =   ("1.2" if nature_effects[INCREASE] == "sp_atk" else
-                             "0.8" if nature_effects[DECREASE] == "sp_atk" else
-                             "1.0")
-        def_modifier =      ("1.2" if nature_effects[INCREASE] == "def" else
-                             "0.8" if nature_effects[DECREASE] == "def" else
-                             "1.0")
-        sp_def_modifier =   ("1.2" if nature_effects[INCREASE] == "sp_def" else
-                             "0.8" if nature_effects[DECREASE] == "sp_def" else
-                             "1.0")
-        spe_modifier =      ("1.2" if nature_effects[INCREASE] == "spe" else
-                             "0.8" if nature_effects[DECREASE] == "spe" else
-                             "1.0")
-        
+        self.atk_modifier =     ("1.2" if nature_effects[INCREASE] == "atk" else
+                                "0.8" if nature_effects[DECREASE] == "atk" else
+                                "1.0")
+        self.sp_atk_modifier =  ("1.2" if nature_effects[INCREASE] == "sp_atk" else
+                                "0.8" if nature_effects[DECREASE] == "sp_atk" else
+                                "1.0")
+        self.def_modifier =     ("1.2" if nature_effects[INCREASE] == "def" else
+                                "0.8" if nature_effects[DECREASE] == "def" else
+                                "1.0")
+        self.sp_def_modifier =  ("1.2" if nature_effects[INCREASE] == "sp_def" else
+                                "0.8" if nature_effects[DECREASE] == "sp_def" else
+                                "1.0")
+        self.spe_modifier =     ("1.2" if nature_effects[INCREASE] == "spe" else
+                                "0.8" if nature_effects[DECREASE] == "spe" else
+                                "1.0")
+            
+    def calculate_stats(self, first: Optional[bool] = False):
         self.hp_max = int(give_just_one_solution(solve_equation(formula_dict["hp"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['hp']}", f"potential = {self.potentials['hp']}"), "hp"))
             
-        self.atk = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['atk']}", f"potential = {self.potentials['atk']}", f"nature = {atk_modifier}"), "stat"))
-        self.sp_atk = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['sp_atk']}", f"potential = {self.potentials['sp_atk']}", f"nature = {sp_atk_modifier}"), "stat"))
-        self.def_ = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['def']}", f"potential = {self.potentials['def']}", f"nature = {def_modifier}"), "stat"))
-        self.sp_def = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['sp_def']}", f"potential = {self.potentials['sp_def']}", f"nature = {sp_def_modifier}"), "stat"))
-        self.spe = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['spe']}", f"potential = {self.potentials['spe']}", f"nature = {spe_modifier}"), "stat"))
+        self.atk = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['atk']}", f"potential = {self.potentials['atk']}", f"nature = {self.atk_modifier}"), "stat"))
+        self.sp_atk = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['sp_atk']}", f"potential = {self.potentials['sp_atk']}", f"nature = {self.sp_atk_modifier}"), "stat"))
+        self.def_ = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['def']}", f"potential = {self.potentials['def']}", f"nature = {self.def_modifier}"), "stat"))
+        self.sp_def = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['sp_def']}", f"potential = {self.potentials['sp_def']}", f"nature = {self.sp_def_modifier}"), "stat"))
+        self.spe = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['spe']}", f"potential = {self.potentials['spe']}", f"nature = {self.spe_modifier}"), "stat"))
         
         self.exp_next_lvl = -1 if self.lvl >= MAX_LVL else int(give_just_one_solution(solve_equation(formula_dict["growth"][self.growth], f"lvl = {self.lvl + 1}"), "growth")) - int(give_just_one_solution(solve_equation(formula_dict["growth"][self.growth], f"lvl = {self.lvl}"), "growth"))
     

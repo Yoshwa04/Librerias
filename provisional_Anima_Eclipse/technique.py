@@ -33,7 +33,7 @@ class Technique(TypedDict): # Pensar que hacer con esto
     priority: bool
     heal: bool
     objective: Literal["self", "one", "all", "all_enemies"]   
-    battle_method: Callable # ? - Literal[...]?
+    battle_method: Literal["damage", "damage_multiple", "damage_second_turn", "damage_recharge", "damage_go", "damage_effect", "damage_heal", "heal", "protect", "buff1", "buff2", "buff3", "debuff1", "debuff2", "debuff3"]
 
     
 def _techdex_entry_model(
@@ -47,7 +47,7 @@ def _techdex_entry_model(
     priority: bool,
     heal: bool,
     objective: Literal["self", "one", "all", "only_enemies"],
-    battle_method: Callable
+    battle_method: Literal["damage", "damage_multiple", "damage_second_turn", "damage_recharge", "damage_go", "damage_effect", "damage_heal", "heal", "protect", "buff1", "buff2", "buff3", "debuff1", "debuff2", "debuff3"]
 ) -> dict[str, Technique]:
     return {
         "name": name,
@@ -260,11 +260,31 @@ techdex: dict[str, Technique] = {
     
     _next_techdex_key(): _techdex_entry_model("Slow String", 30, TypeB.INSECTUM, Category.SPECIAL, 100, 30, _secondary_effects_model(50, (SecondaryEffect.SPE_DOWN)), False, False, "only_enemies", _just_damage),
     
+    _next_techdex_key(): _techdex_entry_model("U-Turn", 40, TypeB.INSECTUM, Category.PHYSICAL, 100, 10, None, False, False, "one", "damage_go"),
+    
     _next_techdex_key(): _techdex_entry_model("Aerial Hit", 55, TypeB.VENTUS, Category.PHYSICAL, 100, 20, None,False, False, "one", _just_damage),
     
     _next_techdex_key(): _techdex_entry_model("Fly", 90, TypeB.VENTUS, Category.PHYSICAL, 100, 10, None, False, False, "one", "DAÑO 2 TURNOS"),
     
     _next_techdex_key(): _techdex_entry_model("Wind Strike", 70, TypeB.VENTUS, Category.SPECIAL, 90, 20, None, False, False, "all", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Aeroblast", 100, TypeB.VENTUS, Category.SPECIAL, 90, 5, None, False, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("CHACHARA", 60, TypeB.VENTUS, Category.PHYSICAL, 90, 10, _secondary_effects_model(50, (SecondaryEffect.CONFUSE)), False, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Snowball", 15, TypeB.GLACIES, Category.PHYSICAL, 95, 30, _secondary_effects_model(5, (SecondaryEffect.FREEZE)), False, False, "one", _just_damage_multiple), # 2-5
+    
+    _next_techdex_key(): _techdex_entry_model("Ice Fang", 50, TypeB.GLACIES, Category.PHYSICAL, 100, 20, _secondary_effects_model(15, (SecondaryEffect.FREEZE)), False, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Icicle Crush", 80, TypeB.GLACIES, Category.PHYSICAL, 85, 10, _secondary_effects_model(35, (SecondaryEffect.FLINCH)), False, False, "one", _just_damage),
+    
+    _next_techdex_key(): _techdex_entry_model("Ice Wind", 50, TypeB.GLACIES, Category.SPECIAL, 80, 15, None, False, False , "all", _just_damage), # Siempre es crítico
+    
+    _next_techdex_key(): _techdex_entry_model("Ice Burn", 140, TypeB.GLACIES, Category.SPECIAL, 90, 5, _secondary_effects_model(40, (SecondaryEffect.BURN)), False, False, "one", _just_damage), # 1 turno cargar
+    
+    _next_techdex_key(): _techdex_entry_model("FlashLight", 40, TypeB.LUX, Category.SPECIAL, 100, 30, _secondary_effects_model(33, (SecondaryEffect.BLIND)), False, False, "one", "damage_effect"),
+    
+    _next_techdex_key(): _techdex_entry_model("Sacred Fire", 60, TypeB.LUX, Category.SPECIAL, 95, 20, _secondary_effects_model(20, (SecondaryEffect.BURN)), False, False, "one", "damage_effect"),
     
     _next_techdex_key(): _techdex_entry_model(),
 }
