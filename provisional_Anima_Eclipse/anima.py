@@ -16,7 +16,7 @@ from technique import Technique
 
 
 class Anima:
-    # Cosas que tiene que tener y aun hay que implementar: su moveset actual, la experiencia, item que lleva...
+    # Cosas que tiene que tener y aun hay que implementar: la experiencia?, item que lleva...
     def __init__(self, nAnimadex: str, min_lvl: int, max_lvl, nature: Optional[Nature] = None, object: Optional[str] = None):
         self.animadex = nAnimadex
         

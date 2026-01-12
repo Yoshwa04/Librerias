@@ -286,7 +286,7 @@ techdex: dict[str, Technique] = {
     
     _next_techdex_key(): _techdex_entry_model("Sacred Fire", 60, TypeB.LUX, Category.SPECIAL, 95, 20, _secondary_effects_model(20, (SecondaryEffect.BURN)), False, False, "one", "damage_effect"),
     
-    _next_techdex_key(): _techdex_entry_model(),
+    _next_techdex_key(): _techdex_entry_model("Divine Punch", 75, TypeB.LUX, Category.PHYSICAL, 100, 15, None, False, False, "one", "damage"),
 }
 '''A dictionary of every single Technique with its information'''
 
