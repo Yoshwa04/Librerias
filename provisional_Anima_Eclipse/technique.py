@@ -33,7 +33,7 @@ class Technique(TypedDict): # Pensar que hacer con esto
     priority: bool
     heal: bool
     objective: Literal["self", "one", "all", "all_enemies"]   
-    battle_method: Literal["damage", "damage_multiple", "damage_second_turn", "damage_recharge", "damage_go", "damage_effect", "damage_heal", "heal", "protect", "buff1", "buff2", "buff3", "debuff1", "debuff2", "debuff3"]
+    battle_method: Literal["damage", "damage_multiple", "damage_second_turn", "damage_recharge", "damage_go", "damage_effect", "damage_heal", "heal", "protect", "buff1", "buff2", "buff3", "debuff1", "debuff2", "debuff3", "status"]
 
     
 def _techdex_entry_model(
@@ -47,7 +47,7 @@ def _techdex_entry_model(
     priority: bool,
     heal: bool,
     objective: Literal["self", "one", "all", "only_enemies"],
-    battle_method: Literal["damage", "damage_multiple", "damage_second_turn", "damage_recharge", "damage_go", "damage_effect", "damage_heal", "heal", "protect", "buff1", "buff2", "buff3", "debuff1", "debuff2", "debuff3"]
+    battle_method: Literal["damage", "damage_multiple", "damage_second_turn", "damage_recharge", "damage_go", "damage_effect", "damage_heal", "heal", "protect", "buff1", "buff2", "buff3", "debuff1", "debuff2", "debuff3", "status"]
 ) -> dict[str, Technique]:
     return {
         "name": name,
@@ -287,6 +287,22 @@ techdex: dict[str, Technique] = {
     _next_techdex_key(): _techdex_entry_model("Sacred Fire", 60, TypeB.LUX, Category.SPECIAL, 95, 20, _secondary_effects_model(20, (SecondaryEffect.BURN)), False, False, "one", "damage_effect"),
     
     _next_techdex_key(): _techdex_entry_model("Divine Punch", 75, TypeB.LUX, Category.PHYSICAL, 100, 15, None, False, False, "one", "damage"),
+    
+    _next_techdex_key(): _techdex_entry_model("Angel Aura", 80, TypeB.LUX, Category.SPECIAL, 85, 10, None, False, False, "only_enemies", "damage"),
+    
+    _next_techdex_key(): _techdex_entry_model("God's Word", None, TypeB.LUX, Category.STATUS, "always", 5, None, False, True, "self", "heal"),
+    
+    _next_techdex_key(): _techdex_entry_model("Saint Strike", 140, TypeB.LUX, Category.PHYSICAL, 80, 5, None, False, False, "one", "damage_recharge"),
+    
+    _next_techdex_key(): _techdex_entry_model("Dark Pulse", 40, TypeB.SINISTER, Category.SPECIAL, 100, 20, None, False, False, "only_enemies", "damage"),
+    
+    _next_techdex_key(): _techdex_entry_model("Pursuit", 50, TypeB.SINISTER, Category.PHYSICAL, "always", 10, None, True, False, "one", "damage_effect"),
+    
+    _next_techdex_key(): _techdex_entry_model("Crunch", 80, TypeB.SINISTER, Category.PHYSICAL, 100, 15, _secondary_effects_model(50, (SecondaryEffect.DEF_DOWN)), False, False, "one", "damage_effect"),
+    
+    _next_techdex_key(): _techdex_entry_model("Night Slash", 70, TypeB.SINISTER, Category.PHYSICAL, 100, 15, None, False, False, "one", "damage"),
+    
+    _next_techdex_key(): _techdex_entry_model("Scary Face", None, TypeB.SINISTER, Category.STATUS, 100, 25, None, False, False, "only_enemies", "status"),
 }
 '''A dictionary of every single Technique with its information'''
 
