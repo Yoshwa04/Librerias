@@ -330,9 +330,17 @@ techdex: dict[str, Technique] = {
     
     _next_techdex_key(): _techdex_entry_model("Mind Reading", None, TypeB.PSYCHICUS, Category.STATUS, "always", 10, None, False, False, "one", "debuff2"),
     
-    _next_techdex_key(): _techdex_entry_model("", 100, TypeB.PSYCHICUS, Category.PHYSICAL, 85, 5, None, False, False, "all", "damage"),
+    _next_techdex_key(): _techdex_entry_model("Psique Wave", 100, TypeB.PSYCHICUS, Category.PHYSICAL, 85, 5, None, False, False, "all", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model(),
+    _next_techdex_key(): _techdex_entry_model("Power Punch", 40, TypeB.PUGNA, Category.PHYSICAL, 100, 30, _secondary_effects_model(100, (SecondaryEffect.ATK_UP)), False, False, "one", "damage_effect"),
+    
+    _next_techdex_key(): _techdex_entry_model("Low Kick", 50, TypeB.PUGNA, Category.PHYSICAL, 100, 15, None, True, False, "one", "damage"),
+    
+    _next_techdex_key(): _techdex_entry_model("High Jump Kick", 100, TypeB.PUGNA, Category.PHYSICAL, 90, 10, None, False, False, "one", "damage"), # Esta es el que si fallas te haces daño
+    
+    _next_techdex_key(): _techdex_entry_model("Drain Punch", 75, TypeB.PUGNA, Category.PHYSICAL, 90, 10, None, False, True, "one", "damage_heal"),
+    
+    _next_techdex_key(): _techdex_entry_model(""),
 }
 '''A dictionary of every single Technique with its information'''
 
