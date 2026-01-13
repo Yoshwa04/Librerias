@@ -165,6 +165,16 @@ techdex: dict[str, Technique] = {
     
     _next_techdex_key(): _techdex_entry_model("Protect", None, TypeB.COMMUNIS, Category.STATUS, "always", 10, None, True, False, "self", _just_protect),
     
+    _next_techdex_key(): _techdex_entry_model("Regular Hit", 40, TypeA.NEUTRO, Category.PHYSICAL, 100, 30, None, False, False, "one", "damage"),
+    
+    _next_techdex_key(): _techdex_entry_model("", 60, TypeA.NEUTRO, Category.SPECIAL, 100, 20, None, False, False, "one", "damage"),
+    
+    _next_techdex_key(): _techdex_entry_model("", 90, TypeA.NEUTRO, Category.SPECIAL, 85, 10, None, False, False, "all", "damage"),
+    
+    _next_techdex_key(): _techdex_entry_model("", 75, TypeA.NEUTRO, Category.PHYSICAL, 95, 15, None, True, False, "one", "damage"),
+    
+    _next_techdex_key(): _techdex_entry_model("", 20, TypeA.NEUTRO, Category.PHYSICAL, 95, 30, None, False, False, "one", "damage_multiple"),
+    
     _next_techdex_key(): _techdex_entry_model("Primal Flow", 120, TypeA.ESSENTIA, Category.SPECIAL, 85, 5, None, False, False, "one", _just_damage),
     
     _next_techdex_key(): _techdex_entry_model("Inner Ressonance", 65, TypeA.ESSENTIA, Category.SPECIAL, 100, 10, None, False, False, "only_enemies", _just_damage),
@@ -357,10 +367,8 @@ techdex: dict[str, Technique] = {
     _next_techdex_key(): _techdex_entry_model("", 90, TypeB.METALLUM, Category.SPECIAL, 90, 10, _secondary_effects_model(50, (SecondaryEffect.BLIND)), False, False, "one", "damage_effect"),
     
     _next_techdex_key(): _techdex_entry_model("Heavy Armor", None, TypeB.METALLUM, Category.STATUS, "always", 20, None, False, False, "self", "buff2"),
-    
-    _next_techdex_key(): _techdex_entry_model(),
 }
-'''A dictionary of every single Technique with its information'''
+'''A dictionary of every single Technique with its information.'''
 
 
 tech = techdex["001"]
