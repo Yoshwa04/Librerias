@@ -163,7 +163,7 @@ techdex: dict[str, Technique] = {
     
     _next_techdex_key(): _techdex_entry_model("Fast Punch", 20, TypeB.COMMUNIS, Category.PHYSICAL, 100, 15, None, True, False, "one", _just_damage),
     
-    _next_techdex_key(): _techdex_entry_model("Protect", None, TypeB.COMMUNIS, Category.STATUS, "always", 10, None, False, False, "self", _just_protect),
+    _next_techdex_key(): _techdex_entry_model("Protect", None, TypeB.COMMUNIS, Category.STATUS, "always", 10, None, True, False, "self", _just_protect),
     
     _next_techdex_key(): _techdex_entry_model("Primal Flow", 120, TypeA.ESSENTIA, Category.SPECIAL, 85, 5, None, False, False, "one", _just_damage),
     
@@ -343,6 +343,20 @@ techdex: dict[str, Technique] = {
     _next_techdex_key(): _techdex_entry_model("Demolition", 60, TypeB.PUGNA, Category.SPECIAL, "always", 20, None, False, False, "only_enemies", "damage"),
     
     _next_techdex_key(): _techdex_entry_model("Focus", None, TypeB.PUGNA, Category.STATUS, "always", 20, None, False, False, "self", "buff1"),
+    
+    _next_techdex_key(): _techdex_entry_model("Bullet Punch", 40, TypeB.METALLUM, Category.PHYSICAL, "always", 20, None, False, False, "one", "damage"),
+    
+    _next_techdex_key(): _techdex_entry_model("Heavy Body", 80, TypeB.METALLUM, Category.PHYSICAL, 95, 10, None, False, False, "one", "damage"),
+    
+    _next_techdex_key(): _techdex_entry_model("Iron Headbutt", 75, TypeB.METALLUM, Category.PHYSICAL, 100, 15, _secondary_effects_model(30, (SecondaryEffect.CONFUSE)), False, False, "one", "damage_effect"),
+    
+    _next_techdex_key(): _techdex_entry_model("Iodo", 60, TypeB.METALLUM, Category.SPECIAL, 100, 20, None, False, False, "all", "damage"),
+    
+    _next_techdex_key(): _techdex_entry_model("", 120, TypeB.METALLUM, Category.PHYSICAL, 80, 5, _secondary_effects_model(30, (SecondaryEffect.FLINCH)), False, False, "one", "damage_effect"),
+    
+    _next_techdex_key(): _techdex_entry_model("", 90, TypeB.METALLUM, Category.SPECIAL, 90, 10, _secondary_effects_model(50, (SecondaryEffect.BLIND)), False, False, "one", "damage_effect"),
+    
+    _next_techdex_key(): _techdex_entry_model("Heavy Armor", None, TypeB.METALLUM, Category.STATUS, "always", 20, None, False, False, "self", "buff2"),
     
     _next_techdex_key(): _techdex_entry_model(),
 }
