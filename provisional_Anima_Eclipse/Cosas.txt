@@ -109,3 +109,34 @@ SOLO CURARSE
 PROTEGERSE
 BUFO 1 - 2 - 3
 DEBUFO 1 - 2 - 3
+
+
+------------------------------------------------
+
+Indice de critico default: 0 -> 6.25%
+
+Habilidad que suma indice de critico -> +1
+Objeto que suma indice de crítico -> +1
+Movimiento que suma indice de crítico -> solo +1 durante x turnos
+Movimiento con mayor indice de critico al dar -> +1
+Critico X -> +1 durante x turnos ?
+
+
+
+Al hacer un movimiento de daño primero se mirara que el objetivo pueda ser golpeado (no se esté protegiendo, bajo tierra...), después si golpea, y despues si este golpea, si es critico con un numero random del 1 al 100 -> si el indice es 12.5 por ejemplo, será critico si el numero random es <= 12.5.
+
+En caso de que el defensor este protegiendose, volando, bajo tierra... No se hará calculo de daño y saldra el mensaje de que se protege o esta fuera de alcance, salvo que el movimiento de ataque indique lo contrario
+
+Si un movimiento no golpea, sin que haya subidas en evasion o bajadas en precision, se dirá que el atacante falló. En cambio si el defensor tiene subida la evasion pueden ocurrir varias cosas: 
+    - Si el movimiento tenia 100 de precision -> Se mostrara siempre que el defensor esquivó el ataque cuando el movimiento no alcance
+    - Si el movimiento ya podia fallar (por ejemplo tiene 70 de precision) -> Se mostrara que el defensor esquivó cuando el numero que salga corresponda con la nueva precision y no con la anterior, es decir, si el movimiento hubiese golpeado sin la subida de evasion sera una esquiva, en cambio si de todas formas habria fallado saldra como un fallo del atacante -> 70 de prec ahora 50 por ejemplo, si el numero es 60 sera una esquiva, si el numero es 75 sera un fallo 
+
+Si sale critico , en el calculo del daño no se tendra en cuenta posibiles subidas en las stats de defensa y defensa especial del receptor, pero si las subidas de ataque y ataque especial del atacante (pero si se tendrá en cuenta otras cosas como un muro magico que aumenta defensa especial, etc). Una vez hecho el calculo del daño normal asi, se aplicará un multiplicador de 1.5 al total.
+
+Evidentemente, si no sale critico el calculo de daño es el normal, con subidas y bajadas de stats
+
+Despues de todo esto, y si ha pegado el movimiento, en caso de que el movimiento tenga algun efecto secundario, se comprobaria si se activa (puede ser siempre o con una probabilidad del 1 al 100)
+
+En el calculo de daño, ademas, esta la variable de variacion (jaja redundancia), que si sale 85 debe indicar que ha salido el daño minimo (minimum damage), y si sale 100 que ha salido el daño maximo (maximum damage)
+
+

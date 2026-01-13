@@ -10,12 +10,6 @@ from itertools import count
 # bol = True if n2 >= n else False
 # print(n, n2, bol)
 
-n = count(98)
+# n = int(give_just_one_solution(solve_equation(f"damage = (3/2 * 1/2 * 85 * (((1/5 * 100 +1) * 410 * 150) / (25 * def) + 2)) / 100"), "damage"))
 
-def efe() -> str:
-    return str(next(n)).zfill(3)
-
-print(efe())
-print(efe())
-print(efe())
-print(efe())
+# print(n)

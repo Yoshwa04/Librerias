@@ -340,7 +340,11 @@ techdex: dict[str, Technique] = {
     
     _next_techdex_key(): _techdex_entry_model("Drain Punch", 75, TypeB.PUGNA, Category.PHYSICAL, 90, 10, None, False, True, "one", "damage_heal"),
     
-    _next_techdex_key(): _techdex_entry_model(""),
+    _next_techdex_key(): _techdex_entry_model("Demolition", 60, TypeB.PUGNA, Category.SPECIAL, "always", 20, None, False, False, "only_enemies", "damage"),
+    
+    _next_techdex_key(): _techdex_entry_model("Focus", None, TypeB.PUGNA, Category.STATUS, "always", 20, None, False, False, "self", "buff1"),
+    
+    _next_techdex_key(): _techdex_entry_model(),
 }
 '''A dictionary of every single Technique with its information'''
 

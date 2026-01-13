@@ -15,7 +15,7 @@ formula_dict: dict[str, str] = {
     "hp": "hp = (lvl/100 * ((stat_base*2) + potential)) + lvl",
     "stat": "stat = (5 + (lvl/100 * ((stat_base*2) + potential))) * nature",
     "catch": "catch = (hp_max*3 - hp_now*2) * catch_ratio * ball_ratio/hp_max*3 * status",
-    "damage": f"damage = 1/100 * stab * eff * {random.randint(75, 100)} * ((2/10 * lvl + 1) * atq * power/25 * def + 2)",
+    "damage": f"damage = (stab * eff * {random.randint(75, 100)} * (((1/5 * lvl +1) * atk * power) / (25 * def) + 2)) / 100",
     "exp_given": "exp_given = (exp_base_given*lvl/participants/5) * ((2*lvl+10)**(5/2)) / ((lvl+ally_lvl+10)**(5/2)) + 1) * combat_type * object_mod * arcana_mod", 
                  # combat_type: si es wild 1 si no 1.5
     "growth": growth_dict,
@@ -26,7 +26,7 @@ formula_dict: dict[str, str] = {
 '''A bunch of formulas'''
 
 
-stat_increases_decreases_dict: dict[int, float] = {
+stat_inc_dec_dict: dict[int, float] = {
     -6: 2/8,
     -5: 2/7,
     -4: 2/6,
