@@ -31,13 +31,13 @@ class Technique(): # Pensar que hacer con esto
     category: Category
     accuracy: int | Literal["always"] # Un número 1-100 o "always"
     pp: int
-    secondary_effects: dict[str, int | tuple[SecondaryEffect]] | None
+    secondary_effects: dict[int, tuple[SecondaryEffect]] | None
     priority: bool
     heal: bool
     objective: Literal["self", "one", "all", "all_enemies"]   
     battle_method: Literal[
         "damage", "damage_multiple", "damage_second_turn", "damage_recharge", "damage_go", "damage_effect", "damage_heal", "heal", "protect", "buff1", "buff2", "buff3", "debuff1", "debuff2", "debuff3", "status"
-    ] # Protect podria ir en status? Ya que seria cambiar el propio status y ya... 
+    ] # Aqui que debo hacer? -> La mayoria de ataques con sus respectivos metodos genericos cuando sean "iguales" y algunos con metodos propios dependiendo de que tan raro sea? I guess...
 
     
 def _techdex_entry_model(
@@ -47,7 +47,7 @@ def _techdex_entry_model(
     category: Category,
     accuracy: int | Literal["always"], # Un número o "always"
     pp: int,
-    secondary_effects: SecondaryEffect | None,
+    secondary_effects: dict[int, tuple[SecondaryEffect]] | None,
     priority: bool,
     heal: bool,
     objective: Literal["self", "one", "all", "only_enemies"],
@@ -367,6 +367,11 @@ techdex: dict[str, Technique] = {
     _next_techdex_key(): _techdex_entry_model("", 90, TypeB.METALLUM, Category.SPECIAL, 90, 10, _secondary_effects_model(50, (SecondaryEffect.BLIND)), False, False, "one", "damage_effect"),
     
     _next_techdex_key(): _techdex_entry_model("Heavy Armor", None, TypeB.METALLUM, Category.STATUS, "always", 20, None, False, False, "self", "buff2"),
+    
+    _next_techdex_key(): _techdex_entry_model("Rock Slide", 45, TypeB.RUPES, Category.PHYSICAL, 100, 25, None, False, False, "only_enemies", "damage"),
+    _next_techdex_key(): _techdex_entry_model("Power Gem", 100, TypeB.RUPES, Category.SPECIAL, 85, 5, _secondary_effects_model(50, (SecondaryEffect.SATK_UP)), False, False, "one", "damage_effect"),
+    
+    
 }
 '''A dictionary of every single Technique with its information.'''
 
