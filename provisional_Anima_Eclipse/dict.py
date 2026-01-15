@@ -39,7 +39,7 @@ stat_inc_dec_dict: dict[int, float] = {
     3: 5/2,
     4: 6/2,
     5: 7/2,
-    6: 8/2,
+    6: 8/2
 }
 '''A dictionary that contains the min and max increases/decreases a regular stat can have (atk, sp atk, def, sp def, spe)'''
 

@@ -163,8 +163,6 @@ techdex: dict[str, Technique] = {
     
     _next_techdex_key(): _techdex_entry_model("Fast Punch", 20, TypeB.COMMUNIS, Category.PHYSICAL, 100, 15, None, True, False, "one", _just_damage),
     
-    _next_techdex_key(): _techdex_entry_model("Protect", None, TypeB.COMMUNIS, Category.STATUS, "always", 10, None, True, False, "self", _just_protect),
-    
     _next_techdex_key(): _techdex_entry_model("Regular Hit", 40, TypeA.NEUTRO, Category.PHYSICAL, 100, 30, None, False, False, "one", "damage"),
     
     _next_techdex_key(): _techdex_entry_model("", 60, TypeA.NEUTRO, Category.SPECIAL, 100, 20, None, False, False, "one", "damage"),
@@ -225,6 +223,8 @@ techdex: dict[str, Technique] = {
     
     _next_techdex_key(): _techdex_entry_model("Lava Plume", 120, TypeB.IGNIS, Category.PHYSICAL, 85, 5, None, False, False, "only_enemies", _just_damage),
     
+    _next_techdex_key(): _techdex_entry_model("Blue Fire", None, TypeB.IGNIS, Category.STATUS, 95, 10, None, False, False, "one", "status"),
+    
     # Los de agua deberian tener el secondary effect? o no ya que todos mojan siempre?
     _next_techdex_key(): _techdex_entry_model("Water Gun", 40, TypeB.AQUA, Category.SPECIAL, 100, 30, _secondary_effects_model(100, (SecondaryEffect.SOAK)), False, False, "one", _just_damage),
     
@@ -248,6 +248,8 @@ techdex: dict[str, Technique] = {
     
     _next_techdex_key(): _techdex_entry_model("Paralizer", None, TypeB.PLANTA, Category.STATUS, 70, 20, _secondary_effects_model(100, (SecondaryEffect.PARALIZE)), False, False, "one", "POR IMPLEMENTAR"),
     
+    _next_techdex_key(): _techdex_entry_model("Spore", None, TypeB.PLANTA, Category.STATUS, 95, 5, None, False, False, "one", "status"), #Sleep
+    
     _next_techdex_key(): _techdex_entry_model("Lightning", 60, TypeB.ELECTRITAS, Category.SPECIAL, 100, 20, _secondary_effects_model(30, (SecondaryEffect.PARALIZE)), False, False, "one", _just_damage),
     
     _next_techdex_key(): _techdex_entry_model("Discharge", 90, TypeB.ELECTRITAS, Category.SPECIAL, 80, 10, _secondary_effects_model(20, (SecondaryEffect.PARALIZE)), False, False, "only_enemies", _just_damage),
@@ -259,6 +261,8 @@ techdex: dict[str, Technique] = {
     _next_techdex_key(): _techdex_entry_model("Spark shot", 75, TypeB.ELECTRITAS, Category.PHYSICAL, "always", 10, None, False, False, "one", _just_damage),
     
     _next_techdex_key(): _techdex_entry_model("Electric Dance", None, TypeB.ELECTRITAS, Category.STATUS, 100, 30, None, False, False, "self", _just_stat_buff),
+    
+    _next_techdex_key(): _techdex_entry_model("Shock Wave", None, TypeB.ELECTRITAS, Category.STATUS, 95, 10, None, False, False, "one", "status"),
     
     _next_techdex_key(): _techdex_entry_model("Bug Bite", 20, TypeB.INSECTUM, Category.PHYSICAL, 100, 30, _secondary_effects_model(30, (SecondaryEffect.POSION)), False, False, "one", _just_damage_multiple), #2 times
     
@@ -296,7 +300,7 @@ techdex: dict[str, Technique] = {
     
     _next_techdex_key(): _techdex_entry_model("Ice Burn", 140, TypeB.GLACIES, Category.SPECIAL, 90, 5, _secondary_effects_model(40, (SecondaryEffect.BURN)), False, False, "one", _just_damage), # 1 turno cargar
     
-    _next_techdex_key(): _techdex_entry_model("FlashLight", 40, TypeB.LUX, Category.SPECIAL, 100, 30, _secondary_effects_model(33, (SecondaryEffect.BLIND)), False, False, "one", "damage_effect"),
+    _next_techdex_key(): _techdex_entry_model("Light Beam", 40, TypeB.LUX, Category.SPECIAL, 100, 30, _secondary_effects_model(33, (SecondaryEffect.BLIND)), False, False, "one", "damage_effect"),
     
     _next_techdex_key(): _techdex_entry_model("Sacred Fire", 60, TypeB.LUX, Category.SPECIAL, 95, 20, _secondary_effects_model(20, (SecondaryEffect.BURN)), False, False, "one", "damage_effect"),
     
@@ -308,6 +312,8 @@ techdex: dict[str, Technique] = {
     
     _next_techdex_key(): _techdex_entry_model("Saint Strike", 140, TypeB.LUX, Category.PHYSICAL, 80, 5, None, False, False, "one", "damage_recharge"),
     
+    _next_techdex_key(): _techdex_entry_model("FlasLight", None, TypeB.LUX, Category.STATUS, 95, 10, None, False, False, "one", "status"), # Blind
+    
     _next_techdex_key(): _techdex_entry_model("Dark Pulse", 40, TypeB.SINISTER, Category.SPECIAL, 100, 20, None, False, False, "only_enemies", "damage"),
     
     _next_techdex_key(): _techdex_entry_model("Pursuit", 40, TypeB.SINISTER, Category.PHYSICAL, "always", 10, None, False, False, "one", "damage_effect"), #?
@@ -317,6 +323,8 @@ techdex: dict[str, Technique] = {
     _next_techdex_key(): _techdex_entry_model("Night Slash", 70, TypeB.SINISTER, Category.PHYSICAL, 100, 15, None, False, False, "one", "damage"),
     
     _next_techdex_key(): _techdex_entry_model("Scary Face", None, TypeB.SINISTER, Category.STATUS, 100, 25, None, False, False, "only_enemies", "status"),
+    
+    _next_techdex_key(): _techdex_entry_model("Confuse RAYO", None, TypeB.SINISTER, Category.STATUS, 95, 10, None, False, False, "one", "status"), # Confuse
     
     _next_techdex_key(): _techdex_entry_model("Shadow Ball", 60, TypeB.PHANTASMA, Category.SPECIAL, 100, 20, _secondary_effects_model(40, (SecondaryEffect.SDEF_DOWN)), False, False, "one", "damage_effect"),
     
@@ -332,6 +340,8 @@ techdex: dict[str, Technique] = {
     
     _next_techdex_key(): _techdex_entry_model("Fake Slam", 35, TypeB.PHANTASMA, Category.PHYSICAL, 100, 25, None, False, False, "one", "damage_multiple"),
     
+    _next_techdex_key(): _techdex_entry_model("", None, TypeB.PHANTASMA, Category.STATUS, 95, 10, None, False, False, "one", "status"), #acc down
+    
     _next_techdex_key(): _techdex_entry_model("Psyquic", 60, TypeB.PSYCHICUS, Category.SPECIAL, 100, 20, _secondary_effects_model(25, (SecondaryEffect.CONFUSE)), False, False, "one", "damage_effect"),
     
     _next_techdex_key(): _techdex_entry_model("Kinetic", 30, TypeB.PSYCHICUS, Category.PHYSICAL, "always", 25, None, True, False, "one", "damage"),
@@ -341,6 +351,8 @@ techdex: dict[str, Technique] = {
     _next_techdex_key(): _techdex_entry_model("Mind Reading", None, TypeB.PSYCHICUS, Category.STATUS, "always", 10, None, False, False, "one", "debuff2"),
     
     _next_techdex_key(): _techdex_entry_model("Psique Wave", 100, TypeB.PSYCHICUS, Category.PHYSICAL, 85, 5, None, False, False, "all", "damage"),
+    
+    _next_techdex_key(): _techdex_entry_model("Flirt", None, TypeB.PSYCHICUS, Category.STATUS, 95, 10, None, False, False, "one", "status"), #Enamorar
     
     _next_techdex_key(): _techdex_entry_model("Power Punch", 40, TypeB.PUGNA, Category.PHYSICAL, 100, 30, _secondary_effects_model(100, (SecondaryEffect.ATK_UP)), False, False, "one", "damage_effect"),
     
@@ -353,6 +365,8 @@ techdex: dict[str, Technique] = {
     _next_techdex_key(): _techdex_entry_model("Demolition", 60, TypeB.PUGNA, Category.SPECIAL, "always", 20, None, False, False, "only_enemies", "damage"),
     
     _next_techdex_key(): _techdex_entry_model("Focus", None, TypeB.PUGNA, Category.STATUS, "always", 20, None, False, False, "self", "buff1"),
+    
+    _next_techdex_key(): _techdex_entry_model("Taunt", None, TypeB.PUGNA, Category.STATUS, 95, 10, None, False, False, "one", "status"), # Annoy
     
     _next_techdex_key(): _techdex_entry_model("Bullet Punch", 40, TypeB.METALLUM, Category.PHYSICAL, "always", 20, None, False, False, "one", "damage"),
     
@@ -368,17 +382,21 @@ techdex: dict[str, Technique] = {
     
     _next_techdex_key(): _techdex_entry_model("Heavy Armor", None, TypeB.METALLUM, Category.STATUS, "always", 20, None, False, False, "self", "buff2"),
     
+    _next_techdex_key(): _techdex_entry_model("Protect", None, TypeB.METALLUM, Category.STATUS, "always", 10, None, True, False, "self", "protect"),
+    
     _next_techdex_key(): _techdex_entry_model("Rubbish Punch", 75, TypeB.VENENUM, Category.PHYSICAL, 100, 15, None, False, False, "one", "damage"),
     
     _next_techdex_key(): _techdex_entry_model("Poison Fang", 60, TypeB.VENENUM, Category.PHYSICAL, 100, 20, _secondary_effects_model(40, (SecondaryEffect.POSION)), False, False, "one", "damage_effect"),
     
-    _next_techdex_key(): _techdex_entry_model("", 60, TypeB.VENENUM, Category.SPECIAL, 90, 20, _secondary_effects_model(30, (SecondaryEffect.POSION)), False, False, "only_enemies", "damage_effect"),
+    _next_techdex_key(): _techdex_entry_model("Toxic Wave", 60, TypeB.VENENUM, Category.SPECIAL, 90, 20, _secondary_effects_model(30, (SecondaryEffect.POSION)), False, False, "only_enemies", "damage_effect"),
     
     _next_techdex_key(): _techdex_entry_model("", 40, TypeB.VENENUM, Category.SPECIAL, 100, 30, _secondary_effects_model(20, (SecondaryEffect.POSION)), False, False, "one", "damage_effect"),
     
-    _next_techdex_key(): _techdex_entry_model("", 120, TypeB.VENENUM, Category.SPECIAL, 85, 5, None, False, False, "one", "damage"),
+    _next_techdex_key(): _techdex_entry_model("FANG THROW", 120, TypeB.VENENUM, Category.SPECIAL, 85, 5, None, False, False, "one", "damage"),
     
     _next_techdex_key(): _techdex_entry_model("", 150, TypeB.VENENUM, Category.PHYSICAL, 85, 5, _secondary_effects_model(50, (SecondaryEffect.POSION)), False, False, "one", "damage_recharge"),
+    
+    _next_techdex_key(): _techdex_entry_model("Toxic", None, TypeB.VENENUM, Category.STATUS, 95, 10, None, False, False, "one", "status"),
     
     _next_techdex_key(): _techdex_entry_model("Rock Slide", 45, TypeB.RUPES, Category.PHYSICAL, 100, 25, None, False, False, "only_enemies", "damage"),
     
@@ -398,7 +416,7 @@ techdex: dict[str, Technique] = {
     
     _next_techdex_key(): _techdex_entry_model("", None, TypeB.TERRA, Category.STATUS, 100, 20, None, False, False, "one", "debuff1"),
     
-    _next_techdex_key(): _techdex_entry_model(),
+    _next_techdex_key(): _techdex_entry_model("Sand GET", None, TypeB.TERRA, Category.STATUS, "always", 5, None, False, True, "self", "heal"),
 }
 '''A dictionary of every single Technique with its information.'''
 
