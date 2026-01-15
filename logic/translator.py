@@ -5,7 +5,11 @@ class Translator():
     This class serves to translate anything in a generic way using a json file.
     """
     
-    def __init__(self, json_file: str, language: str="en"):
+    def __init__(
+        self, 
+        json_file: str, 
+        language: str="en"
+    ):
         """
         Inicializates the traductor in English by default.
 

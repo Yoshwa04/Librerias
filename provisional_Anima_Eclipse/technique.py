@@ -368,8 +368,33 @@ techdex: dict[str, Technique] = {
     
     _next_techdex_key(): _techdex_entry_model("Heavy Armor", None, TypeB.METALLUM, Category.STATUS, "always", 20, None, False, False, "self", "buff2"),
     
+    _next_techdex_key(): _techdex_entry_model("Rubbish Punch", 75, TypeB.VENENUM, Category.PHYSICAL, 100, 15, None, False, False, "one", "damage"),
+    
+    _next_techdex_key(): _techdex_entry_model("Poison Fang", 60, TypeB.VENENUM, Category.PHYSICAL, 100, 20, _secondary_effects_model(40, (SecondaryEffect.POSION)), False, False, "one", "damage_effect"),
+    
+    _next_techdex_key(): _techdex_entry_model("", 60, TypeB.VENENUM, Category.SPECIAL, 90, 20, _secondary_effects_model(30, (SecondaryEffect.POSION)), False, False, "only_enemies", "damage_effect"),
+    
+    _next_techdex_key(): _techdex_entry_model("", 40, TypeB.VENENUM, Category.SPECIAL, 100, 30, _secondary_effects_model(20, (SecondaryEffect.POSION)), False, False, "one", "damage_effect"),
+    
+    _next_techdex_key(): _techdex_entry_model("", 120, TypeB.VENENUM, Category.SPECIAL, 85, 5, None, False, False, "one", "damage"),
+    
+    _next_techdex_key(): _techdex_entry_model("", 150, TypeB.VENENUM, Category.PHYSICAL, 85, 5, _secondary_effects_model(50, (SecondaryEffect.POSION)), False, False, "one", "damage_recharge"),
+    
     _next_techdex_key(): _techdex_entry_model("Rock Slide", 45, TypeB.RUPES, Category.PHYSICAL, 100, 25, None, False, False, "only_enemies", "damage"),
+    
     _next_techdex_key(): _techdex_entry_model("Power Gem", 100, TypeB.RUPES, Category.SPECIAL, 85, 5, _secondary_effects_model(50, (SecondaryEffect.SATK_UP)), False, False, "one", "damage_effect"),
+    
+    _next_techdex_key(): _techdex_entry_model("Anti Aerial", 50, TypeB.RUPES, Category.PHYSICAL, 100, 20, _secondary_effects_model(100, (SecondaryEffect.CONFUSE)), False, False, "one", "damage"), # El efecto debe ser solo a tipo volador
+    
+    _next_techdex_key(): _techdex_entry_model("Rock Throw", 70, TypeB.RUPES, Category.PHYSICAL, "always", 10, None, False, False, "one", "damage"),
+    
+    _next_techdex_key(): _techdex_entry_model("Earthquake", 90, TypeB.TERRA, Category.PHYSICAL, 95, 10, None, False, False, "all", "damage"),
+    
+    _next_techdex_key(): _techdex_entry_model("Sand ", 55, TypeB.TERRA, Category.SPECIAL, 100, 15, _secondary_effects_model(50, (SecondaryEffect.BLIND)), False, False, "one", "damage_effect"),
+    
+    _next_techdex_key(): _techdex_entry_model("One Thousand Arrows", 95, TypeB.TERRA, Category.SPECIAL, 90, 10, None, False, False, "only_enemies", "damage"), # Este tambien da a voladores
+    
+    _next_techdex_key(): _techdex_entry_model("Dig", 75, TypeB.TERRA, Category.PHYSICAL, 100, 15, None, False, False, "one", "damage_second_turn"),
     
     
 }
