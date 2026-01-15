@@ -7,7 +7,7 @@ from logic.math import solve_equation, give_just_one_solution
 
 from arcana import Arcana
 from animadex import animadex
-from constants import INCREASE, DECREASE, MAX_LVL, MAX_STAT_INCREASE
+from constants import INCREASE, DECREASE, MAX_LVL, MAX_STAT_INCREASE_DECREASE
 from dict import  formula_dict
 from nature import Nature, nature_dict
 from status import Status1, Status2

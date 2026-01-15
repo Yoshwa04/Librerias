@@ -137,31 +137,31 @@ def _just_protect(anima: Anima): # Esto aqui? No?
 
 # Cambiar el metodo de callable a str
 techdex: dict[str, Technique] = {
-    _next_techdex_key(): _techdex_entry_model("example", 10, TypeA.FLUXOR, Category.SPECIAL, 100, 10, None, False, False, "one", _just_damage), 
+    _next_techdex_key(): _techdex_entry_model("example", 10, TypeA.FLUXOR, Category.SPECIAL, 100, 10, None, False, False, "one", "damage"), 
     
-    _next_techdex_key(): _techdex_entry_model("Strike", 40, TypeB.COMMUNIS, Category.PHYSICAL, 100, 30, None, False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Strike", 40, TypeB.COMMUNIS, Category.PHYSICAL, 100, 30, None, False, False, "one", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("Double Punch", 20, TypeB.COMMUNIS, Category.PHYSICAL, 90, 10, None, False, False, "one", _just_damage_multiple),
+    _next_techdex_key(): _techdex_entry_model("Double Punch", 20, TypeB.COMMUNIS, Category.PHYSICAL, 90, 10, None, False, False, "one", "damage_multiple"),
     
-    _next_techdex_key(): _techdex_entry_model("Mega Punch", 80, TypeB.COMMUNIS, Category.PHYSICAL, 80, 10, None, False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Mega Punch", 80, TypeB.COMMUNIS, Category.PHYSICAL, 80, 10, None, False, False, "one", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("Swift", 60, TypeB.COMMUNIS, Category.SPECIAL, "always", 20, None, False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Swift", 60, TypeB.COMMUNIS, Category.SPECIAL, "always", 20, None, False, False, "one", "damage"),
     
     _next_techdex_key(): _techdex_entry_model("Tri Attack", 80, TypeB.COMMUNIS, Category.SPECIAL, 100, 15, _secondary_effects_model(50, (SecondaryEffect.BURN, SecondaryEffect.PARALIZE, SecondaryEffect.FREEZE)), False, False, "one", _just_damage),
     
-    _next_techdex_key(): _techdex_entry_model("Restore", None, TypeB.COMMUNIS, Category.STATUS, "always", 5, None, False, True, "self", _just_heal),
+    _next_techdex_key(): _techdex_entry_model("Restore", None, TypeB.COMMUNIS, Category.STATUS, "always", 5, None, False, True, "self", "heal"),
     
-    _next_techdex_key(): _techdex_entry_model("Leer", None, TypeB.COMMUNIS, Category.STATUS, 100, 20, None, False, False, "one", partial(_just_stat_debuff, "def")),
+    _next_techdex_key(): _techdex_entry_model("Leer", None, TypeB.COMMUNIS, Category.STATUS, 100, 20, None, False, False, "one", "debuff1"),
     
-    _next_techdex_key(): _techdex_entry_model("Growl", None, TypeB.COMMUNIS, Category.STATUS, 100, 20, None, False, False, "one", partial(_just_stat_debuff, "atk")),
+    _next_techdex_key(): _techdex_entry_model("Growl", None, TypeB.COMMUNIS, Category.STATUS, 100, 20, None, False, False, "one", "debuff1"),
     
-    _next_techdex_key(): _techdex_entry_model("Roar", None, TypeB.COMMUNIS, Category.STATUS, 100, 20, None, False, False, "one", partial(_just_stat_debuff, "sp_atk")),
+    _next_techdex_key(): _techdex_entry_model("Roar", None, TypeB.COMMUNIS, Category.STATUS, 100, 20, None, False, False, "one","debuff1"),
     
-    _next_techdex_key(): _techdex_entry_model("Solid armor", None, TypeB.COMMUNIS, Category.STATUS, 100, 20, None, False, False, "one", partial(_just_stat_buff, "def")),
+    _next_techdex_key(): _techdex_entry_model("Solid armor", None, TypeB.COMMUNIS, Category.STATUS, 100, 20, None, False, False, "one", "buff1"),
     
-    _next_techdex_key(): _techdex_entry_model("Sword Dance", None, TypeB.COMMUNIS, Category.STATUS, "always", 5, None, False, False, "self", partial(_just_stat_buff, "atk", "atk")),
+    _next_techdex_key(): _techdex_entry_model("Sword Dance", None, TypeB.COMMUNIS, Category.STATUS, "always", 5, None, False, False, "self", "buff1"),
     
-    _next_techdex_key(): _techdex_entry_model("Fast Punch", 20, TypeB.COMMUNIS, Category.PHYSICAL, 100, 15, None, True, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Fast Punch", 20, TypeB.COMMUNIS, Category.PHYSICAL, 100, 15, None, True, False, "one", "damage"),
     
     _next_techdex_key(): _techdex_entry_model("Regular Hit", 40, TypeA.NEUTRO, Category.PHYSICAL, 100, 30, None, False, False, "one", "damage"),
     
@@ -173,74 +173,74 @@ techdex: dict[str, Technique] = {
     
     _next_techdex_key(): _techdex_entry_model("Repetition", 20, TypeA.NEUTRO, Category.PHYSICAL, 95, 30, None, False, False, "one", "damage_multiple"),
     
-    _next_techdex_key(): _techdex_entry_model("Primal Flow", 120, TypeA.ESSENTIA, Category.SPECIAL, 85, 5, None, False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Primal Flow", 120, TypeA.ESSENTIA, Category.SPECIAL, 85, 5, None, False, False, "one", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("Inner Ressonance", 65, TypeA.ESSENTIA, Category.SPECIAL, 100, 10, None, False, False, "only_enemies", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Inner Ressonance", 65, TypeA.ESSENTIA, Category.SPECIAL, 100, 10, None, False, False, "only_enemies", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("Being Rupture", 50, TypeA.ESSENTIA, Category.PHYSICAL, 90, 15, _secondary_effects_model(50, (SecondaryEffect.DEF_DOWN)), False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Being Rupture", 50, TypeA.ESSENTIA, Category.PHYSICAL, 90, 15, _secondary_effects_model(50, (SecondaryEffect.DEF_DOWN)), False, False, "one", "damage_effect"),
     
-    _next_techdex_key(): _techdex_entry_model("Essence Burst", 40, TypeA.ESSENTIA, Category.SPECIAL, 100, 30, None, False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Essence Burst", 40, TypeA.ESSENTIA, Category.SPECIAL, 100, 30, None, False, False, "one", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("Essence Expansion", None, TypeA.ESSENTIA, Category.STATUS, "always", 20, None, False, False, "self", partial(_just_stat_buff, "spe", "spe")),
+    _next_techdex_key(): _techdex_entry_model("Essence Expansion", None, TypeA.ESSENTIA, Category.STATUS, "always", 20, None, False, False, "self", "buff1"),
     
-    _next_techdex_key(): _techdex_entry_model("Soul Fragment", 60, TypeA.ESSENTIA, Category.PHYSICAL, 100, 20, _secondary_effects_model(30, (SecondaryEffect.CONFUSE)), False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Soul Fragment", 60, TypeA.ESSENTIA, Category.PHYSICAL, 100, 20, _secondary_effects_model(30, (SecondaryEffect.CONFUSE)), False, False, "one", "damage_effect"),
     
-    _next_techdex_key(): _techdex_entry_model("Pattern Slash", 60, TypeA.FORMA, Category.PHYSICAL, 100, 20, None, False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Pattern Slash", 60, TypeA.FORMA, Category.PHYSICAL, 100, 20, None, False, False, "one", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("Geometric Force", None, TypeA.FORMA, Category.STATUS, 100, 10, None, False, False, "only_enemies", partial(_just_stat_debuff, "spe")),
+    _next_techdex_key(): _techdex_entry_model("Geometric Force", None, TypeA.FORMA, Category.STATUS, 100, 10, None, False, False, "only_enemies", "debuff1"),
     
-    _next_techdex_key(): _techdex_entry_model("Reshape", None, TypeA.FORMA, Category.STATUS, "always", 10, None, False, False, "self", partial(_just_stat_buff, "eva", "eva")),
+    _next_techdex_key(): _techdex_entry_model("Reshape", None, TypeA.FORMA, Category.STATUS, "always", 10, None, False, False, "self", "buff1"),
     
-    _next_techdex_key(): _techdex_entry_model("Structural Impact", 75, TypeA.FORMA, Category.PHYSICAL, 90, 10, None, False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Structural Impact", 75, TypeA.FORMA, Category.PHYSICAL, 90, 10, None, False, False, "one", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("Adaptative Frame", 18, TypeA.FORMA, Category.SPECIAL, 90, 25, None, False, False, "one", _just_damage_multiple),
+    _next_techdex_key(): _techdex_entry_model("Adaptative Frame", 18, TypeA.FORMA, Category.SPECIAL, 90, 25, None, False, False, "one", "damage_multiple"),
     
-    _next_techdex_key(): _techdex_entry_model("Drain Mass", 75, 100, TypeA.FORMA, Category.PHYSICAL, 10, None, False, True, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Drain Mass", 75, 100, TypeA.FORMA, Category.PHYSICAL, 10, None, False, True, "one", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("Cosmic Power", 60, TypeA.FORMA, Category.SPECIAL, "always", 15, _secondary_effects_model(30, (SecondaryEffect.FLINCH)), False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Cosmic Power", 60, TypeA.FORMA, Category.SPECIAL, "always", 15, _secondary_effects_model(30, (SecondaryEffect.FLINCH)), False, False, "one", "damage_effect"),
     
-    _next_techdex_key(): _techdex_entry_model("Resolve Strike", 40, TypeA.VOLUNTAS, Category.SPECIAL, 100, 30, None, False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Resolve Strike", 40, TypeA.VOLUNTAS, Category.SPECIAL, 100, 30, None, False, False, "one", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("Will Power", 50, TypeA.VOLUNTAS, Category.PHYSICAL, 90, 20, None, True, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Will Power", 50, TypeA.VOLUNTAS, Category.PHYSICAL, 90, 20, None, True, False, "one", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("", 80, TypeA.VOLUNTAS, Category.SPECIAL, 95, 10, None, False, False, "only_enemies", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("", 80, TypeA.VOLUNTAS, Category.SPECIAL, 95, 10, None, False, False, "only_enemies", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("", 120, TypeA.VOLUNTAS, Category.SPECIAL, 75, 5, None, False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("", 120, TypeA.VOLUNTAS, Category.SPECIAL, 75, 5, None, False, False, "one", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("", 60, TypeA.VOLUNTAS, Category.PHYSICAL, 95, 15, None, False, True, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("", 60, TypeA.VOLUNTAS, Category.PHYSICAL, 95, 15, None, False, True, "one", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("", 200, TypeA.VOLUNTAS, Category.SPECIAL, 25, 10, None, False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("", 200, TypeA.VOLUNTAS, Category.SPECIAL, 25, 10, None, False, False, "one", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("Ember", 40, TypeB.IGNIS, Category.SPECIAL, 100, 30, _secondary_effects_model(15, (SecondaryEffect.BURN)), False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Ember", 40, TypeB.IGNIS, Category.SPECIAL, 100, 30, _secondary_effects_model(15, (SecondaryEffect.BURN)), False, False, "one", "damage_effect"),
     
-    _next_techdex_key(): _techdex_entry_model("Fire Fist", 60, TypeB.IGNIS, Category.PHYSICAL, 95, 20, _secondary_effects_model(25, (SecondaryEffect.BURN)), False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Fire Fist", 60, TypeB.IGNIS, Category.PHYSICAL, 95, 20, _secondary_effects_model(25, (SecondaryEffect.BURN)), False, False, "one", "damage_effect"),
     
     _next_techdex_key(): _techdex_entry_model("Fire Punch", 80, TypeB.IGNIS, Category.PHYSICAL, 100, 15, None, False, False, "one", _just_damage),
     
-    _next_techdex_key(): _techdex_entry_model("Fire Wave", 80, TypeB.IGNIS, Category.SPECIAL, 95, 15, _secondary_effects_model(15, (SecondaryEffect.BURN)), False, False, "all", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Fire Wave", 80, TypeB.IGNIS, Category.SPECIAL, 95, 15, _secondary_effects_model(15, (SecondaryEffect.BURN)), False, False, "all", "damage_effect"),
     
-    _next_techdex_key(): _techdex_entry_model("Flamethrower", 100, TypeB.IGNIS, Category.SPECIAL, 90, 10, _secondary_effects_model(30, (SecondaryEffect.BURN)), False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Flamethrower", 100, TypeB.IGNIS, Category.SPECIAL, 90, 10, _secondary_effects_model(30, (SecondaryEffect.BURN)), False, False, "one", "damage_effect"),
     
-    _next_techdex_key(): _techdex_entry_model("Lava Plume", 120, TypeB.IGNIS, Category.PHYSICAL, 85, 5, None, False, False, "only_enemies", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Lava Plume", 120, TypeB.IGNIS, Category.PHYSICAL, 85, 5, None, False, False, "only_enemies", "damage"),
     
     _next_techdex_key(): _techdex_entry_model("Blue Fire", None, TypeB.IGNIS, Category.STATUS, 95, 10, None, False, False, "one", "status"),
     
     # Los de agua deberian tener el secondary effect? o no ya que todos mojan siempre?
-    _next_techdex_key(): _techdex_entry_model("Water Gun", 40, TypeB.AQUA, Category.SPECIAL, 100, 30, _secondary_effects_model(100, (SecondaryEffect.SOAK)), False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Water Gun", 40, TypeB.AQUA, Category.SPECIAL, 100, 30, _secondary_effects_model(100, (SecondaryEffect.SOAK)), False, False, "one", "damage_effect"),
     
-    _next_techdex_key(): _techdex_entry_model("Bubble", 40, TypeB.AQUA, Category.SPECIAL, 100, 30, _secondary_effects_model(100, (SecondaryEffect.SOAK)), False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Bubble", 40, TypeB.AQUA, Category.SPECIAL, 100, 30, _secondary_effects_model(100, (SecondaryEffect.SOAK)), False, False, "one", "damage_effect"),
      
-    _next_techdex_key(): _techdex_entry_model("Water Pulse", 60, TypeB.AQUA, Category.SPECIAL, 100, 20, _secondary_effects_model(100, (SecondaryEffect.SOAK)), False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Water Pulse", 60, TypeB.AQUA, Category.SPECIAL, 100, 20, _secondary_effects_model(100, (SecondaryEffect.SOAK)), False, False, "one", "damage_effect"),
     
-    _next_techdex_key(): _techdex_entry_model("Heat ", 110, TypeB.AQUA, Category.SPECIAL, 85, 5, _secondary_effects_model(30, (SecondaryEffect.BURN)), False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Heat ", 110, TypeB.AQUA, Category.SPECIAL, 85, 5, _secondary_effects_model(30, (SecondaryEffect.BURN)), False, False, "one", "damage_effect"),
     
-    _next_techdex_key(): _techdex_entry_model("Absorb", 40, TypeB.PLANTA, Category.SPECIAL, 100, 30, None, False, True, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Absorb", 40, TypeB.PLANTA, Category.SPECIAL, 100, 30, None, False, True, "one", "damage_heal"),
     
-    _next_techdex_key(): _techdex_entry_model("Razor Leaf", 60, TypeB.PLANTA, Category.PHYSICAL, 100, 20, None, False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Razor Leaf", 60, TypeB.PLANTA, Category.PHYSICAL, 100, 20, None, False, False, "one", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("Mega Absorb", 75, TypeB.PLANTA, Category.SPECIAL, 90, 10, None, False, True, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Mega Absorb", 75, TypeB.PLANTA, Category.SPECIAL, 90, 10, None, False, True, "one", "damage_heal"),
     
-    _next_techdex_key(): _techdex_entry_model("Petal Dance", 120, TypeB.PLANTA, Category.PHYSICAL, 80, 5, None, False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Petal Dance", 120, TypeB.PLANTA, Category.PHYSICAL, 80, 5, None, False, False, "one", "damage"),
     
     _next_techdex_key(): _techdex_entry_model("Spore", None, TypeB.PLANTA, Category.STATUS, 100, 10, _secondary_effects_model(100, (SecondaryEffect.ASLEEP)), False, False, "one", "POR IMPLEMENTAR"),
     
@@ -254,51 +254,51 @@ techdex: dict[str, Technique] = {
     
     _next_techdex_key(): _techdex_entry_model("Discharge", 90, TypeB.ELECTRITAS, Category.SPECIAL, 80, 10, _secondary_effects_model(20, (SecondaryEffect.PARALIZE)), False, False, "only_enemies", _just_damage),
     
-    _next_techdex_key(): _techdex_entry_model("Electric Punch", 90, TypeB.ELECTRITAS, Category.PHYSICAL, 90, 15, None, False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Electric Punch", 90, TypeB.ELECTRITAS, Category.PHYSICAL, 90, 15, None, False, False, "one", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("Bolt Strike", 110, TypeB.ELECTRITAS, Category.SPECIAL, 80, 5, _secondary_effects_model(40, (SecondaryEffect.PARALIZE)), False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Bolt Strike", 110, TypeB.ELECTRITAS, Category.SPECIAL, 80, 5, _secondary_effects_model(40, (SecondaryEffect.PARALIZE)), False, False, "one", "damage_effect"),
     
-    _next_techdex_key(): _techdex_entry_model("Spark shot", 75, TypeB.ELECTRITAS, Category.PHYSICAL, "always", 10, None, False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Spark shot", 75, TypeB.ELECTRITAS, Category.PHYSICAL, "always", 10, None, False, False, "one", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("Electric Dance", None, TypeB.ELECTRITAS, Category.STATUS, 100, 30, None, False, False, "self", _just_stat_buff),
+    _next_techdex_key(): _techdex_entry_model("Electric Dance", None, TypeB.ELECTRITAS, Category.STATUS, 100, 30, None, False, False, "self", "buff1"),
     
     _next_techdex_key(): _techdex_entry_model("Shock Wave", None, TypeB.ELECTRITAS, Category.STATUS, 95, 10, None, False, False, "one", "status"),
     
-    _next_techdex_key(): _techdex_entry_model("Bug Bite", 20, TypeB.INSECTUM, Category.PHYSICAL, 100, 30, _secondary_effects_model(30, (SecondaryEffect.POSION)), False, False, "one", _just_damage_multiple), #2 times
+    _next_techdex_key(): _techdex_entry_model("Bug Bite", 20, TypeB.INSECTUM, Category.PHYSICAL, 100, 30, _secondary_effects_model(30, (SecondaryEffect.POSION)), False, False, "one", "damage_multiple"), #2 times
     
-    _next_techdex_key(): _techdex_entry_model("XScizor", 70, TypeB.INSECTUM, Category.PHYSICAL, 95, 15, None, False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("XScizor", 70, TypeB.INSECTUM, Category.PHYSICAL, 95, 15, None, False, False, "one", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("Buzz Wave", 60, TypeB.INSECTUM, Category.SPECIAL, 95, 10, None, False, False, "only_enemies", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Buzz Wave", 60, TypeB.INSECTUM, Category.SPECIAL, 95, 10, None, False, False, "only_enemies", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("Rapid Horn", 40, TypeB.INSECTUM, Category.PHYSICAL, "always", 20, None, True, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Rapid Horn", 40, TypeB.INSECTUM, Category.PHYSICAL, "always", 20, None, True, False, "one", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("Quiver Dance", None, TypeB.INSECTUM, Category.STATUS, "always", 10, None, False, False, "self", _just_stat_buff),
+    _next_techdex_key(): _techdex_entry_model("Quiver Dance", None, TypeB.INSECTUM, Category.STATUS, "always", 10, None, False, False, "self", "buff1"),
     
-    _next_techdex_key(): _techdex_entry_model(" Song", None, TypeB.INSECTUM, Category.STATUS, 100, 20, None, False, False, "one", _just_stat_debuff),
+    _next_techdex_key(): _techdex_entry_model(" Song", None, TypeB.INSECTUM, Category.STATUS, 100, 20, None, False, False, "one", "debuff1"),
     
-    _next_techdex_key(): _techdex_entry_model("Slow String", 30, TypeB.INSECTUM, Category.SPECIAL, 100, 30, _secondary_effects_model(50, (SecondaryEffect.SPE_DOWN)), False, False, "only_enemies", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Slow String", 30, TypeB.INSECTUM, Category.SPECIAL, 100, 30, _secondary_effects_model(50, (SecondaryEffect.SPE_DOWN)), False, False, "only_enemies", "damage_effect"),
     
     _next_techdex_key(): _techdex_entry_model("U-Turn", 40, TypeB.INSECTUM, Category.PHYSICAL, 100, 10, None, False, False, "one", "damage_go"),
     
-    _next_techdex_key(): _techdex_entry_model("Aerial Hit", 55, TypeB.VENTUS, Category.PHYSICAL, 100, 20, None,False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Aerial Hit", 55, TypeB.VENTUS, Category.PHYSICAL, 100, 20, None,False, False, "one", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("Fly", 90, TypeB.VENTUS, Category.PHYSICAL, 100, 10, None, False, False, "one", "DAÑO 2 TURNOS"),
+    _next_techdex_key(): _techdex_entry_model("Fly", 90, TypeB.VENTUS, Category.PHYSICAL, 100, 10, None, False, False, "one", "damage_second_turn"),
     
-    _next_techdex_key(): _techdex_entry_model("Wind Strike", 70, TypeB.VENTUS, Category.SPECIAL, 90, 20, None, False, False, "all", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Wind Strike", 70, TypeB.VENTUS, Category.SPECIAL, 90, 20, None, False, False, "all", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("Aeroblast", 100, TypeB.VENTUS, Category.SPECIAL, 90, 5, None, False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Aeroblast", 100, TypeB.VENTUS, Category.SPECIAL, 90, 5, None, False, False, "one", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("CHACHARA", 60, TypeB.VENTUS, Category.PHYSICAL, 90, 10, _secondary_effects_model(50, (SecondaryEffect.CONFUSE)), False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("CHACHARA", 60, TypeB.VENTUS, Category.PHYSICAL, 90, 10, _secondary_effects_model(50, (SecondaryEffect.CONFUSE)), False, False, "one", "damage_effect"),
     
-    _next_techdex_key(): _techdex_entry_model("Snowball", 15, TypeB.GLACIES, Category.PHYSICAL, 95, 30, _secondary_effects_model(5, (SecondaryEffect.FREEZE)), False, False, "one", _just_damage_multiple), # 2-5
+    _next_techdex_key(): _techdex_entry_model("Snowball", 15, TypeB.GLACIES, Category.PHYSICAL, 95, 30, _secondary_effects_model(5, (SecondaryEffect.FREEZE)), False, False, "one", "damage_multiple"), # 2-5
     
-    _next_techdex_key(): _techdex_entry_model("Ice Fang", 50, TypeB.GLACIES, Category.PHYSICAL, 100, 20, _secondary_effects_model(15, (SecondaryEffect.FREEZE)), False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Ice Fang", 50, TypeB.GLACIES, Category.PHYSICAL, 100, 20, _secondary_effects_model(15, (SecondaryEffect.FREEZE)), False, False, "one", "damage_effect"),
     
-    _next_techdex_key(): _techdex_entry_model("Icicle Crush", 80, TypeB.GLACIES, Category.PHYSICAL, 85, 10, _secondary_effects_model(35, (SecondaryEffect.FLINCH)), False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Icicle Crush", 80, TypeB.GLACIES, Category.PHYSICAL, 85, 10, _secondary_effects_model(35, (SecondaryEffect.FLINCH)), False, False, "one", "damage_effect"),
     
-    _next_techdex_key(): _techdex_entry_model("Ice Wind", 50, TypeB.GLACIES, Category.SPECIAL, 80, 15, None, False, False , "all", _just_damage), # Siempre es crítico
+    _next_techdex_key(): _techdex_entry_model("Ice Wind", 50, TypeB.GLACIES, Category.SPECIAL, 80, 15, None, False, False , "all", "damage"), # Siempre es crítico
     
-    _next_techdex_key(): _techdex_entry_model("Ice Burn", 140, TypeB.GLACIES, Category.SPECIAL, 90, 5, _secondary_effects_model(40, (SecondaryEffect.BURN)), False, False, "one", _just_damage), # 1 turno cargar
+    _next_techdex_key(): _techdex_entry_model("Ice Burn", 140, TypeB.GLACIES, Category.SPECIAL, 90, 5, _secondary_effects_model(40, (SecondaryEffect.BURN)), False, False, "one", "damage_recharge"), # 1 turno cargar
     
     _next_techdex_key(): _techdex_entry_model("Light Beam", 40, TypeB.LUX, Category.SPECIAL, 100, 30, _secondary_effects_model(33, (SecondaryEffect.BLIND)), False, False, "one", "damage_effect"),
     
