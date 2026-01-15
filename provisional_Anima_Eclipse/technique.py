@@ -396,7 +396,9 @@ techdex: dict[str, Technique] = {
     
     _next_techdex_key(): _techdex_entry_model("Dig", 75, TypeB.TERRA, Category.PHYSICAL, 100, 15, None, False, False, "one", "damage_second_turn"),
     
+    _next_techdex_key(): _techdex_entry_model("", None, TypeB.TERRA, Category.STATUS, 100, 20, None, False, False, "one", "debuff1"),
     
+    _next_techdex_key(): _techdex_entry_model(),
 }
 '''A dictionary of every single Technique with its information.'''
 

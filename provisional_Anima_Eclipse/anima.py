@@ -54,8 +54,7 @@ class Anima:
             "spe_inc_dec": 0,
             "sp_spe_inc_dec": 0,
             "acc_inc_dec": 0,
-            "eva_inc_dec": 0,
-            "crit_inc_dec": 0
+            "eva_inc_dec": 0
         }
         
         self.exp = 0
