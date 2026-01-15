@@ -183,5 +183,3 @@ class Anima:
 
 
 ani = Anima("001", 5, 5, Nature.ADIVINO) 
-
-

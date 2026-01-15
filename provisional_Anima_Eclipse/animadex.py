@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from typing import Callable, TypedDict
 
 from arcana import Arcana
@@ -5,9 +6,10 @@ from type import TypeA, TypeB
 from technique import Technique, techdex
 from ability import Ability, abilitydex
 
-class Animadex(TypedDict):
+@dataclass(slots=True)
+class Animadex():
     name: str
-    types: tuple[TypeA, TypeB, TypeB | None]
+    types: tuple[TypeA, TypeB] | tuple[TypeA, TypeB, TypeB] 
     abilities: dict[str, str, str]
     arcana: Arcana
     growth: str
@@ -49,20 +51,20 @@ class Animadex(TypedDict):
         base_stats: dict[str, int], 
         technique_learning: dict[int, str], 
         technique_capsules: tuple[str]
-    ) -> dict[str, any]:
-        return {
-            "name": name,    
-            "types": types,
-            "abilities": abilities,
-            "arcana":arcana,
-            "growth": growth,
-            "exp_base_given": exp_base_given,
-            "catch_rate" : catch_rate,
-            "evolves": evolves,
-            "base_stats" : base_stats,
-            "technique_learning": technique_learning,
-            "technique_capsules": technique_capsules
-        }
+    ) -> Animadex:
+        return Animadex(
+            name=name,    
+            types=types,
+            abilities=abilities,
+            arcana=arcana,
+            growth=growth,
+            exp_base_given=exp_base_given,
+            catch_rate=catch_rate,
+            evolves=evolves,
+            base_stats=base_stats,
+            technique_learning=technique_learning,
+            technique_capsules=technique_capsules
+        )
 
 
 animadex: dict[str, Animadex] = {
