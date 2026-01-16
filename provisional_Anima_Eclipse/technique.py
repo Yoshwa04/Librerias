@@ -29,7 +29,7 @@ class Technique(): # Pensar que hacer con esto
     power: int | None
     type: TypeA | TypeB
     category: Category
-    accuracy: int | Literal["always"] # Un número 1-100 o "always"
+    accuracy: int | Literal["always"] # Un número 1-100 o "always" -> Evidentemente que sea always no implica que haga daño si los tipos hacen un x0
     pp: int
     secondary_effects: dict[int, tuple[SecondaryEffect]] | None
     priority: bool
@@ -72,70 +72,8 @@ def _secondary_effects_model(prob: int, effects: tuple[SecondaryEffect]) -> dict
         "prob": prob,
         "effects": effects
     }
-
-
-def _just_damage(atack_anima: Anima, defense_Anima: Anima, tech: Technique): # Tal vez esto no vaya aqui y ni guarde metodos en el techdex who knows
-    if isinstance(tech.type, TypeA):
-        eff = effectiveness_chart[tech.type][defense_Anima.type_a]
-    else:
-        eff = effectiveness_chart[tech.type][defense_Anima.type_b1]
-        if defense_Anima.type_b2 is not None:
-            eff2 = effectiveness_chart[tech.type][defense_Anima.type_b2]
-            eff *= eff2
     
-    stab = "stab = 1.5" if tech.type in (atack_anima.type_a, atack_anima.type_b1, atack_anima.type_b2) else "stab = 1"        
-    eff = f"eff = {eff}"      
-    v = f"v = {randint(75, 100)}" # Me gustaria que si sale 75 ponga min damage y si sale 100 ponga max damage
-    lvl = f"lvl = {atack_anima.lvl}"
-    atq = f"atq = {atack_anima.atk if tech.category is Category.PHYSICAL else atack_anima.sp_atk}"
-    def_ = f"def = {defense_Anima.def_ if tech.category is Category.PHYSICAL else defense_Anima.sp_def}"
-    power = f"power = {tech.power}"
-    
-    return int(give_just_one_solution(solve_equation(formula_dict["damage"], stab, eff, v, lvl, atq, power, def_), "damage"))
 
-def _just_damage_multiple(atack_anima: Anima, defense_Anima: Anima, tech: Technique, times: int):
-    if isinstance(tech.type, TypeA):
-        eff = effectiveness_chart[tech.type][defense_Anima.type_a]
-    else:
-        eff = effectiveness_chart[tech.type][defense_Anima.type_b1]
-        if defense_Anima.type_b2 is not None:
-            eff2 = effectiveness_chart[tech.type][defense_Anima.type_b2]
-            eff *= eff2
-    
-    stab = "stab = 1.5" if tech.type in (atack_anima.type_a, atack_anima.type_b1, atack_anima.type_b2) else "stab = 1"        
-    eff = f"eff = {eff}"      
-    v = f"v = {randint(75, 100)}" # Me gustaria que si sale 75 ponga min damage y si sale 100 ponga max damage
-    lvl = f"lvl = {atack_anima.lvl}"
-    atq = f"atq = {atack_anima.atk if tech.category is Category.PHYSICAL else atack_anima.sp_atk}"
-    def_ = f"def = {defense_Anima.def_ if tech.category is Category.PHYSICAL else defense_Anima.sp_def}"
-    power = f"power = {tech.power}"
-    
-    damage = int(give_just_one_solution(solve_equation(formula_dict["damage"], stab, eff, v, lvl, atq, power, def_), "damage")) * times
-    return damage
-
-
-def _just_heal(anima: Anima): # Tal vez hay que poner algo mas idk
-    anima.hp_now += (anima.hp_max/2)
-
-
-def _just_stat_debuff(*stats: str, anima: Anima):
-    """En stats importante poner solo la stat (atk, def...)"""
-    
-    for stat in stats:
-        anima.stats_inc_dec[f"{stat}_inc_dec"] -= 1
-    
-def _just_stat_buff(*stats: str, anima: Anima):
-    """En stats importante poner solo la stat (atk, def...)"""
-    
-    for stat in stats:
-        anima.stats_inc_dec[f"{stat}_inc_dec"] += 1
-        
-
-def _just_protect(anima: Anima): # Esto aqui? No?
-    anima.status1 = Status1.PROTECTED
-
-
-# Cambiar el metodo de callable a str
 techdex: dict[str, Technique] = {
     _next_techdex_key(): _techdex_entry_model("example", 10, TypeA.FLUXOR, Category.SPECIAL, 100, 10, None, False, False, "one", "damage"), 
     
@@ -147,7 +85,7 @@ techdex: dict[str, Technique] = {
     
     _next_techdex_key(): _techdex_entry_model("Swift", 60, TypeB.COMMUNIS, Category.SPECIAL, "always", 20, None, False, False, "one", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("Tri Attack", 80, TypeB.COMMUNIS, Category.SPECIAL, 100, 15, _secondary_effects_model(50, (SecondaryEffect.BURN, SecondaryEffect.PARALIZE, SecondaryEffect.FREEZE)), False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Tri Attack", 80, TypeB.COMMUNIS, Category.SPECIAL, 100, 15, _secondary_effects_model(50, (SecondaryEffect.BURN, SecondaryEffect.PARALIZE, SecondaryEffect.FREEZE)), False, False, "one", "damage_effect"),
     
     _next_techdex_key(): _techdex_entry_model("Restore", None, TypeB.COMMUNIS, Category.STATUS, "always", 5, None, False, True, "self", "heal"),
     
@@ -165,11 +103,11 @@ techdex: dict[str, Technique] = {
     
     _next_techdex_key(): _techdex_entry_model("Regular Hit", 40, TypeA.NEUTRO, Category.PHYSICAL, 100, 30, None, False, False, "one", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("", 60, TypeA.NEUTRO, Category.SPECIAL, 100, 20, None, False, False, "one", "damage"),
+    _next_techdex_key(): _techdex_entry_model("Blank Aura", 60, TypeA.NEUTRO, Category.SPECIAL, 100, 20, None, False, False, "one", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("", 90, TypeA.NEUTRO, Category.SPECIAL, 85, 10, None, False, False, "all", "damage"),
+    _next_techdex_key(): _techdex_entry_model("Shout Loud", 90, TypeA.NEUTRO, Category.SPECIAL, 85, 10, None, False, False, "all", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("", 75, TypeA.NEUTRO, Category.PHYSICAL, 95, 15, None, True, False, "one", "damage"),
+    _next_techdex_key(): _techdex_entry_model("Void Punch", 75, TypeA.NEUTRO, Category.PHYSICAL, 95, 15, None, True, False, "one", "damage"),
     
     _next_techdex_key(): _techdex_entry_model("Repetition", 20, TypeA.NEUTRO, Category.PHYSICAL, 95, 30, None, False, False, "one", "damage_multiple"),
     
@@ -203,19 +141,19 @@ techdex: dict[str, Technique] = {
     
     _next_techdex_key(): _techdex_entry_model("Will Power", 50, TypeA.VOLUNTAS, Category.PHYSICAL, 90, 20, None, True, False, "one", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("", 80, TypeA.VOLUNTAS, Category.SPECIAL, 95, 10, None, False, False, "only_enemies", "damage"),
+    _next_techdex_key(): _techdex_entry_model("Free ----", 80, TypeA.VOLUNTAS, Category.SPECIAL, 95, 10, None, False, False, "only_enemies", "damage"),
     
     _next_techdex_key(): _techdex_entry_model("Path Breaker", 120, TypeA.VOLUNTAS, Category.SPECIAL, 75, 5, None, False, False, "one", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("", 60, TypeA.VOLUNTAS, Category.PHYSICAL, 95, 15, None, False, True, "one", "damage"),
+    _next_techdex_key(): _techdex_entry_model("Strength Move", 60, TypeA.VOLUNTAS, Category.PHYSICAL, 95, 15, None, False, True, "one", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("", 200, TypeA.VOLUNTAS, Category.SPECIAL, 25, 10, None, False, False, "one", "damage"),
+    _next_techdex_key(): _techdex_entry_model("Mass Destruction", 200, TypeA.VOLUNTAS, Category.SPECIAL, 25, 10, None, False, False, "one", "damage"),
     
     _next_techdex_key(): _techdex_entry_model("Ember", 40, TypeB.IGNIS, Category.SPECIAL, 100, 30, _secondary_effects_model(15, (SecondaryEffect.BURN)), False, False, "one", "damage_effect"),
     
     _next_techdex_key(): _techdex_entry_model("Fire Fist", 60, TypeB.IGNIS, Category.PHYSICAL, 95, 20, _secondary_effects_model(25, (SecondaryEffect.BURN)), False, False, "one", "damage_effect"),
     
-    _next_techdex_key(): _techdex_entry_model("Fire Punch", 80, TypeB.IGNIS, Category.PHYSICAL, 100, 15, None, False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Fire Punch", 80, TypeB.IGNIS, Category.PHYSICAL, 100, 15, None, False, False, "one", "damage"),
     
     _next_techdex_key(): _techdex_entry_model("Fire Wave", 80, TypeB.IGNIS, Category.SPECIAL, 95, 15, _secondary_effects_model(15, (SecondaryEffect.BURN)), False, False, "all", "damage_effect"),
     
@@ -250,9 +188,9 @@ techdex: dict[str, Technique] = {
     
     _next_techdex_key(): _techdex_entry_model("Spore", None, TypeB.PLANTA, Category.STATUS, 95, 5, None, False, False, "one", "status"), #Sleep
     
-    _next_techdex_key(): _techdex_entry_model("Lightning", 60, TypeB.ELECTRITAS, Category.SPECIAL, 100, 20, _secondary_effects_model(30, (SecondaryEffect.PARALIZE)), False, False, "one", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Lightning", 60, TypeB.ELECTRITAS, Category.SPECIAL, 100, 20, _secondary_effects_model(30, (SecondaryEffect.PARALIZE)), False, False, "one", "damage_effect"),
     
-    _next_techdex_key(): _techdex_entry_model("Discharge", 90, TypeB.ELECTRITAS, Category.SPECIAL, 80, 10, _secondary_effects_model(20, (SecondaryEffect.PARALIZE)), False, False, "only_enemies", _just_damage),
+    _next_techdex_key(): _techdex_entry_model("Discharge", 90, TypeB.ELECTRITAS, Category.SPECIAL, 80, 10, _secondary_effects_model(20, (SecondaryEffect.PARALIZE)), False, False, "only_enemies", "damage_effect"),
     
     _next_techdex_key(): _techdex_entry_model("Electric Punch", 90, TypeB.ELECTRITAS, Category.PHYSICAL, 90, 15, None, False, False, "one", "damage"),
     
@@ -416,9 +354,9 @@ techdex: dict[str, Technique] = {
     
     _next_techdex_key(): _techdex_entry_model("Dig", 75, TypeB.TERRA, Category.PHYSICAL, 100, 15, None, False, False, "one", "damage_second_turn"),
     
-    _next_techdex_key(): _techdex_entry_model("", None, TypeB.TERRA, Category.STATUS, 100, 20, None, False, False, "one", "debuff1"),
+    _next_techdex_key(): _techdex_entry_model("CHAPOTEO LODO O ALGO ASI IDKA", None, TypeB.TERRA, Category.STATUS, 100, 20, None, False, False, "one", "debuff1"), # baja precision
     
-    _next_techdex_key(): _techdex_entry_model("Sand GET", None, TypeB.TERRA, Category.STATUS, "always", 5, None, False, True, "self", "heal"),
+    _next_techdex_key(): _techdex_entry_model("Recollect Sand", None, TypeB.TERRA, Category.STATUS, "always", 5, None, False, True, "self", "heal"),
 }
 '''A dictionary of every single Technique with its information.'''
 
