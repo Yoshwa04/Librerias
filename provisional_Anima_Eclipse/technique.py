@@ -354,7 +354,7 @@ techdex: dict[str, Technique] = {
     
     _next_techdex_key(): _techdex_entry_model("Dig", 75, TypeB.TERRA, Category.PHYSICAL, 100, 15, None, False, False, "one", "damage_second_turn"),
     
-    _next_techdex_key(): _techdex_entry_model("CHAPOTEO LODO O ALGO ASI IDKA", None, TypeB.TERRA, Category.STATUS, 100, 20, None, False, False, "one", "debuff1"), # baja precision
+    _next_techdex_key(): _techdex_entry_model("CHAPOTEO LODO O ALGO ASI IDK", None, TypeB.TERRA, Category.STATUS, 100, 20, None, False, False, "one", "debuff1"), # baja precision
     
     _next_techdex_key(): _techdex_entry_model("Recollect Sand", None, TypeB.TERRA, Category.STATUS, "always", 5, None, False, True, "self", "heal"),
 }
