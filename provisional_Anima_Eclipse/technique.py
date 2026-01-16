@@ -205,7 +205,7 @@ techdex: dict[str, Technique] = {
     
     _next_techdex_key(): _techdex_entry_model("", 80, TypeA.VOLUNTAS, Category.SPECIAL, 95, 10, None, False, False, "only_enemies", "damage"),
     
-    _next_techdex_key(): _techdex_entry_model("", 120, TypeA.VOLUNTAS, Category.SPECIAL, 75, 5, None, False, False, "one", "damage"),
+    _next_techdex_key(): _techdex_entry_model("Path Breaker", 120, TypeA.VOLUNTAS, Category.SPECIAL, 75, 5, None, False, False, "one", "damage"),
     
     _next_techdex_key(): _techdex_entry_model("", 60, TypeA.VOLUNTAS, Category.PHYSICAL, 95, 15, None, False, True, "one", "damage"),
     
