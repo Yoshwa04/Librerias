@@ -62,7 +62,7 @@ def give_just_one_solution(solutions: list[Dict[Any, Any]], solution: Optional[s
         solution (str): The name of the variable whose value should be extracted. Defaults to None
 
     Returns:
-        Any: The value associated with the requested variable, or the first value if no variable is specified.
+        Any: The value associated with the requested variable, or the first value if no variable is specified. Can be an integer, a float...
     """
 
     if not solutions:
