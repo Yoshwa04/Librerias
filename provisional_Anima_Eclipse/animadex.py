@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Callable, TypedDict
+from typing import Callable, Literal, TypedDict
 
 from arcana import Arcana
 from type import TypeA, TypeB
@@ -15,7 +15,7 @@ class Animadex():
     growth: str
     exp_base_given: int
     catch_rate: int
-    evolves: str | None
+    evolves: str | dict[str, str] | None
     base_stats: dict[str, int]
     technique_learning: dict[int, str]
     technique_capsules: tuple[str]
@@ -41,10 +41,10 @@ class Animadex():
         
     def _animadex_entry_model(
         name: str, 
-        types: tuple[TypeA, TypeB, TypeB | None], 
+        types: tuple[TypeA, TypeB] | tuple[TypeA, TypeB, TypeB],
         abilities: dict[str, str, str], 
         arcana: Arcana, 
-        growth: str, 
+        growth: Literal["fast", "nomral", "slow", "parabolic"], 
         exp_base_given: int, 
         catch_rate: int, 
         evolves: str | None, 
@@ -68,7 +68,7 @@ class Animadex():
 
 
 animadex: dict[str, Animadex] = {
-    # Ejemplo usando el metodo
+    # Ejemplo usando el método
     "000": Animadex._animadex_entry_model(
         "ejemplo", (TypeA.ESSENTIA, TypeB.AQUA), Animadex._animadex_abilities_model("001", "001", "001"), Arcana.ABYSSUS, "fast", 1, 255, None, 
         Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
@@ -367,5 +367,81 @@ animadex: dict[str, Animadex] = {
         }
     },
 
+    "019": Animadex._animadex_entry_model(
+      "normal1", (TypeA.NEUTRO, TypeB.COMMUNIS), Animadex._animadex_abilities_model("", "", ""), Arcana.AURORA, "normal", 00, 230, "18:020",
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    ),
+    "020": Animadex._animadex_entry_model(
+      "normal1.2", (TypeA.NEUTRO, TypeB.COMMUNIS), Animadex._animadex_abilities_model("", "", ""), Arcana.AURORA, "normal", 00, 230, None,
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    ),
+    
+    "021": Animadex._animadex_entry_model(
+      "electric1", (TypeA.VOLUNTAS, TypeB.ELECTRITAS), Animadex._animadex_abilities_model("", "", ""), Arcana.COMETA, "normal", 00, 200, "20:022",
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    ),
+    "022": Animadex._animadex_entry_model(
+      "electric1.2", (TypeA.VOLUNTAS, TypeB.ELECTRITAS), Animadex._animadex_abilities_model("", "", ""), Arcana.COMETA, "normal", 00, 200, "28:023",
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    ),
+    "023": Animadex._animadex_entry_model(
+      "electric1.3", (TypeA.VOLUNTAS, TypeB.ELECTRITAS), Animadex._animadex_abilities_model("", "", ""), Arcana.COMETA, "normal", 00, 200, None,
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    ),
+    
+    "024": Animadex._animadex_entry_model(
+      "Ghost", (TypeA.ESSENTIA, TypeB.PHANTASMA, TypeB.TERRA), Animadex._animadex_abilities_model("", "", ""), Arcana.LUNA, "normal", 00, 190, "30:025",
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    ),
+    "025": Animadex._animadex_entry_model(
+      "Ghost", (TypeA.ESSENTIA, TypeB.PHANTASMA, TypeB.TERRA), Animadex._animadex_abilities_model("", "", ""), Arcana.LUNA, "normal", 00, 190, None,
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    ),
+    
+    "026": Animadex._animadex_entry_model(
+      "eevee", (TypeA.NEUTRO, TypeB.COMMUNIS), Animadex._animadex_abilities_model("", "", ""), Arcana.TERRA, "normal", 00, 150,
+      {"piedra_fuego": "027",
+       "piedra_hielo": "028",
+       "piedra_lunar": "029",
+       "piedra_dura": "030"},
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    ),
+    "027": Animadex._animadex_entry_model(
+      "eeveeolution1", (TypeA.VOLUNTAS, TypeB.IGNIS), Animadex._animadex_abilities_model("", "", ""), Arcana.SOL, "normal", 00, 130, None,
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    ),
+    "028": Animadex._animadex_entry_model(
+      "eeveeolution2", (TypeA.FORMA, TypeB.GLACIES), Animadex._animadex_abilities_model("", "", ""), Arcana.AURORA, "normal", 00, 130, None,
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    ),
+    "029": Animadex._animadex_entry_model(
+      "eeveeolution3", (TypeA.ESSENTIA, TypeB.SINISTER), Animadex._animadex_abilities_model("", "", ""), Arcana.LUNA, "normal", 00, 130, None,
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    ),
+    "030": Animadex._animadex_entry_model(
+      "eeveeolution4", (TypeA.FORMA, TypeB.RUPES), Animadex._animadex_abilities_model("", "", ""), Arcana.COMETA, "normal", 00, 130, None,
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    ),
+    
+    "031": Animadex._animadex_entry_model(
+      "steel1", (TypeA.FLUXOR, TypeB.METALLUM), Animadex._animadex_abilities_model("", "", ""), Arcana.HALOS, "slow", 00, 90, "38:032",
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    ),
+    "032": Animadex._animadex_entry_model(
+      "steel2", (TypeA.FLUXOR, TypeB.METALLUM, TypeB.PUGNA), Animadex._animadex_abilities_model("", "", ""), Arcana.HALOS, "slow", 00, 90, "44:033",
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    ),
+    "033": Animadex._animadex_entry_model(
+      "steel3", (TypeA.FLUXOR, TypeB.METALLUM, TypeB.PUGNA), Animadex._animadex_abilities_model("", "", ""), Arcana.HALOS, "slow", 00, 90, None,
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    ),
+    
 }
 '''A dictionary of every single Anima with its information that never changes'''
+
+
+
+# Metodo provisional y no acabado, no se si ira aqui para separar la informacion de la evolucion de un anima y tener por separado el nivel necesario (o otra cosa supongo) y a cual evoluciona
+def __split_lvl_and_animadex(str: str):
+    lvl = int(str.split(":")[0])
+    animadex_number = lvl = str.split(":")[1]

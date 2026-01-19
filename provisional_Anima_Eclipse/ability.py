@@ -10,103 +10,13 @@ Otra posibilidad es que haga ambas cosas. Ya que hay casos especificos de rompem
 
 class Ability(TypedDict):
     name: str
-    when: Literal["Beginning", "End", "Do damage", "Recieve damage", "Changing", "Rival changing", "At fainting", "At being fainted", "Taking status"] 
-    effect: Callable[[Anima], int]
-    
-     
-def stat_boost_ability(anima: Anima, stat_name: str, multiplier: float):
-    if anima.ability_uses >= 1:
-        return 0
-    
-    anima.ability_uses += 1
-    
-    current = getattr(anima, stat_name)
-    setattr(anima, stat_name, current * multiplier)
-    
-    return 1
-        
-def potentiate_technique_power_ability(anima: Anima):
-    if anima.ability_uses >= 1:
-        return 0
-    if anima.hp_now > anima.hp_max * 0.5:
-        return 0
-    
-    anima.ability_uses += 1
-    
-    for tech in anima.technique_set.items():
-        
-        if tech["type"] in (anima.type_a, anima.type_b) and tech["power"] is not None:
-            tech["power"] *= 1.5
-            
-    return 1
-
-def status_techniques_priority(anima: Anima):
-    if anima.ability_uses >= 1:
-        return 0
-    
-    anima.ability_uses += 1
-    
-    for tech in anima.technique_set.items():
-        if tech["category"] == "status":
-            tech["priority"] = True
-            
-    return 1
-            
-def more_resistance_less_def(anima: Anima, type: TypeB | TypeA): 
-    if anima.ability_uses == 0:
-        anima.def_ *= 0.8
-    
-    # terminar
-    
-    anima.ability_uses += 1
-    return 1
-
-def decrease_stat_beginning(p_anima: Anima, ai_anima: Anima, stat: str):
-    if p_anima.ability_uses == 0:
-        setattr(ai_anima, stat, getattr(ai_anima, stat) - 0.25)
-    else:
-        return 0    
-    return 1
+    when: Literal["beginning", "end", "do_damage", "recieve_damage", "changing", "rival_changing", "fainting", "being_fainted", "taking_status"] 
+    effect: str
                 
 abilitydex: dict[str, Ability] = {
     "000": {
         "name": "example",
-        "when": "Beginning",
-        "effect": lambda anima: setattr(anima, 'atk', anima.atk * 2)
+        "when": "beginning",
+        "effect": ""
     },
-    "0000": {
-        "name": "example2",
-        "when": "Taking status",
-        "effect": lambda anima: setattr(anima, 'status1', Status1.BURNED)
-    },
-    
-    "001": {
-        "name": "Physical Rock",
-        "when": "Do damage",
-        "effect": lambda anima: stat_boost_ability(anima, "atk", 1.2)
-    },
-    "002": {
-        "name": "Highly Gifted",
-        "effect": lambda anima: stat_boost_ability(anima, "sp_atk", 1.2)
-    },
-    "003": {
-        "name": "Wall",
-        "effect": lambda anima: stat_boost_ability(anima, "def_", 1.2)
-    },
-    "004": {
-        "name": "Magnetic Force",
-        "effect": lambda anima: stat_boost_ability(anima, "sp_def", 1.2)
-    },
-    "005": {
-        "name": "Torrent",
-        "effect": potentiate_technique_power_ability
-    },
-    "006": {
-        "name": "Blaze",
-        "effect": potentiate_technique_power_ability
-    },
-    "007": {
-        "name": "Overgrow",
-        "effect": potentiate_technique_power_ability
-    }
 }

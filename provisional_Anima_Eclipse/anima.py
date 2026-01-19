@@ -149,9 +149,13 @@ class Anima:
         self.hp_max = int(give_just_one_solution(solve_equation(formula_dict["hp"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['hp']}", f"potential = {self.potentials['hp']}"), "hp"))
             
         self.atk = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['atk']}", f"potential = {self.potentials['atk']}", f"nature = {self.atk_modifier}"), "stat"))
+        
         self.sp_atk = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['sp_atk']}", f"potential = {self.potentials['sp_atk']}", f"nature = {self.sp_atk_modifier}"), "stat"))
+        
         self.def_ = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['def']}", f"potential = {self.potentials['def']}", f"nature = {self.def_modifier}"), "stat"))
+        
         self.sp_def = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['sp_def']}", f"potential = {self.potentials['sp_def']}", f"nature = {self.sp_def_modifier}"), "stat"))
+        
         self.spe = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['spe']}", f"potential = {self.potentials['spe']}", f"nature = {self.spe_modifier}"), "stat"))
         
         self.exp_next_lvl = -1 if self.lvl >= MAX_LVL else int(give_just_one_solution(solve_equation(formula_dict["growth"][self.growth], f"lvl = {self.lvl + 1}"), "growth")) - int(give_just_one_solution(solve_equation(formula_dict["growth"][self.growth], f"lvl = {self.lvl}"), "growth"))
