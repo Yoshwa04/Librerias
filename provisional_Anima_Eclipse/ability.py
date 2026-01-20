@@ -22,7 +22,7 @@ class Ability():
         "foe_ability_affects_you"
     ] 
     effect: str
-    '''x2/1.5... una stat - hacer daño al recibir daño fisico - absorber un tipo - recibir x2 de un tipo - recibir /2 de un tipo - Curarse si esta envenenado - atacaer un turno si otro no - 
+    '''x2/1.5... una stat - hacer daño al recibir daño fisico - absorber un tipo - recibir x2 de un tipo - recibir /2 de un tipo - Curarse si esta envenenado - atacar un turno si otro no - 
     curarse los estados - '''
     
 def ability_entry_model(
@@ -48,11 +48,11 @@ def ability_entry_model(
 abilitydex: dict[str, Ability] = {
     "000": ability_entry_model("exemple", "always", "nothing"),
     
-    "001": ability_entry_model("Pure Energy", "always", "x2 atk"),
-    "002": ability_entry_model("", "always", "x2 sp_atk"),
+    "001": ability_entry_model("Huge Power", "always", "x2 atk"),
+    "002": ability_entry_model("Canalize", "always", "x2 sp_atk"),
     "003": ability_entry_model("Intimidate", "entering_battle", "-1 foe atk"),
-    "004": ability_entry_model("", "entering_battle", "-1 foe sp_atk"),
-    "005": ability_entry_model("", "entering_battle", "-1 foe acc"),
+    "004": ability_entry_model("Disrupt", "entering_battle", "-1 foe sp_atk"),
+    "005": ability_entry_model("Flash", "entering_battle", "-1 foe acc"),
     "006": ability_entry_model("Natural Cure", "exiting_battle", "cure status"),
     "007": ability_entry_model("NEGADOR O ALGO ASI", "stat fall", "+1 stat that fell"),
     "008": ability_entry_model("Shadow Trap", "always", "foe cant change or escape"),
@@ -67,5 +67,7 @@ abilitydex: dict[str, Ability] = {
     "016": ability_entry_model("Electromotor", "taking_damage", "negates electric damage and gains hp"),
     "017": ability_entry_model("Herbivor", "taking_damage", "negates plant damage and gains hp"),
     "018": ability_entry_model("Holy Saint", "taking_damage", "negates lux damage and gains hp"),
-    "019": ability_entry_model("", "taking_damage", "negates water damage and gains hp"),
+    "019": ability_entry_model("Antidote", "with_status", "heals if poisoned instead of losing hp"),
+    "020": ability_entry_model("Ausent", "always", "needs to rest 1 turn after atacking"),
+    "021": ability_entry_model(),
 }
