@@ -10,13 +10,18 @@ Otra posibilidad es que haga ambas cosas. Ya que hay casos especificos de rompem
 
 class Ability(TypedDict):
     name: str
-    when: Literal["beginning", "end", "do_damage", "recieve_damage", "changing", "rival_changing", "fainting", "being_fainted", "taking_status"] 
+    when: Literal["entering_battle", "exiting_battle", "start_of_turn", "end_of_turn", "taking_damage", "dealing_damage", "with_status", "stat_always"] 
     effect: str
+    '''x2 una stat - hacer daño al recibir daño fisico - absorber un tipo - recibir x2 de un tipo - recibir /2 de un tipo - '''
                 
 abilitydex: dict[str, Ability] = {
     "000": {
         "name": "example",
-        "when": "beginning",
-        "effect": ""
+        "when": "entering_battle",
+        "effect": "nothing"
     },
+    
+    "001": {
+        
+    }
 }
