@@ -1,4 +1,5 @@
-from typing import Callable, Literal, TypedDict
+from dataclasses import dataclass
+from typing import Literal, TypedDict
 
 from anima import Anima
 from type import TypeA, TypeB
@@ -8,26 +9,51 @@ from status import Status1
 
 Otra posibilidad es que haga ambas cosas. Ya que hay casos especificos de rompemoldes anulando la habilidad pero no es en todas las habilidades. Ya que aquellas que al momento de realizarse no interactuan directamente con el Anima no debe de tenerse en cuenta, la posibilidad de que si se hagan los cambios de las habilidades dentro del propio metodo pero que a parte tambien hagan un return en algun formato a verse de lo que ha hecho para que lo recoja la segunda habilidad en el orden (que podria o no ser rompemoldes) y que esta recoja esas "instrucciones" y las interprete, en ese caso todas las habilidades deben recoger una variable de instrucciones aunque solo algunas las utilicen"""  
 
-class Ability(TypedDict):
+@dataclass(slots=True)
+class Ability():
     name: str
-    when: Literal["entering_battle", "exiting_battle", 
-                  "start_of_turn", "end_of_turn", 
-                  "taking_damage", "dealing_damage", 
-                  "with_status", 
-                  "stat_fall", 
-                  "always", 
-                  "foe_ability_affects_you"] 
+    when: Literal[
+        "entering_battle", "exiting_battle",
+        "start_of_turn", "end_of_turn",
+        "taking_damage", "dealing_damage",
+        "with_status",
+        "stat_fall",
+        "always",
+        "foe_ability_affects_you"
+    ] 
     effect: str
     '''x2 una stat - hacer daño al recibir daño fisico - absorber un tipo - recibir x2 de un tipo - recibir /2 de un tipo - Curarse si esta envenenado - atacaer un turno si otro no - 
     curarse los estados - '''
-                
+    
+def ability_entry_model(
+    name: str,
+    when: Literal[
+        "entering_battle", "exiting_battle",
+        "start_of_turn", "end_of_turn",
+        "taking_damage", "dealing_damage",
+        "with_status",
+        "stat_fall",
+        "always",
+        "foe_ability_affects_you"
+    ], 
+    effect: str
+) -> Ability:
+    return Ability(
+        name=name,
+        when=when,
+        effect=effect
+    )
+
+            
 abilitydex: dict[str, Ability] = {
-    "000": {
-        "name": "example",
-        "when": "entering_battle",
-        "effect": "nothing"
-    },
-    "001": {
-        
-    }
+    "000": ability_entry_model("exemple", "always", "nothing"),
+    
+    "001": ability_entry_model("Pure Energy", "always", "x2 atk"),
+    "002": ability_entry_model("", "always", "x2 sp_atk"),
+    "003": ability_entry_model("Intimidate", "entering_battle", "-1 foe atk"),
+    "004": ability_entry_model("", "entering_battle", "-1 foe sp_atk"),
+    "005": ability_entry_model("", "entering_battle", "-1 foe acc"),
+    "006": ability_entry_model("Natural Cure", "exiting_battle", "cure status"),
+    "007": ability_entry_model("RESPONDON", "stat_fall", "+1 stat that fell"),
+    "008": ability_entry_model("", )
 }

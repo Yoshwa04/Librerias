@@ -56,6 +56,8 @@ class Anima:
             "acc_inc_dec": 0,
             "eva_inc_dec": 0
         }
+        if self.ability["when"] == "always":
+            pass # Aqui va el metodo de la habilidad en cuestion
         
         self.exp = 0
         self._init_technique_set()
