@@ -22,7 +22,7 @@ class Ability():
         "foe_ability_affects_you"
     ] 
     effect: str
-    '''x2 una stat - hacer daño al recibir daño fisico - absorber un tipo - recibir x2 de un tipo - recibir /2 de un tipo - Curarse si esta envenenado - atacaer un turno si otro no - 
+    '''x2/1.5... una stat - hacer daño al recibir daño fisico - absorber un tipo - recibir x2 de un tipo - recibir /2 de un tipo - Curarse si esta envenenado - atacaer un turno si otro no - 
     curarse los estados - '''
     
 def ability_entry_model(
@@ -54,6 +54,18 @@ abilitydex: dict[str, Ability] = {
     "004": ability_entry_model("", "entering_battle", "-1 foe sp_atk"),
     "005": ability_entry_model("", "entering_battle", "-1 foe acc"),
     "006": ability_entry_model("Natural Cure", "exiting_battle", "cure status"),
-    "007": ability_entry_model("RESPONDON", "stat_fall", "+1 stat that fell"),
-    "008": ability_entry_model("", )
+    "007": ability_entry_model("NEGADOR O ALGO ASI", "stat fall", "+1 stat that fell"),
+    "008": ability_entry_model("Shadow Trap", "always", "foe cant change or escape"),
+    "009": ability_entry_model("Overweat", "always", "x1.5 water damage when hp/2"),
+    "010": ability_entry_model("Overgrow", "always", "x1.5 plant damage when hp/2"),
+    "011": ability_entry_model("Overheat", "always", "x1.5 fire damage when hp/2"),
+    "012": ability_entry_model("Overcharge", "always", "x1.5 electric damage when hp/2"),
+    "013": ability_entry_model("RESPONDON??????", "stat fall", "+1 atk when other stat fall"),
+    "013": ability_entry_model("", "stat fall", "x2 stat changes"),
+    "014": ability_entry_model("Water absorb", "taking_damage", "negates water damage and gains hp"),
+    "015": ability_entry_model("Fire absorb", "taking_damage", "negates fire damage and gains hp"),
+    "016": ability_entry_model("Electromotor", "taking_damage", "negates electric damage and gains hp"),
+    "017": ability_entry_model("Herbivor", "taking_damage", "negates plant damage and gains hp"),
+    "018": ability_entry_model("Holy Saint", "taking_damage", "negates lux damage and gains hp"),
+    "019": ability_entry_model("", "taking_damage", "negates water damage and gains hp"),
 }
