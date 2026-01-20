@@ -10,9 +10,16 @@ Otra posibilidad es que haga ambas cosas. Ya que hay casos especificos de rompem
 
 class Ability(TypedDict):
     name: str
-    when: Literal["entering_battle", "exiting_battle", "start_of_turn", "end_of_turn", "taking_damage", "dealing_damage", "with_status", "stat_always"] 
+    when: Literal["entering_battle", "exiting_battle", 
+                  "start_of_turn", "end_of_turn", 
+                  "taking_damage", "dealing_damage", 
+                  "with_status", 
+                  "stat_fall", 
+                  "always", 
+                  "foe_ability_affects_you"] 
     effect: str
-    '''x2 una stat - hacer daño al recibir daño fisico - absorber un tipo - recibir x2 de un tipo - recibir /2 de un tipo - '''
+    '''x2 una stat - hacer daño al recibir daño fisico - absorber un tipo - recibir x2 de un tipo - recibir /2 de un tipo - Curarse si esta envenenado - atacaer un turno si otro no - 
+    curarse los estados - '''
                 
 abilitydex: dict[str, Ability] = {
     "000": {
@@ -20,7 +27,6 @@ abilitydex: dict[str, Ability] = {
         "when": "entering_battle",
         "effect": "nothing"
     },
-    
     "001": {
         
     }
