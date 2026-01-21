@@ -68,6 +68,6 @@ abilitydex: dict[str, Ability] = {
     "017": ability_entry_model("Herbivor", "taking_damage", "negates plant damage and gains hp"),
     "018": ability_entry_model("Holy Saint", "taking_damage", "negates lux damage and gains hp"),
     "019": ability_entry_model("Antidote", "with_status", "heals if poisoned instead of losing hp"),
-    "020": ability_entry_model("Ausent", "always", "needs to rest 1 turn after atacking"),
-    "021": ability_entry_model(),
+    "020": ability_entry_model("Absent?", "always", "needs to rest 1 turn after atacking"),
+    "021": ability_entry_model(""),
 }
