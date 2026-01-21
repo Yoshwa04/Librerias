@@ -1,21 +1,6 @@
 import string
-from typing import List, Dict, Optional, Union, Any
-from sympy import symbols, Eq, solve, sympify
-
-class Constants():
-    '''This class just contains some mathematic constants'''
-    
-    PI = 3.14159265358979323846
-    E = 2.71828
-    '''Euler'''
-    C = 299792458
-    '''Light Speed'''
-    DEGREES_TO_RADIANS = 0.017453292519943295
-    RADIANS_TO_DEGREES = 57.29577951308232
-    
-    
-formulas = {
-}
+from typing import Any, List, Optional
+from sympy import Dict, Eq, Union, solve, symbols, sympify
 
 
 def solve_equation(*eq_given : str) -> Union[List[Dict[str, Any]], str]:
