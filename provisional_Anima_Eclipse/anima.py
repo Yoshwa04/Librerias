@@ -3,7 +3,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from typing import Optional
 import random
 
-from logic.math import solve_equation, give_just_one_solution
+from logic.math_core.solver import solve_equation, give_just_one_solution
 
 from arcana import Arcana
 from animadex import animadex
