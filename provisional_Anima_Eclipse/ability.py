@@ -104,5 +104,4 @@ abilitydex: dict[str, Ability] = {
     "051": ability_entry_model("Calc", "entering_battle", "copies the stat changes of your foe (good and bad ones)"),
     "052": ability_entry_model("Lynx", "dealing_damage", "+1 critical index"),
     "053": ability_entry_model("Typycalize", "always", "converts neutral attacks in your TypeA & communis in your TypeB (if 2 TypeB, takes the primal)"),
-    
 }
