@@ -12,6 +12,7 @@ from trainer_base import TrainerBase
 class Player(TrainerBase):
     def __init__(self, name, money):
         super().__init__(name, money)
+        self.confidents = []
         
         for arcana in Arcana:
             confident = Confident(
