@@ -48,7 +48,7 @@ def ability_entry_model(
 
             
 abilitydex: dict[str, Ability] = {
-    "000": ability_entry_model("exemple", "always", "nothing"),
+    "000": ability_entry_model("example", "always", "nothing"),
     
     "001": ability_entry_model("Huge Power", "always", "x2 atk"),
     "002": ability_entry_model("Canalize", "always", "x2 sp_atk"),

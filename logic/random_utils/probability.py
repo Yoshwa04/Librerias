@@ -1,4 +1,5 @@
-from random import choice, choices, randint, random, seed
+from random import choice, choices, randint, seed
+from random_number import randunit
 
 
 def chance(probability: float) -> bool:
@@ -18,7 +19,7 @@ def chance(probability: float) -> bool:
     
     if not 0 <= probability <= 1:
         raise ValueError("Probability must be between 0 and 1")
-    return random() < probability
+    return randunit() < probability
 
 def increasing_chance(attempt: int, base: float = 0.1, cap: float = 1.0) -> bool:
     """

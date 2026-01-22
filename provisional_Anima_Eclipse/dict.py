@@ -26,6 +26,22 @@ formula_dict: dict[str, str] = {
 '''A bunch of formulas'''
 
 
+arcana_mod_dict = {
+    0: 1,
+    1: 1.1,
+    2: 1.2,
+    3: 1.3,
+    4: 1.4,
+    5: 1.5,
+    6: 1.6,
+    7: 1.7,
+    8: 1.8,
+    9: 1.9,
+    10: 2,
+}
+'''The dictionary to know the multiplier when recieving xp depending on the level of confident of that arcana'''
+
+
 stat_inc_dec_dict: dict[int, float] = {
     -6: 2/8,
     -5: 2/7,

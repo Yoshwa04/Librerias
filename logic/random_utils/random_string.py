@@ -68,5 +68,3 @@ def random_dni() -> str:
 
     return numero_str + letra
 
-
-print(random_dni())

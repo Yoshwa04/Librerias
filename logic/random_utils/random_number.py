@@ -8,10 +8,10 @@ def randunit() -> float:
 
 def randfloat(a: float, b: float) -> float:
     """
-    Returns a uniformly distributed random float between a and b.
+    Returns a uniformly distributed random float between a and b (inclusive).
     """
     
-    return a + (b - a) * random()
+    return a + (b - a) * randunit()
 
 
 def randrange_float(start: float, stop: float, step: float) -> float:
