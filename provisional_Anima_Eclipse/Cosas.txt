@@ -157,6 +157,8 @@ Básicamente el combate es Pokemon y fuera de el es un Persona
 
 
 
+Tengo que tener hecho: 1 anima, el pj, otro pj o como mucho 2, y el terreno (hierba, tierra, cemento. los sprites del mundo tal vez los puedo encontrar todos ya hechos) 
+PARA QUE? -> Para tenerlo de base, asi puedo probarlo, no debo empezar a hacer 100 animas, 30 pj etc antes de tener el juego funcional, cuando tenga eso que he dicho, puedo probar que las cosas funcionan: el movimiento, los combates, los menus, que se suba de experiencia y nivel, y esas cosas. No necesito 2 modelos de animas para pelear con 2 distintas, simplemente le asigno el mismo modelo a todas y ya esta, tendran sus datos diferentes.
 
 ====================================================================================
 

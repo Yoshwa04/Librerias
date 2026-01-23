@@ -10,7 +10,7 @@ from animadex import animadex
 from constants import INCREASE, DECREASE, MAX_LVL, MAX_STAT_INCREASE_DECREASE
 from dict import  formula_dict
 from nature import Nature, nature_dict
-from status import Status1, Status2
+from status import *
 from type import TypeA, TypeB
 from technique import Technique
 
@@ -21,7 +21,7 @@ class Anima:
         self.animadex = nAnimadex
         
         self.lvl = random.randint(min_lvl, max_lvl)
-        self.status1, self.status2 = Status1.GOOD, Status2.GOOD
+        self.alive_status = AliveStatus.ALIVE; self.element_status = ElementStatus.NOTHING; self.behave_status = BehaveStatus.NOTHING; self.special_status = SpecialStatus.NOTHING; 
         self.name = animadex[self.animadex]["name"]
         
         
@@ -180,12 +180,14 @@ class Anima:
         
     def cure_anima(self):
         self.hp_now = self.hp_max
-        self.status1 = Status1.GOOD
-        self.status2 = Status2.GOOD
+        self.alive_status = AliveStatus.ALIVE
+        self.element_status = ElementStatus.NOTHING
+        self.behave_status = BehaveStatus.NOTHING
+        self.special_status = SpecialStatus.NOTHING
 
 
     def reset_status(self): # Para cuando termina el turno
-        self.status1 = Status1.GOOD if self.status1 == Status1.PROTECTED else self.status1
+        self.special_status = SpecialStatus.NOTHING if self.special_status == SpecialStatus.PROTECTED else self.special_status
 
     def reset_stats_inc_dec(self): # Para cuando salen de combate y cuando termina el combate
         for stat in self.stats_inc_dec:

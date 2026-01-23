@@ -10,6 +10,7 @@ from type import effectiveness_chart
 
 # PROVISIONAL
 
+# el lvl si es el del que has debilitado lo tengo que poner que se pase por parametro.
 def calc_exp(player: Player, anima: Anima, combat_type: float) -> int:
     for confident in player.confidents:
         arcana_lvl = confident.lvl if anima.arcana == confident.arcana else arcana_lvl = 0
