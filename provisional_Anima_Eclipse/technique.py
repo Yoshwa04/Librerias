@@ -9,13 +9,6 @@ from anima import Anima
 from secondary_effect import SecondaryEffect
 from type import TypeA, TypeB
 
-from logic.math import solve_equation, give_just_one_solution
-from logic.generate.boolean import fifty_fifty
-
-from random import randint
-from dict import formula_dict
-from type import effectiveness_chart
-from status import Status1, Status2
 
 _techdex_index = count(0)
 
