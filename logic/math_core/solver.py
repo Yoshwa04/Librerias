@@ -7,7 +7,7 @@ def solve_equation(*eq_given : str) -> Union[List[Dict[str, Any]], str]:
     """This method solves the given equation/s with the most exactitude possible. When theres no enough equations for the existing incognites in that equations it just reduces the length at its maximum. If no incognite given but only the operation, it will assign automatically it starting with x, y, z then a, b, c.... then x2, y2, z2...
 
     Returns:
-          Union[List[Dict[str, Any]], str]: A list of solution dictionaries or an error message.
+          Union[List[Dict[str, Any]], str]: A list of solution dictionaries or an error message. 
     """
     
     try:
