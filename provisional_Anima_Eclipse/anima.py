@@ -54,8 +54,9 @@ class Anima:
             "spe_inc_dec": 0,
             "sp_spe_inc_dec": 0,
             "acc_inc_dec": 0,
-            "eva_inc_dec": 0
+            "eva_inc_dec": 0,
         }
+        self.crit_index = 0
         if self.ability["when"] == "always":
             pass # Aqui va el metodo de la habilidad en cuestion???
         
@@ -163,12 +164,17 @@ class Anima:
         self.exp_next_lvl = -1 if self.lvl >= MAX_LVL else int(give_just_one_solution(solve_equation(formula_dict["growth"][self.growth], f"lvl = {self.lvl + 1}"), "growth")) - int(give_just_one_solution(solve_equation(formula_dict["growth"][self.growth], f"lvl = {self.lvl}"), "growth"))
     
     def lvl_up(self):
-        if self.exp >= self.exp_next_lvl and self.exp_next_lvl != -1:
-            self.lvl += 1
-            self.exp -= self.exp_next_lvl # La resta es asi porque aún no se ha calculado la exp del sig lvl.
+        self.lvl += 1
+        self.exp -= self.exp_next_lvl # La resta es asi porque aún no se ha calculado la exp del sig lvl.
             
-            self.calculate_stats(False)
-    
+        self.calculate_stats(False)
+            
+    def add_exp(self, exp: int):
+        self.exp += exp
+        
+        if self.exp >= self.exp_next_lvl and self.exp_next_lvl != -1:
+            self.lvl_up()
+        
     def recieve_damage(self, damage: int):
         self.hp_now -= damage 
         

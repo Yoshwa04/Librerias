@@ -19,8 +19,8 @@ formula_dict: dict[str, str] = {
     "exp_given": "exp_given = (exp_base_given*lvl/participants/5) * ((2*lvl+10)**(5/2)) / ((lvl+ally_lvl+10)**(5/2)) + 1) * combat_type * object_mod * arcana_mod", 
                  # combat_type: si es wild 1 si no 1.5
     "growth": growth_dict,
-    "hit_chance": "hit_chance = move_accuracy * (attacker_accuracy/defender_evasion)", 
-                  # Este número sera el que se use cuando se verifique en combate, con uno random del 1 al 100, si es mayor o igual a ese random entonces le da
+    "hit_chance": "hit_chance = move_accuracy * (attacker_accuracy/defender_evasion) / 100", 
+                  # Este número sera el que se use cuando se verifique en combate, con uno random del 0 al 1, si es mayor o igual a ese random entonces le da
     
 }
 '''A bunch of formulas'''
@@ -60,12 +60,12 @@ stat_inc_dec_dict: dict[int, float] = {
 '''A dictionary that contains the min and max increases/decreases a regular stat can have (atk, sp atk, def, sp def, spe)'''
 
 critical_index_dict: dict[int, float] = {   
-    0: 6.25,
-    1: 12.5,
-    2: 25,
-    3: 33.3,
-    4: 50,
-    5: 75,
-    6: 100
+    0: 6.25/100,
+    1: 12.5/100,
+    2: 25/100,
+    3: 33.3/100,
+    4: 50/100,
+    5: 75/100,
+    6: 100/100
 }
 '''A dictionary that contains the critical hit chance percentages based on the index'''

@@ -49,7 +49,8 @@ class TypeB(Enum):
     COMMUNIS = "Communis"
     '''Comoun'''
     
-    
+
+# Tipo de la tecnica --> a los tipos a los que pega esa tecnica    
 effectiveness_chart: dict[TypeA | TypeB, DefaultDict[TypeA | TypeB, float]] = defaultdict(
     lambda: defaultdict(lambda: 1), # Por defecto 1 si el tipo pasado no esta dentro -> Para los 2 tipos neutros
     {
