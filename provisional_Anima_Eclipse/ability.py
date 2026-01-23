@@ -17,7 +17,7 @@ class Ability():
         "start_of_turn", "end_of_turn",
         "taking_damage", "dealing_damage",
         "try to run/change", "foe tries to change",
-        "with_status",
+        "taking_status", "dealing_status", "with_status",
         "stat_fall",
         "always",
         "foe_ability_affects_you"
@@ -33,7 +33,7 @@ def ability_entry_model(
         "start_of_turn", "end_of_turn",
         "taking_damage", "dealing_damage",
         "try to run/change", "foe tries to change",
-        "with_status",
+        "taking_status", "dealing_status", "with_status",
         "stat_fall",
         "always",
         "foe_ability_affects_you"
@@ -80,7 +80,7 @@ abilitydex: dict[str, Ability] = {
     "027": ability_entry_model("Shield Dust", "taking_damage", "Prevents status atacks"),
     "028": ability_entry_model("Rough Skin", "taking_damage", "deals damage when taking physical damage"),
     "029": ability_entry_model("Effect Spore", "taking_damage", "paralizes, sleeps or poisons when taking damage (33%)"),
-    "030": ability_entry_model("Synchronize", "always", "passes the status change to the foe that gave it"),
+    "030": ability_entry_model("Synchronize", "taking_status", "passes the status change to the foe that gave it"),
     "031": ability_entry_model("Serene Grace (DICHA)", "dealing_damage", "augments the secondary effect chance"),
     "032": ability_entry_model("Trace", "entering_battle", "copies the foe ability"), 
     "033": ability_entry_model("Toxic Point", "taking_damage", "poisons when taking physical damage"),

@@ -172,3 +172,11 @@ Ademas el estilo seria 2.5d o algo asi, en full 2d como sera esto seria literalm
 La musica deberia tener un estilo definido y no ser tanto como Persona que, si que tiene un estilo pero para cada titulo es diferente al mismo timepo (El 5 es basicamente jazz, el 4 es mas pop, el 3 era soft rock), el estilo para Anima Eclipse no se del todo cual me gustaria que fuese. De hecho he dicho que fuese identificativo por si hubiese un 2, 3... Pero tampoco lo se jaja, tal vez un estilo radicalmente diferente para cada uno dependiendo de la ambientación estaría mas GOD, wk.
 
 Es mucho mas complicado en todos los aspectos, pero joder que guapo estaria eh. Diseñar las diferentes mecanicas de combate de cada pj seria una odisea, y los graficos ni te cuento en 2.5d y retratos asi dibujados/anime, las animaciones... en fin, pero me atrae muchisimo mas ese Anima Ecplipse que el que voy a hacer. Llamemosle a este: "Prototype: Anima Eclipse 0.5"
+
+
+En El true Anima Eclipse: tan solo habria 1 tipo (el A, Essentia y tal), y cada anima tendria afinidades diferentes a los demas tipos (haciendo que asi uno que es debil a fuego no sea debil a volador por ejemplo, y otro que sea debil a fuego y agua al mismo tiempo.... ya que no depende de una tabla de tipos sino de la propia criatura en si que es fuerte o debil a cada uno).
+
+Ademas no solo estaria Neutro, Fuerte y Debil a cada tipo, tambien estaria el NULL y el ABS (como en Persona basicamente).
+
+Los tiposB no serian los mismos -> Se mantienen: Fuego, Electrico, Viento, Hielo, Psiquico, Siniestro, Luz, Tierra, Planta y veneno - Se eliminarian: Fantasma, Insecto, Roca y Metal - Se añadiría 1 solo: tipo Sonido - El tipo comun pasaria a ser TODOPODEROSO / ETER ya le buscaria algun nombre, este seria basicamente el normal, el que nadie puede ser fuerte ni negar ni absorber.
+
