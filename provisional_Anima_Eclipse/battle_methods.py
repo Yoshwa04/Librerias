@@ -41,7 +41,7 @@ def calc_damage(anima_atk: Anima, anima_def: Anima, tech: Technique, critical: b
     
     crit = 1.5 if critical else 1
     
-    return int(give_just_one_solution(solve_equation(formula_dict["damage"], f"stab = {stab}", f"eff = {eff}", f"lvl = {anima_atk.lvl}", f"atk = {atk}", f"power = {tech.power}", f"def = {def_}"), "damage")) * crit
+    return int(give_just_one_solution(solve_equation(formula_dict["damage"], f"stab = {stab}", f"eff = {eff}", f"lvl = {anima_atk.lvl}", f"atk = {atk}", f"power = {tech.power}", f"def = {def_}"), "damage") * crit)
 
 
 def _calc_stab(anima: Anima, tech: Technique) -> float:
