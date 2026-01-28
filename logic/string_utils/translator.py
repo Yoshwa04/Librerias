@@ -1,5 +1,7 @@
 import json
 
+from file_utils.json_utils import load_json
+
 class Translator():
     """
     This class serves to translate anything in a generic way using a json file.
@@ -19,15 +21,7 @@ class Translator():
         """
         
         self.language = language
-        self.str = self._load_json(json_file)
-        
-    
-    def _load_json(self, json_file: str) -> dict:
-        try:
-            with open(f"traduction_files\\{json_file}", "r", encoding="utf-8") as file:
-                return json.load(file)
-        except(FileNotFoundError, json.JSONDecodeError) as ex:
-            raise ValueError(f"Error loading the file: {ex}")
+        self.str = load_json(json_file)
     
     
     def translate(self, key: str) -> str:

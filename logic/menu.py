@@ -2,7 +2,7 @@ import os
 import sys
 from typing import List
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from translator import Translator
+from string_utils.translator import Translator
 
 
 class Menu:
