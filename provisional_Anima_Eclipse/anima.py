@@ -47,14 +47,13 @@ class Anima:
         self.calculate_stats()
         self.hp_now = self.hp_max
         self.stats_inc_dec = {
-            "atk_inc_dec": 0,
-            "sp_atk_inc_dec": 0,
-            "def_inc_dec": 0,
-            "sp_def_inc_dec": 0,
-            "spe_inc_dec": 0,
-            "sp_spe_inc_dec": 0,
-            "acc_inc_dec": 0,
-            "eva_inc_dec": 0,
+            "atk": 0,
+            "sp_atk": 0,
+            "def": 0,
+            "sp_def": 0,
+            "spe": 0,
+            "acc": 0,
+            "eva": 0,
         }
         self.crit_index = 0
         if self.ability["when"] == "always":

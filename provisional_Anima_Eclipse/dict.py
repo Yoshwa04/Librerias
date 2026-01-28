@@ -1,7 +1,9 @@
 import random
 import os, sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from status import ElementStatus
 
 growth_dict: dict[str, str] = {
     "fast": "growth = 4 * lvl**3 / 5",
