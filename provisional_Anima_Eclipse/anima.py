@@ -36,7 +36,7 @@ class Anima:
         self.growth = animadex[self.animadex]["growth"]
         self.exp_base_given = animadex[self.animadex]["exp_base_given"]
         self.catch_rate = animadex[self.animadex]["catch_rate"]
-        self.evolves = animadex[self.animadex]["evolves"]
+        self.evolves = animadex[self.animadex]["evolves"] ######
         self.base_stats = animadex[nAnimadex]["base_stats"]
         
         self.object = object
@@ -167,6 +167,43 @@ class Anima:
         self.exp -= self.exp_next_lvl # La resta es asi porque aún no se ha calculado la exp del sig lvl.
             
         self.calculate_stats()
+        
+        possible = self.can_evolve()
+        if possible:
+            return possible
+     
+    def can_evolve(self, used_item: str | None = None) -> list[str]:
+        evolutions = animadex[self.animadex]["evolves"]
+        possible = []
+        
+        for evo in evolutions:
+            if evo["method"] == "level" and self.lvl >= evo["value"]:
+                possible.append(evo["to"])
+            elif evo["method"] == "item" and used_item == evo["value"]:
+                possible.append(evo["to"])
+                
+        return possible
+    
+    def evolve(self, evolution_id: str):
+        data = animadex[evolution_id]
+        
+        self.animadex = evolution_id
+        self.name = data["name"]
+        self.type_a = data["types"][0]
+        self.type_b1 = data["types"][1]
+        self.type_b2 = data["types"][2] if len(data["types"]) > 2 else None
+        self.arcana = data["arcana"]
+        self.growth = data["growth"]
+        self.exp_base_given = data["exp_base_given"]
+        self.catch_rate = data["catch_rate"]
+        self.evolves = data["evolves"]
+        self.base_stats = data["base_stats"]
+        self.technique_learning = data["technique_learning"]
+        self.assisted_techniques = data["technique_capsules"]
+
+        self._random_ability()
+        self.calculate_stats()
+        self.hp_now = self.hp_max
             
     def add_exp(self, exp: int):
         self.exp += exp

@@ -23,7 +23,7 @@ class Animadex():
     growth: Literal["fast", "normal", "slow", "parabolic"] 
     exp_base_given: int
     catch_rate: int
-    evolves: str | dict[str, str]
+    evolves: list[dict]
     base_stats: dict[str, int]
     technique_learning: dict[int, str]
     technique_capsules: tuple[str]
@@ -55,7 +55,7 @@ class Animadex():
         growth: Literal["fast", "normal", "slow", "parabolic"], 
         exp_base_given: int, 
         catch_rate: int, 
-        evolves: str | dict[str, str],  # formato: "lvl:id"/"No"  |  {metodo : id, metodo : id ...} 
+        evolves: list[dict],
         base_stats: dict[str, int], 
         technique_learning: dict[int, str], 
         technique_capsules: tuple[str]
@@ -80,360 +80,204 @@ class Animadex():
 
 animadex: dict[str, Animadex] = {
     # Ejemplo usando el método
-    "000": Animadex._animadex_entry_model(
-        "ejemplo", (TypeA.ESSENTIA, TypeB.AQUA), Animadex._animadex_abilities_model("001", "001", "001"), Arcana.ABYSSUS, "fast", 1, 255, "no", 
+    Animadex._animadex_entry_model(
+        "ejemplo", (TypeA.ESSENTIA, TypeB.AQUA), Animadex._animadex_abilities_model("001", "001", "001"), Arcana.ABYSSUS, "fast", 1, 255,
+        [], 
         Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
     ),
     
     Animadex._animadex_entry_model(
-      "starter", (TypeA.ESSENTIA, TypeB.COMMUNIS), Animadex._animadex_abilities_model("", "",""), Arcana.TERRA, "parabolic", 64, 45, "20:002", 
+      "starter", (TypeA.ESSENTIA, TypeB.COMMUNIS), Animadex._animadex_abilities_model("", "",""), Arcana.TERRA, "parabolic", 64, 45,
+      [{"method": "level", "value": "20", "to": "002"}], 
       Animadex._animadex_base_stats_model(hp=44, atk=40, sp_atk=58, _def=62, sp_def=61, spe=49), {}, ()
     ),
-    
-    "002": { 
-        "name": "evolved_starter",
-        "types": [TypeA.ESSENTIA, TypeB.LUX, TypeB.IGNIS],
-        "abilitys": "",
-        "arcana": Arcana.TERRA,
-        "growth": "parabolic",
-        "exp_base_given": 141,
-        "catch_rate" : 45,
-        "evolves": {"lvl": 40, "to": "003"},
-        "base_stats": Animadex._animadex_base_stats_model(58, 54, 72, 79, 77, 56),
-        "technique_learning": {
-        },
-        "assisted_techniques": {
-            "001" : techdex["000"],
-        },
-    },
-    "003": { 
-        "name": "final_starter",
-        "types": [TypeA.ESSENTIA, TypeB.LUX, TypeB.IGNIS],
-        "abilitys": "",
-        "arcana": Arcana.TERRA,
-        "growth": "fast",
-        "exp_base_given": 208,
-        "catch_rate": 45,
-        "evolves": None,
-        "base_stats": Animadex._animadex_base_stats_model(80, 68, 90, 121, 90, 70),
-        "technique_learning": {
-            
-        },
-        "assisted_techniques": {
-            "001" : techdex["000"],
-        },
-    },
-    "004": {
-        "name": "rival_starter",
-        "types": [TypeA.FORMA, TypeB.COMMUNIS],
-        "abilitys": "",
-        "arcana": Arcana.ABYSSUS,
-        "growth": "parabolic",
-        "exp_base_given": 64,
-        "catch_rate": 45,
-        "evolves": {"lvl" : 20, "to": "005"},
-        "base_stats": Animadex._animadex_base_stats_model(hp=49, atk=55, sp_atk=44, _def=60, sp_def=60, spe=53),
-        "technique_learning": {
-        },
-        "assisted_techniques": {
-            "001" : techdex["000"],
-        },
-    },
-    "005": { 
-        "name": "evolved_rival_starter",
-        "types": [TypeA.FORMA, TypeB.SINISTER],
-        "abilitys": "",
-        "arcana": Arcana.ABYSSUS,
-        "growth": "parabolic",
-        "exp_base_given": 141,
-        "catch_rate": 45,
-        "evolves": {"lvl": 40, "to": "006"},
-        "base_stats": Animadex._animadex_base_stats_model(hp=61, atk=70, sp_atk=59, _def=81, sp_def=74, spe=61),
-        "technique_learning": {
-        },
-        "assisted_techniques": {
-            "001" : techdex["000"],
-        },
-    },
-    "006": { 
-        "name": "final_rival_starter",
-        "types": [TypeA.FORMA, TypeB.SINISTER, TypeB.AQUA],
-        "abilitys": "",
-        "arcana": Arcana.ABYSSUS,
-        "growth": "parabolic",
-        "exp_base_given": 208,
-        "catch_rate": 45,
-        "evolves": None,
-        "base_stats": Animadex._animadex_base_stats_model(hp=90, atk=92, sp_atk=61, _def=100, sp_def=113, spe=72),
-        "technique_learning": {
-        },
-        "assisted_techniques": {
-            "001" : techdex["000"],
-        },
-    },
-    "007": {
-        "name": "antagonist_starter",
-        "types": [TypeA.VOLUNTAS, TypeB.COMMUNIS],
-        "abilitys": "",
-        "arcana": Arcana.HALOS,
-        "growth": "parabolic",
-        "exp_base_given": 64,
-        "evolves": {"lvl": 20, "to": "008"},
-        "base_stats": Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), # modificar
-        "technique_learning": {
-        },
-        "assisted_techniques": {
-            "001" : techdex["000"],
-        },
-    },
-    "008": {
-        "name": "antagonist_evolved_starter",
-        "types": [TypeA.VOLUNTAS, TypeB.VENENUM],
-        "abilities": "",
-        "arcana": Arcana.HALOS,
-        "growth": "parabolic",
-        "exp_base_given": 141,
-        "evolves": {"lvl": 40, "to": "009"},
-        "base_stats": Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
-        "technique_learning": {
-        },
-        "assisted_techniques": {
-        },
-    },
-    "009": {
-        "name": "antagonist_final_starter",
-        "types": [TypeA.VOLUNTAS, TypeB.VENENUM, TypeB.PLANTA],
-        "abilities": "",
-        "arcana": Arcana.HALOS,
-        "growth": "parabolic",
-        "exp_base_given": 208,
-        "evolves": None,
-        "base_stats": Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
-        "technique_learning": {
-        },
-        "assisted_techniques": {            
-        },
-    },
-    "010": {
-      "name": "bird1",
-      "types": [TypeA.NEUTRO, TypeB.VENTUS],
-      "abilities": "",
-      "arcana": Arcana.AURORA,
-      "growth": "parabolic",
-      "exp_base_given": 0,
-      "catch_rate": 255,
-      "evolves": {"lvl": 18, "to":"011"},
-      "base_stats": Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
-      "technique_learning": {
-          
-      },
-      "assisted_techniques": {
-          
-      } 
-    },
-    "011": {
-      "name": "bird1.2",
-      "types": [TypeA.NEUTRO, TypeB.VENTUS],
-      "abilities": "",
-      "arcana": Arcana.AURORA,
-      "growth": "parabolic",
-      "exp_base_given": 0,
-      "catch_rate": 255,
-      "evolves": {"lvl": 34, "to": "012"},
-      "base_stats": Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
-      "technique_learning": {
-          
-      },
-      "assisted_techniques": {
-          
-      } 
-    },
-    "012": {
-      "name": "bird1.3",
-      "types": [TypeA.NEUTRO, TypeB.VENTUS, TypeB.GLACIES],
-      "abilities": "",
-      "arcana": Arcana.AURORA,
-      "growth": "parabolic",
-      "exp_base_given": 0,
-      "catch_rate": 255,
-      "evolves": "011",
-      "base_stats": Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
-      "technique_learning": {
-          
-      },
-      "assisted_techniques": {
-          
-      } 
-    },
-    "013": {
-        "name": "bug1",
-        "types": [TypeA.FORMA, TypeB.INSECTUM, TypeB.TERRA],
-        "abilities": "",
-        "arcana": Arcana.TERRA,
-        "growth": "fast",
-        "exp_base_given": 0,
-        "catch_rate": 255,
-        "evolves": "014",
-        "base_stats": Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
-        "technique_learning": {
-            
-        },
-        "assisted_techniques": {
-            
-        }
-    },
-    "014": {
-        "name": "bug1.2",
-        "types": [TypeA.FORMA, TypeB.INSECTUM, TypeB.TERRA],
-        "abilities": "",
-        "arcana": Arcana.TERRA,
-        "growth": "fast",
-        "exp_base_given": 0,
-        "catch_rate": 255,
-        "evolves": ["015", "016"],
-        "base_stats": Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
-        "technique_learning": {
-            
-        },
-        "assisted_techniques": {
-            
-        }
-    },
-    "015": {
-        "name": "bug1.3.1",
-        "types": [TypeA.FORMA, TypeB.INSECTUM, TypeB.TERRA],
-        "abilities": "",
-        "arcana": Arcana.TERRA,
-        "growth": "fast",
-        "exp_base_given": 0,
-        "catch_rate": 255,
-        "evolves": None,
-        "base_stats": Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
-        "technique_learning": {
-            
-        },
-        "assisted_techniques": {
-            
-        }
-    },
-    "016": {
-        "name": "bug1.3.2",
-        "types": [TypeA.FORMA, TypeB.INSECTUM, TypeB.RUPES],
-        "abilities": "",
-        "arcana": Arcana.TERRA,
-        "growth": "fast",
-        "exp_base_given": 0,
-        "catch_rate": 255,
-        "evolves": None,
-        "base_stats": Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
-        "technique_learning": {
-            
-        },
-        "assisted_techniques": {
-            
-        }
-    },
-    "017": {
-        "name": "bug2",
-        "types": [TypeA.VOLUNTAS, TypeB.INSECTUM],
-        "abilities": "",
-        "arcana": Arcana.ECLIPSIS,
-        "growth": "normal",
-        "exp_base_given": 0,
-        "catch_rate": 255,
-        "evolves": "018",
-        "base_stats": Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
-        "technique_learning": {
-            
-        },
-        "assisted_techniques": {
-            
-        }
-    },
-    "018": {
-        "name": "bug2.2",
-        "types": [TypeA.VOLUNTAS, TypeB.INSECTUM, TypeB.PLANTA],
-        "abilities": "",
-        "arcana": Arcana.ECLIPSIS,
-        "growth": "normal",
-        "exp_base_given": 0,
-        "catch_rate": 255,
-        "evolves": None,
-        "base_stats": Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1),
-        "technique_learning": {
-            
-        },
-        "assisted_techniques": {
-            
-        }
-    },
-
-    "019": Animadex._animadex_entry_model(
-      "normal1", (TypeA.NEUTRO, TypeB.COMMUNIS), Animadex._animadex_abilities_model("", "", ""), Arcana.AURORA, "normal", 00, 230, "18:020",
-      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    Animadex._animadex_entry_model(
+      "evolved_starter", (TypeA.ESSENTIA, TypeB.IGNIS), Animadex._animadex_abilities_model("", "",""), Arcana.TERRA, "parabolic", 141, 45,
+      [{"method": "level", "value": "40", "to": "003"}], 
+      Animadex._animadex_base_stats_model(hp=58, atk=54, sp_atk=72, _def=79, sp_def=77, spe=56), {}, ()
     ),
-    "020": Animadex._animadex_entry_model(
-      "normal1.2", (TypeA.NEUTRO, TypeB.COMMUNIS), Animadex._animadex_abilities_model("", "", ""), Arcana.AURORA, "normal", 00, 230, None,
-      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    Animadex._animadex_entry_model( ##### HAY QUE DARLE UN TIPO MAS 
+      "final_starter", (TypeA.ESSENTIA, TypeB.IGNIS), Animadex._animadex_abilities_model("", "",""), Arcana.TERRA, "parabolic", 208, 45,
+      [], 
+      Animadex._animadex_base_stats_model(hp=80, atk=68, sp_atk=90, _def=121, sp_def=90, spe=70), {}, ()
     ),
-    
-    "021": Animadex._animadex_entry_model(
-      "electric1", (TypeA.VOLUNTAS, TypeB.ELECTRITAS), Animadex._animadex_abilities_model("", "", ""), Arcana.COMETA, "normal", 00, 200, "20:022",
-      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    Animadex._animadex_entry_model(
+      "rival_starter", (TypeA.FORMA, TypeB.COMMUNIS), Animadex._animadex_abilities_model("", "",""), Arcana.ABYSSUS, "parabolic", 64, 45,
+      [{"method": "level", "value": "20", "to": "005"}], 
+      Animadex._animadex_base_stats_model(hp=49, atk=55, sp_atk=44, _def=60, sp_def=60, spe=53), {}, ()
     ),
-    "022": Animadex._animadex_entry_model(
-      "electric1.2", (TypeA.VOLUNTAS, TypeB.ELECTRITAS), Animadex._animadex_abilities_model("", "", ""), Arcana.COMETA, "normal", 00, 200, "28:023",
-      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    Animadex._animadex_entry_model(
+      "evolved_rival_starter", (TypeA.FORMA, TypeB.SINISTER), Animadex._animadex_abilities_model("", "",""), Arcana.ABYSSUS, "parabolic", 141, 45,
+      [{"method": "level", "value": "40", "to": "006"}], 
+      Animadex._animadex_base_stats_model(hp=61, atk=70, sp_atk=59, _def=81, sp_def=74, spe=61), {}, ()
     ),
-    "023": Animadex._animadex_entry_model(
-      "electric1.3", (TypeA.VOLUNTAS, TypeB.ELECTRITAS), Animadex._animadex_abilities_model("", "", ""), Arcana.COMETA, "normal", 00, 200, None,
-      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    Animadex._animadex_entry_model(
+      "final_rival_starter", (TypeA.FORMA, TypeB.SINISTER, TypeB.AQUA), Animadex._animadex_abilities_model("", "",""), Arcana.ABYSSUS, "parabolic", 208, 45,
+      [], 
+      Animadex._animadex_base_stats_model(hp=90, atk=92, sp_atk=61, _def=100, sp_def=113, spe=72), {}, ()
     ),
-    
-    "024": Animadex._animadex_entry_model(
-      "Ghost", (TypeA.ESSENTIA, TypeB.PHANTASMA, TypeB.TERRA), Animadex._animadex_abilities_model("", "", ""), Arcana.LUNA, "normal", 00, 190, "30:025",
-      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    Animadex._animadex_entry_model(
+      "antagonist_starter", (TypeA.VOLUNTAS, TypeB.COMMUNIS), Animadex._animadex_abilities_model("", "",""), Arcana.HALOS, "parabolic", 64, 45,
+      [{"method": "level", "value": "20", "to": "008"}], 
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {}, ()
     ),
-    "025": Animadex._animadex_entry_model(
-      "Ghost", (TypeA.ESSENTIA, TypeB.PHANTASMA, TypeB.TERRA), Animadex._animadex_abilities_model("", "", ""), Arcana.LUNA, "normal", 00, 190, None,
-      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    Animadex._animadex_entry_model(
+      "evolved_antagonist_starter", (TypeA.VOLUNTAS, TypeB.VENENUM), Animadex._animadex_abilities_model("", "",""), Arcana.HALOS, "parabolic", 141, 45,
+      [{"method": "level", "value": "40", "to": "009"}], 
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {}, ()
     ),
-    
-    "026": Animadex._animadex_entry_model(
+    Animadex._animadex_entry_model(
+      "final_antagonist_starter", (TypeA.VOLUNTAS, TypeB.VENENUM, TypeB.PLANTA), Animadex._animadex_abilities_model("", "",""), Arcana.HALOS, "parabolic", 208, 45,
+      [], 
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {}, ()
+    ),
+    Animadex._animadex_entry_model(
+      "bird1", (TypeA.NEUTRO, TypeB.VENTUS), Animadex._animadex_abilities_model("", "",""), Arcana.AURORA, "parabolic", 1, 200,
+      [{"method": "level", "value": "18", "to": "011"}], 
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {}, ()
+    ),
+    Animadex._animadex_entry_model(
+      "bird1.2", (TypeA.NEUTRO, TypeB.VENTUS), Animadex._animadex_abilities_model("", "",""), Arcana.AURORA, "parabolic", 1, 200,
+      [{"method": "level", "value": "34", "to": "012"}], 
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {}, ()
+    ),
+    Animadex._animadex_entry_model(
+      "bird1.3", (TypeA.NEUTRO, TypeB.VENTUS, TypeB.GLACIES), Animadex._animadex_abilities_model("", "",""), Arcana.AURORA, "parabolic", 1, 200,
+      [], 
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {}, ()
+    ),
+    Animadex._animadex_entry_model(
+      "bug1", (TypeA.FORMA, TypeB.INSECTUM, TypeB.TERRA), Animadex._animadex_abilities_model("", "",""), Arcana.TERRA, "fast", 1, 255,
+      [{"method": "level", "value": "12", "to": "014"}], 
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {}, ()
+    ),
+    Animadex._animadex_entry_model(
+      "bug1.2", (TypeA.FORMA, TypeB.INSECTUM, TypeB.TERRA), Animadex._animadex_abilities_model("", "",""), Arcana.TERRA, "fast", 1, 255,
+      [
+          {"method": "level", "value": "17", "to": "015"},
+          {"method": "item", "value": "piedra_dura", "to": "016"}
+      ],
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {}, ()
+    ),
+    Animadex._animadex_entry_model(
+      "bug1.3.1", (TypeA.FORMA, TypeB.INSECTUM, TypeB.TERRA), Animadex._animadex_abilities_model("", "",""), Arcana.TERRA, "fast", 1, 255,
+      [], 
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {}, ()
+    ),
+    Animadex._animadex_entry_model(
+      "bug1.3.2", (TypeA.FORMA, TypeB.INSECTUM, TypeB.RUPES), Animadex._animadex_abilities_model("", "",""), Arcana.COMETA, "fast", 1, 255,
+      [], 
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {}, ()
+    ),
+    Animadex._animadex_entry_model(
+      "bug2", (TypeA.FORMA, TypeB.INSECTUM), Animadex._animadex_abilities_model("", "",""), Arcana.ECLIPSIS, "normal", 1, 255,
+      [{"method": "level", "value": "12", "to": "018"}], 
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {}, ()
+    ),
+    Animadex._animadex_entry_model(
+      "bug2.2", (TypeA.FORMA, TypeB.INSECTUM, TypeB.PLANTA), Animadex._animadex_abilities_model("", "",""), Arcana.ECLIPSIS, "normal", 1, 255,
+      [], 
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {}, ()
+    ),
+    Animadex._animadex_entry_model(
+      "normal1", (TypeA.NEUTRO, TypeB.COMMUNIS), Animadex._animadex_abilities_model("", "",""), Arcana.AURORA, "normal", 1, 230,
+      [{"method": "level", "value": "18", "to": "020"}], 
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {}, ()
+    ),
+    Animadex._animadex_entry_model(
+      "normal1.2", (TypeA.NEUTRO, TypeB.COMMUNIS), Animadex._animadex_abilities_model("", "",""), Arcana.AURORA, "normal", 1, 230,
+      [], 
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {}, ()
+    ),
+    Animadex._animadex_entry_model(
+      "pikachu1", (TypeA.VOLUNTAS, TypeB.ELECTRITAS), Animadex._animadex_abilities_model("", "",""), Arcana.COMETA, "normal", 1, 200,
+      [{"method": "level", "value": "20", "to": "022"}], 
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {}, ()
+    ),
+    Animadex._animadex_entry_model(
+      "pikachu2", (TypeA.VOLUNTAS, TypeB.ELECTRITAS), Animadex._animadex_abilities_model("", "",""), Arcana.COMETA, "normal", 1, 200,
+      [{"method": "item", "value": "piedra_trueno", "to": "023"}], 
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {}, ()
+    ),
+    Animadex._animadex_entry_model(
+      "pikachu3", (TypeA.VOLUNTAS, TypeB.ELECTRITAS), Animadex._animadex_abilities_model("", "",""), Arcana.COMETA, "normal", 1, 200,
+      [], 
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {}, ()
+    ),
+    Animadex._animadex_entry_model(
+      "ghost1", (TypeA.ESSENTIA, TypeB.PHANTASMA, TypeB.TERRA), Animadex._animadex_abilities_model("", "",""), Arcana.LUNA, "normal", 1, 190,
+      [{"method": "level", "value": "30", "to": "025"}], 
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {}, ()
+    ),
+    Animadex._animadex_entry_model(
+      "ghost1.2", (TypeA.ESSENTIA, TypeB.PHANTASMA, TypeB.TERRA), Animadex._animadex_abilities_model("", "",""), Arcana.LUNA, "normal", 1, 190,
+      [], 
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {}, ()
+    ),
+    Animadex._animadex_entry_model(
       "eevee", (TypeA.NEUTRO, TypeB.COMMUNIS), Animadex._animadex_abilities_model("", "", ""), Arcana.TERRA, "normal", 00, 150,
-      {"piedra_fuego": "027",
-       "piedra_hielo": "028",
-       "piedra_lunar": "029",
-       "piedra_dura": "030"},
+      [
+          {"method": "item", "value": "piedra_fuego", "to": "027"},
+          {"method": "item", "value": "piedra_hielo", "to": "028"},
+          {"method": "item", "value": "piedra_lunar", "to": "029"},
+          {"method": "item", "value": "piedra_dura", "to": "030"}
+      ],
       Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
     ),
-    "027": Animadex._animadex_entry_model(
-      "eeveeolution1", (TypeA.VOLUNTAS, TypeB.IGNIS), Animadex._animadex_abilities_model("", "", ""), Arcana.SOL, "normal", 00, 130, None,
+    Animadex._animadex_entry_model(
+      "eeveeolution1", (TypeA.VOLUNTAS, TypeB.IGNIS), Animadex._animadex_abilities_model("", "", ""), Arcana.SOL, "normal", 00, 130,
+      [],
       Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
     ),
-    "028": Animadex._animadex_entry_model(
-      "eeveeolution2", (TypeA.FORMA, TypeB.GLACIES), Animadex._animadex_abilities_model("", "", ""), Arcana.AURORA, "normal", 00, 130, None,
+    Animadex._animadex_entry_model(
+      "eeveeolution2", (TypeA.FORMA, TypeB.GLACIES), Animadex._animadex_abilities_model("", "", ""), Arcana.AURORA, "normal", 00, 130,
+      [],
       Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
     ),
-    "029": Animadex._animadex_entry_model(
-      "eeveeolution3", (TypeA.ESSENTIA, TypeB.SINISTER), Animadex._animadex_abilities_model("", "", ""), Arcana.LUNA, "normal", 00, 130, None,
+    Animadex._animadex_entry_model(
+      "eeveeolution3", (TypeA.ESSENTIA, TypeB.SINISTER), Animadex._animadex_abilities_model("", "", ""), Arcana.LUNA, "normal", 00, 130,
+      [],
       Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
     ),
-    "030": Animadex._animadex_entry_model(
-      "eeveeolution4", (TypeA.FORMA, TypeB.RUPES), Animadex._animadex_abilities_model("", "", ""), Arcana.COMETA, "normal", 00, 130, None,
+    Animadex._animadex_entry_model(
+      "eeveeolution4", (TypeA.FORMA, TypeB.RUPES), Animadex._animadex_abilities_model("", "", ""), Arcana.COMETA, "normal", 00, 130,
+      [],
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    ),
+    Animadex._animadex_entry_model(
+      "steel1", (TypeA.FLUXOR, TypeB.METALLUM), Animadex._animadex_abilities_model("", "", ""), Arcana.HALOS, "slow", 00, 90,
+      [{"method": "level", "value": "38", "to": "032"}],
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    ),
+    Animadex._animadex_entry_model(
+      "steel2", (TypeA.FLUXOR, TypeB.METALLUM, TypeB.PUGNA), Animadex._animadex_abilities_model("", "", ""), Arcana.HALOS, "slow", 00, 90,
+      [{"method": "level", "value": "46", "to": "033"}],
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    ),
+    Animadex._animadex_entry_model(
+      "steel3", (TypeA.FLUXOR, TypeB.METALLUM, TypeB.PUGNA), Animadex._animadex_abilities_model("", "", ""), Arcana.HALOS, "slow", 00, 90,
+      [],
       Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
     ),
     
-    "031": Animadex._animadex_entry_model(
-      "steel1", (TypeA.FLUXOR, TypeB.METALLUM), Animadex._animadex_abilities_model("", "", ""), Arcana.HALOS, "slow", 00, 90, "38:032",
+    
+    
+    
+    
+    
+    Animadex._animadex_entry_model(
+      "legendary1", (TypeA.ESSENTIA, TypeB.PSYCHICUS), Animadex._animadex_abilities_model("", "", ""), Arcana.ZENITH, "slow", 00, 3,
+      [],
       Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
     ),
-    "032": Animadex._animadex_entry_model(
-      "steel2", (TypeA.FLUXOR, TypeB.METALLUM, TypeB.PUGNA), Animadex._animadex_abilities_model("", "", ""), Arcana.HALOS, "slow", 00, 90, "44:033",
+    Animadex._animadex_entry_model(
+      "legendary2", (TypeA.FORMA, TypeB.PUGNA), Animadex._animadex_abilities_model("", "", ""), Arcana.UNDAE, "slow", 00, 3,
+      [],
       Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
     ),
-    "033": Animadex._animadex_entry_model(
-      "steel3", (TypeA.FLUXOR, TypeB.METALLUM, TypeB.PUGNA), Animadex._animadex_abilities_model("", "", ""), Arcana.HALOS, "slow", 00, 90, None,
+    Animadex._animadex_entry_model(
+      "legendary3", (TypeA.VOLUNTAS, TypeB.LUX), Animadex._animadex_abilities_model("", "", ""), Arcana.SOL, "slow", 00, 3,
+      [],
       Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
     ),
     

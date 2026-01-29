@@ -149,16 +149,24 @@ Las zonas... Ir desbloqueando a medida que se avance en la trama, AUNQUE, tecnic
 En estas, salen animas salvajes en la hierba: aun no se si dividir por zonas las propias zonas, en plan 1-1, 1-2, 1-3. Pero en cada zona/subzona habrá un grupo de animas y un porcentaje de aparicion, marcando que tan raro es que aparezca uno u otro, con u lvl minimo y maximo de aparicion.
 
 
+
 ------------------------------------------------
+
+
+Objetos: Algunos pueden ser usables, otros no, por tanto deben tener un atributo de usable. Lo que si que todos pueden ser equipados asi que no hace falta ese atributo, pero si un metodo para saber que efecto tienen si estan equipados en el anima (pueden no tener efecto al ser equipados, como una pocion por ejemplo que solo tiene uso real para curar (ser usado fuera de combate)),por tanto todos los objetos deben tener un metodo de effect_when_equiped o algo asi, que puede ser nada sin problema
+
+
+------------------------------------------------
+
 
 Decidido: Combate estilo full pokemon - De Persona las arcanas y los vínculos/confidentes, y stats sociales + acciones por el día/tarde/noche, Días límite para hacer estas acciones (repartir el tiempo de manera eficiente para subir a los confidentes disponibles, subir las stats sociales, e ir a las zonas/dungeons desbloqueadas para subir de nivel a las Animas y/o capturar de nuevas y hacer ciertas misiones secundarias, mayormente pseudo bosses que dan experiencia, items etc, etc) -
 
 Básicamente el combate es Pokemon y fuera de el es un Persona
 
 
-
 Tengo que tener hecho: 1 anima, el pj, otro pj o como mucho 2, y el terreno (hierba, tierra, cemento. los sprites del mundo tal vez los puedo encontrar todos ya hechos) 
 PARA QUE? -> Para tenerlo de base, asi puedo probarlo, no debo empezar a hacer 100 animas, 30 pj etc antes de tener el juego funcional, cuando tenga eso que he dicho, puedo probar que las cosas funcionan: el movimiento, los combates, los menus, que se suba de experiencia y nivel, y esas cosas. No necesito 2 modelos de animas para pelear con 2 distintas, simplemente le asigno el mismo modelo a todas y ya esta, tendran sus datos diferentes.
+
 
 ====================================================================================
 
