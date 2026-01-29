@@ -170,7 +170,7 @@ class Anima:
         
         possible = self.can_evolve()
         if possible:
-            return possible
+            return possible # Aqui luego fuera del combate supongo, hacer un evolve() para que evolucione
      
     def can_evolve(self, used_item: str | None = None) -> list[str]:
         evolutions = animadex[self.animadex]["evolves"]
