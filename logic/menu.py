@@ -16,7 +16,7 @@ class Menu:
         """This class generates the logic of a menu given methods. Supports submenus.
 
         Args:
-            methods_list (List): list with the methods for each option
+            methods_list (List): list with the methods for each option.
             options_list (List[str]): the keys of the options (for the json or for literally print)
             lan (str, optional): language of the menu. Defaults to "en".
             json_file (str, optional): json file with the translations. Defaults to None.
