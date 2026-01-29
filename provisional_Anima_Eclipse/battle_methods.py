@@ -50,11 +50,19 @@ def calc_residual_damage(anima: Anima):
 def _calc_stab(anima: Anima, tech: Technique) -> float:
     return 1.5 if tech.type in (anima.type_a, anima.type_b1, anima.type_b2) else 1
 
-def _calc_atk(anima: Anima, tech: Technique) -> float:
-    return anima.atk * anima.stats_inc_dec["atk"] if tech.category == Category.PHYSICAL else anima.sp_atk * anima.stats_inc_dec["sp_atk"]
+def _calc_atk(anima: Anima, tech: Technique) -> float:   
+    return anima.atk * anima.stats_inc_dec["atk"] if tech.category == Category.PHYSICAL else anima.sp_atk * anima.stats_inc_dec["sp_atk"] 
     
-def _calc_def(anima: Anima, tech: Technique) -> float:
-    return anima.def_ * anima.stats_inc_dec["def"] if tech.category == Category.PHYSICAL else anima.sp_def * anima.stats_inc_dec["sp_def"]
+def _calc_def(anima: Anima, tech: Technique, critical: bool) -> float:
+    if not critical:
+        if tech.category == Category.PHYSICAL:
+            def_ = anima.def_ * anima.stats_inc_dec["def"]
+        else:
+            def_ = anima.sp_def * anima.stats_inc_dec["sp_def"]
+    else:
+        def_ = anima.def_ if tech.category == Category.PHYSICAL else anima.sp_def
+            
+    return int(def_)
 
 def _calc_eff(anima: Anima, tech: Technique) -> float:
     eff = 1

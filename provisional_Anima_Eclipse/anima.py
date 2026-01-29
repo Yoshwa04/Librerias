@@ -147,7 +147,7 @@ class Anima:
                                 "0.8" if nature_effects[DECREASE] == "spe" else
                                 "1.0")
             
-    def calculate_stats(self, first: Optional[bool] = False):
+    def calculate_stats(self):
         self.hp_max = int(give_just_one_solution(solve_equation(formula_dict["hp"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['hp']}", f"potential = {self.potentials['hp']}"), "hp"))
             
         self.atk = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['atk']}", f"potential = {self.potentials['atk']}", f"nature = {self.atk_modifier}"), "stat"))
@@ -166,7 +166,7 @@ class Anima:
         self.lvl += 1
         self.exp -= self.exp_next_lvl # La resta es asi porque aún no se ha calculado la exp del sig lvl.
             
-        self.calculate_stats(False)
+        self.calculate_stats()
             
     def add_exp(self, exp: int):
         self.exp += exp

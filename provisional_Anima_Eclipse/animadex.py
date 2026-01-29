@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from itertools import count
 from typing import Callable, Literal, TypedDict
 
 from arcana import Arcana
@@ -6,16 +7,23 @@ from type import TypeA, TypeB
 from technique import Technique, techdex
 from ability import Ability, abilitydex
 
+
+_animadex_index = count(0)
+
+def _next_animadex_key() -> str:
+    return str(next(_animadex_index)).zfill(3)
+
 @dataclass(slots=True)
 class Animadex():
     name: str
+    id: str
     types: tuple[TypeA, TypeB] | tuple[TypeA, TypeB, TypeB] 
     abilities: dict[str, str, str]
     arcana: Arcana
-    growth: str
+    growth: Literal["fast", "normal", "slow", "parabolic"] 
     exp_base_given: int
     catch_rate: int
-    evolves: str | dict[str, str] | None
+    evolves: str | dict[str, str]
     base_stats: dict[str, int]
     technique_learning: dict[int, str]
     technique_capsules: tuple[str]
@@ -44,16 +52,19 @@ class Animadex():
         types: tuple[TypeA, TypeB] | tuple[TypeA, TypeB, TypeB],
         abilities: dict[str, str, str], 
         arcana: Arcana, 
-        growth: Literal["fast", "nomral", "slow", "parabolic"], 
+        growth: Literal["fast", "normal", "slow", "parabolic"], 
         exp_base_given: int, 
         catch_rate: int, 
-        evolves: str | None, 
+        evolves: str | dict[str, str],  # formato: "lvl:id"/"No"  |  {metodo : id, metodo : id ...} 
         base_stats: dict[str, int], 
         technique_learning: dict[int, str], 
         technique_capsules: tuple[str]
-    ) -> Animadex:
-        return Animadex(
-            name=name,    
+    ) -> tuple[str, Animadex]:
+        animadex_id = _next_animadex_key()
+        
+        return animadex_id, Animadex(
+            name=name,
+            id=animadex_id,    
             types=types,
             abilities=abilities,
             arcana=arcana,
@@ -70,25 +81,15 @@ class Animadex():
 animadex: dict[str, Animadex] = {
     # Ejemplo usando el método
     "000": Animadex._animadex_entry_model(
-        "ejemplo", (TypeA.ESSENTIA, TypeB.AQUA), Animadex._animadex_abilities_model("001", "001", "001"), Arcana.ABYSSUS, "fast", 1, 255, None, 
+        "ejemplo", (TypeA.ESSENTIA, TypeB.AQUA), Animadex._animadex_abilities_model("001", "001", "001"), Arcana.ABYSSUS, "fast", 1, 255, "no", 
         Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
     ),
-    "001": { 
-        "name": "starter", 
-        "types": [TypeA.ESSENTIA, TypeB.COMMUNIS],
-        "abilitys": Animadex._animadex_abilities_model("", "", ""),
-        "arcana": Arcana.TERRA,
-        "growth": "parabolic",
-        "exp_base_given": 64,
-        "catch_rate": 45,
-        "evolves": {"lvl" : 20, "to": "002"},
-        "base_stats": Animadex._animadex_base_stats_model(44, 40, 58, 62, 61, 49),
-        "technique_learning": {
-        },
-        "technique_capsules": {
-            "001" : techdex["000"],
-        },
-    },
+    
+    Animadex._animadex_entry_model(
+      "starter", (TypeA.ESSENTIA, TypeB.COMMUNIS), Animadex._animadex_abilities_model("", "",""), Arcana.TERRA, "parabolic", 64, 45, "20:002", 
+      Animadex._animadex_base_stats_model(hp=44, atk=40, sp_atk=58, _def=62, sp_def=61, spe=49), {}, ()
+    ),
+    
     "002": { 
         "name": "evolved_starter",
         "types": [TypeA.ESSENTIA, TypeB.LUX, TypeB.IGNIS],
