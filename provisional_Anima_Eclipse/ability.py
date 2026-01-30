@@ -34,7 +34,7 @@ class Ability():
         "try to run/change", "foe tries to change",
         "taking_status", "dealing_status", "with_status",
         "stat_fall",
-        "always",
+        "always", "always_stats",
         "foe_ability_affects_you"
     ] 
     effect: str
@@ -50,7 +50,7 @@ def ability_entry_model(
         "try to run/change", "foe tries to change",
         "taking_status", "dealing_status", "with_status",
         "stat_fall",
-        "always",
+        "always", "always_stats",
         "foe_ability_affects_you"
     ], 
     effect: str
@@ -68,8 +68,8 @@ def ability_entry_model(
 abilitydex: dict[str, Ability] = {
     ability_entry_model("example", "always", "nothing"),
     
-    ability_entry_model("Huge Power", "always", "x2 atk"),
-    ability_entry_model("Canalize", "always", "x2 sp_atk"),
+    ability_entry_model("Huge Power", "always_stats", "x2 atk"),
+    ability_entry_model("Canalize", "always_stats", "x2 sp_atk"),
     ability_entry_model("Intimidate", "entering_battle", "-1 foe atk"),
     ability_entry_model("Disrupt", "entering_battle", "-1 foe sp_atk"),
     ability_entry_model("Flash", "entering_battle", "-1 foe acc"),

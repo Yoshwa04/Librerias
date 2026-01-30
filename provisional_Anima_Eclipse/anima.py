@@ -39,6 +39,9 @@ class Anima:
         self.evolves = animadex[self.animadex]["evolves"]
         self.base_stats = animadex[nAnimadex]["base_stats"]
         
+        if self.ability["when"] == "always_stats":
+            pass # Aqui va el metodo de la habilidad en cuestion??? 
+        
         self.object = object
         
         self.nature = nature if nature else self._random_nature()
@@ -56,8 +59,7 @@ class Anima:
             "eva": 0,
         }
         self.crit_index = 0
-        if self.ability["when"] == "always":
-            pass # Aqui va el metodo de la habilidad en cuestion??? Crear un tipo de habilidad tipo always_stats???????
+        
         
         self.exp = 0
         self._init_technique_set()
@@ -170,7 +172,7 @@ class Anima:
         
         possible = self._can_evolve()
         if possible:
-            return possible 
+            return possible
      
     def _can_evolve(self, used_item: str | None = None) -> list[str]:
         evolutions = animadex[self.animadex]["evolves"]
