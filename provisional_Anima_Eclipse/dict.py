@@ -23,7 +23,6 @@ formula_dict: dict[str, str] = {
     "growth": growth_dict,
     "hit_chance": "hit_chance = move_accuracy * (attacker_accuracy/defender_evasion) / 100", 
                   # Este número sera el que se use cuando se verifique en combate, con uno random del 0 al 1, si es mayor o igual a ese random entonces le da
-    
 }
 '''A bunch of formulas'''
 

@@ -36,7 +36,7 @@ class Anima:
         self.growth = animadex[self.animadex]["growth"]
         self.exp_base_given = animadex[self.animadex]["exp_base_given"]
         self.catch_rate = animadex[self.animadex]["catch_rate"]
-        self.evolves = animadex[self.animadex]["evolves"] ######
+        self.evolves = animadex[self.animadex]["evolves"]
         self.base_stats = animadex[nAnimadex]["base_stats"]
         
         self.object = object
@@ -164,15 +164,15 @@ class Anima:
     
     def lvl_up(self):
         self.lvl += 1
-        self.exp -= self.exp_next_lvl # La resta es asi porque aún no se ha calculado la exp del sig lvl.
+        self.exp -= self.exp_next_lvl
             
         self.calculate_stats()
         
-        possible = self.can_evolve()
+        possible = self._can_evolve()
         if possible:
             return possible 
      
-    def can_evolve(self, used_item: str | None = None) -> list[str]:
+    def _can_evolve(self, used_item: str | None = None) -> list[str]:
         evolutions = animadex[self.animadex]["evolves"]
         possible = []
         
