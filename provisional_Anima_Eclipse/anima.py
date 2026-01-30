@@ -5,13 +5,12 @@ import random
 
 from logic.math_core.solver import solve_equation, give_just_one_solution
 
-from arcana import Arcana
 from animadex import animadex
 from constants import INCREASE, DECREASE, MAX_LVL, MAX_STAT_INCREASE_DECREASE
 from dict import  formula_dict
 from nature import Nature, nature_dict
 from status import *
-from type import TypeA, TypeB
+from type import TypeA
 from technique import Technique
 
 
