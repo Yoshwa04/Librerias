@@ -18,7 +18,7 @@ formula_dict: dict[str, str] = {
     "stat": "stat = (5 + (lvl/100 * ((stat_base*2) + potential))) * nature",
     "catch": "catch = (hp_max*3 - hp_now*2) * catch_ratio * ball_ratio/hp_max*3 * status",
     "damage": f"damage = (stab * eff * {random.randint(75, 100)} * (((1/5 * lvl +1) * atk * power) / (25 * def) + 2)) / 100",
-    "exp_given": "exp_given = (exp_base_given*lvl/participants/5) * ((2*lvl+10)**(5/2)) / ((lvl+ally_lvl+10)**(5/2)) + 1) * combat_type * object_mod * arcana_mod", 
+    "exp_given": "exp_given = (exp_base_given*lvl/participants/5) * ((2*lvl+10)**(5/2)) / ((lvl+ally_lvl+10)**(5/2)) + 1) * combat_type * object_mod * arcana_mod", #VERIFICAR FORMULA
                  # combat_type: si es wild 1 si no 1.5
     "growth": growth_dict,
     "hit_chance": "hit_chance = move_accuracy * (attacker_accuracy/defender_evasion) / 100", 
@@ -62,12 +62,12 @@ stat_inc_dec_dict: dict[int, float] = {
 '''A dictionary that contains the min and max increases/decreases a regular stat can have (atk, sp atk, def, sp def, spe)'''
 
 critical_index_dict: dict[int, float] = {   
-    0: 6.25/100,
-    1: 12.5/100,
-    2: 25/100,
-    3: 33.3/100,
-    4: 50/100,
-    5: 75/100,
-    6: 100/100
+    0: 0.0625,
+    1: 0.125,
+    2: 0.25,
+    3: 0.333,
+    4: 0.5,
+    5: 0.75,
+    6: 1
 }
 '''A dictionary that contains the critical hit chance percentages based on the index'''

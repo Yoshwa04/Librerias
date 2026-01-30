@@ -6,7 +6,7 @@ import random
 from logic.math_core.solver import solve_equation, give_just_one_solution
 
 from animadex import animadex
-from constants import INCREASE, DECREASE, MAX_LVL, MAX_STAT_INCREASE_DECREASE
+from constants import INCREASE, DECREASE, ANIMA_MAX_LVL
 from dict import  formula_dict
 from nature import Nature, nature_dict
 from status import *
@@ -22,6 +22,7 @@ class Anima:
         self.lvl = random.randint(min_lvl, max_lvl)
         self.alive_status = AliveStatus.ALIVE; self.element_status = ElementStatus.NOTHING; self.behave_status = BehaveStatus.NOTHING; self.special_status = SpecialStatus.NOTHING; 
         self.name = animadex[self.animadex]["name"]
+        
         
         
         self.type_a = animadex[self.animadex]["types"][0]
@@ -56,7 +57,7 @@ class Anima:
         }
         self.crit_index = 0
         if self.ability["when"] == "always":
-            pass # Aqui va el metodo de la habilidad en cuestion???
+            pass # Aqui va el metodo de la habilidad en cuestion??? Crear un tipo de habilidad tipo always_stats???????
         
         self.exp = 0
         self._init_technique_set()
@@ -159,7 +160,7 @@ class Anima:
         
         self.spe = int(give_just_one_solution(solve_equation(formula_dict["stat"], f"lvl = {self.lvl}", f"stat_base = {self.base_stats['spe']}", f"potential = {self.potentials['spe']}", f"nature = {self.spe_modifier}"), "stat"))
         
-        self.exp_next_lvl = -1 if self.lvl >= MAX_LVL else int(give_just_one_solution(solve_equation(formula_dict["growth"][self.growth], f"lvl = {self.lvl + 1}"), "growth")) - int(give_just_one_solution(solve_equation(formula_dict["growth"][self.growth], f"lvl = {self.lvl}"), "growth"))
+        self.exp_next_lvl = -1 if self.lvl >= ANIMA_MAX_LVL else int(give_just_one_solution(solve_equation(formula_dict["growth"][self.growth], f"lvl = {self.lvl + 1}"), "growth")) - int(give_just_one_solution(solve_equation(formula_dict["growth"][self.growth], f"lvl = {self.lvl}"), "growth"))
     
     def lvl_up(self):
         self.lvl += 1
@@ -169,7 +170,7 @@ class Anima:
         
         possible = self.can_evolve()
         if possible:
-            return possible # Aqui luego fuera del combate supongo, hacer un evolve() para que evolucione
+            return possible 
      
     def can_evolve(self, used_item: str | None = None) -> list[str]:
         evolutions = animadex[self.animadex]["evolves"]
@@ -192,17 +193,13 @@ class Anima:
         self.type_b1 = data["types"][1]
         self.type_b2 = data["types"][2] if len(data["types"]) > 2 else None
         self.arcana = data["arcana"]
-        self.growth = data["growth"]
         self.exp_base_given = data["exp_base_given"]
-        self.catch_rate = data["catch_rate"]
         self.evolves = data["evolves"]
         self.base_stats = data["base_stats"]
         self.technique_learning = data["technique_learning"]
         self.assisted_techniques = data["technique_capsules"]
 
-        self._random_ability()
         self.calculate_stats()
-        self.hp_now = self.hp_max
             
     def add_exp(self, exp: int):
         self.exp += exp

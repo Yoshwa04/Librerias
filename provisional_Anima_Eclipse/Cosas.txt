@@ -159,6 +159,12 @@ Objetos: Algunos pueden ser usables, otros no, por tanto deben tener un atributo
 ------------------------------------------------
 
 
+Las evoluciones seran como en los Pokemon Leyendas, o Digimon creo, en las que al llegar al nivel requerido para evolucionar, saldra un icono y el jugador le deberá dar a evolucionar manualmente, (así podría meter varias evoluciones por niveles distintos, en la que se cogería la de nivel más alto), mezclando un poco la forma de evolucion que hay en digimon, siendo mucho menos ramificada esta por supuesto
+
+
+------------------------------------------------
+
+
 Decidido: Combate estilo full pokemon - De Persona las arcanas y los vínculos/confidentes, y stats sociales + acciones por el día/tarde/noche, Días límite para hacer estas acciones (repartir el tiempo de manera eficiente para subir a los confidentes disponibles, subir las stats sociales, e ir a las zonas/dungeons desbloqueadas para subir de nivel a las Animas y/o capturar de nuevas y hacer ciertas misiones secundarias, mayormente pseudo bosses que dan experiencia, items etc, etc) -
 
 Básicamente el combate es Pokemon y fuera de el es un Persona

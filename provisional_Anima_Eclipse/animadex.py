@@ -97,7 +97,7 @@ animadex: dict[str, Animadex] = {
       Animadex._animadex_base_stats_model(hp=58, atk=54, sp_atk=72, _def=79, sp_def=77, spe=56), {}, ()
     ),
     Animadex._animadex_entry_model( ##### HAY QUE DARLE UN TIPO MAS 
-      "final_starter", (TypeA.ESSENTIA, TypeB.IGNIS), Animadex._animadex_abilities_model("", "",""), Arcana.TERRA, "parabolic", 208, 45,
+      "final_starter", (TypeA.ESSENTIA, TypeB.IGNIS, TypeB.LUX), Animadex._animadex_abilities_model("", "",""), Arcana.TERRA, "parabolic", 208, 45,
       [], 
       Animadex._animadex_base_stats_model(hp=80, atk=68, sp_atk=90, _def=121, sp_def=90, spe=70), {}, ()
     ),
@@ -107,12 +107,12 @@ animadex: dict[str, Animadex] = {
       Animadex._animadex_base_stats_model(hp=49, atk=55, sp_atk=44, _def=60, sp_def=60, spe=53), {}, ()
     ),
     Animadex._animadex_entry_model(
-      "evolved_rival_starter", (TypeA.FORMA, TypeB.SINISTER), Animadex._animadex_abilities_model("", "",""), Arcana.ABYSSUS, "parabolic", 141, 45,
+      "evolved_rival_starter", (TypeA.FORMA, TypeB.AQUA), Animadex._animadex_abilities_model("", "",""), Arcana.ABYSSUS, "parabolic", 141, 45,
       [{"method": "level", "value": "40", "to": "006"}], 
       Animadex._animadex_base_stats_model(hp=61, atk=70, sp_atk=59, _def=81, sp_def=74, spe=61), {}, ()
     ),
     Animadex._animadex_entry_model(
-      "final_rival_starter", (TypeA.FORMA, TypeB.SINISTER, TypeB.AQUA), Animadex._animadex_abilities_model("", "",""), Arcana.ABYSSUS, "parabolic", 208, 45,
+      "final_rival_starter", (TypeA.FORMA, TypeB.AQUA, TypeB.SINISTER), Animadex._animadex_abilities_model("", "",""), Arcana.ABYSSUS, "parabolic", 208, 45,
       [], 
       Animadex._animadex_base_stats_model(hp=90, atk=92, sp_atk=61, _def=100, sp_def=113, spe=72), {}, ()
     ),
@@ -122,12 +122,12 @@ animadex: dict[str, Animadex] = {
       Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {}, ()
     ),
     Animadex._animadex_entry_model(
-      "evolved_antagonist_starter", (TypeA.VOLUNTAS, TypeB.VENENUM), Animadex._animadex_abilities_model("", "",""), Arcana.HALOS, "parabolic", 141, 45,
+      "evolved_antagonist_starter", (TypeA.VOLUNTAS, TypeB.PLANTA), Animadex._animadex_abilities_model("", "",""), Arcana.HALOS, "parabolic", 141, 45,
       [{"method": "level", "value": "40", "to": "009"}], 
       Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {}, ()
     ),
     Animadex._animadex_entry_model(
-      "final_antagonist_starter", (TypeA.VOLUNTAS, TypeB.VENENUM, TypeB.PLANTA), Animadex._animadex_abilities_model("", "",""), Arcana.HALOS, "parabolic", 208, 45,
+      "final_antagonist_starter", (TypeA.VOLUNTAS, TypeB.PLANTA, TypeB.VENENUM), Animadex._animadex_abilities_model("", "",""), Arcana.HALOS, "parabolic", 208, 45,
       [], 
       Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {}, ()
     ),
@@ -259,6 +259,38 @@ animadex: dict[str, Animadex] = {
       [],
       Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
     ),
+    Animadex._animadex_entry_model(
+      "Ground1", (TypeA.NEUTRO, TypeB.TERRA), Animadex._animadex_abilities_model("", "", ""), Arcana.TERRA, "normal", 00, 90,
+      [{"method": "level", "value": "27", "to": "035"}],
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    ),
+    Animadex._animadex_entry_model(
+      "Ground1.2", (TypeA.NEUTRO, TypeB.TERRA, TypeB.VENENUM), Animadex._animadex_abilities_model("", "", ""), Arcana.ZENITH, "normal", 00, 90,
+      [],
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    ),
+    Animadex._animadex_entry_model(
+      "Fighting1", (TypeA.FLUXOR, TypeB.PUGNA), Animadex._animadex_abilities_model("", "", ""), Arcana.HALOS, "parabolic", 00, 90,
+      [{"method": "item", "value": "piedra_fina", "to": "037"}],
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    ),
+    Animadex._animadex_entry_model(
+      "Fighting1.2", (TypeA.FLUXOR, TypeB.PUGNA), Animadex._animadex_abilities_model("", "", ""), Arcana.HALOS, "parabolic", 00, 90,
+      [],
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    ),
+    Animadex._animadex_entry_model(
+      "Fighting2", (TypeA.ESSENTIA, TypeB.PUGNA), Animadex._animadex_abilities_model("", "", ""), Arcana.ECLIPSIS, "slow", 00, 90,
+      [],
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    ),
+    Animadex._animadex_entry_model(
+      "Fighting3", (TypeA.VOLUNTAS, TypeB.PUGNA), Animadex._animadex_abilities_model("", "", ""), Arcana.NEBULA, "slow", 00, 90,
+      [],
+      Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+    ),
+    
+    
     
     
     

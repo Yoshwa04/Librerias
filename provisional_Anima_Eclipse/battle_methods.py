@@ -12,14 +12,14 @@ from constants import ELEMENT_STATUS_RESIDUAL_DAMAGE
 # PROVISIONAL
 
 # el lvl si es el del que has debilitado lo tengo que poner que se pase por parametro.
-def calc_exp(player: Player, anima: Anima, foe_anima: Anima, combat_type: float) -> int:
+def calc_exp(player: Player, anima: Anima, fainted_anima: Anima, combat_type: float) -> int:
     for confident in player.confidents:
         arcana_lvl = confident.lvl if anima.arcana == confident.arcana else arcana_lvl = 0
     
     arcana_mod = arcana_mod_dict.get(arcana_lvl)
     object_mod = 1.5 if anima.object == "lucky_egg" else object_mod = 1 # el objeto no se como se hará al final, de momento lo dejo como un str y ya
     
-    return int(give_just_one_solution(solve_equation(formula_dict["exp_given"], f"exp_base_given = {foe_anima.exp_base_given}", f"lvl = {foe_anima.lvl}", f"participants = ", f"ally_lvl = ", f"combat_type = {combat_type}", f"object_mod = {object_mod}", f"arcana_mod = {arcana_mod}"), "exp_given"))  
+    return int(give_just_one_solution(solve_equation(formula_dict["exp_given"], f"exp_base_given = {fainted_anima.exp_base_given}", f"lvl = {fainted_anima.lvl}", f"participants = ", f"ally_lvl = ", f"combat_type = {combat_type}", f"object_mod = {object_mod}", f"arcana_mod = {arcana_mod}"), "exp_given"))  
 
 
 # Esto se guardara en la logica del combate, para poder mandar el mensaje de ¡FALLAS / ESQUIVAS!... y tal
@@ -50,19 +50,37 @@ def calc_residual_damage(anima: Anima):
 def _calc_stab(anima: Anima, tech: Technique) -> float:
     return 1.5 if tech.type in (anima.type_a, anima.type_b1, anima.type_b2) else 1
 
-def _calc_atk(anima: Anima, tech: Technique) -> float:   
-    return anima.atk * anima.stats_inc_dec["atk"] if tech.category == Category.PHYSICAL else anima.sp_atk * anima.stats_inc_dec["sp_atk"] 
+def _calc_atk(anima: Anima, tech: Technique, critical: bool) -> float:
+    if tech.category == Category.PHYSICAL:
+        atk = anima.atk
+        if critical:
+            atk *= stat_inc_dec_dict[anima.stats_inc_dec["atk"]] if anima.stats_inc_dec["atk"] > 0 else 1
+        else:
+            atk *= stat_inc_dec_dict[anima.stats_inc_dec["atk"]]
+    else:
+        atk = anima.sp_atk
+        if critical:
+            atk *= stat_inc_dec_dict[anima.stats_inc_dec["sp_atk"]] if anima.stats_inc_dec["sp_atk"] > 0 else 1
+        else:
+            atk *= stat_inc_dec_dict[anima.stats_inc_dec["sp_atk"]]
+       
+    return atk 
     
 def _calc_def(anima: Anima, tech: Technique, critical: bool) -> float:
-    if not critical:
-        if tech.category == Category.PHYSICAL:
-            def_ = anima.def_ * anima.stats_inc_dec["def"]
+    if tech.category == Category.PHYSICAL:
+        def_ = anima.def_
+        if critical:
+            def_ *= stat_inc_dec_dict[anima.stats_inc_dec["def"]] if anima.stats_inc_dec["def"] < 0 else 1
         else:
-            def_ = anima.sp_def * anima.stats_inc_dec["sp_def"]
+             def_ *= stat_inc_dec_dict[anima.stats_inc_dec["def"]]
     else:
-        def_ = anima.def_ if tech.category == Category.PHYSICAL else anima.sp_def
+        def_ = anima.sp_def
+        if critical:
+            def_ *= stat_inc_dec_dict[anima.stats_inc_dec["sp_def"]] if anima.stats_inc_dec["sp_def"] < 0 else 1
+        else:
+             def_ *= stat_inc_dec_dict[anima.stats_inc_dec["sp_def"]]
             
-    return int(def_)
+    return def_
 
 def _calc_eff(anima: Anima, tech: Technique) -> float:
     eff = 1
