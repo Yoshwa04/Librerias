@@ -154,8 +154,8 @@ animadex: dict[str, Animadex] = {
   Animadex._animadex_entry_model(
     "bug1.2", (TypeA.FORMA, TypeB.INSECTUM, TypeB.TERRA), Animadex._animadex_abilities_model("", "",""), Arcana.TERRA, "fast", 1, 255,
     [
-        {"method": "level", "value": "17", "to": "015"},
-        {"method": "item", "value": "piedra_dura", "to": "016"}
+      {"method": "level", "value": "17", "to": "015"},
+      {"method": "item", "value": "piedra_dura", "to": "016"}
     ],
     Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {}, ()
   ),
@@ -217,10 +217,10 @@ animadex: dict[str, Animadex] = {
   Animadex._animadex_entry_model(
     "eevee", (TypeA.NEUTRO, TypeB.COMMUNIS), Animadex._animadex_abilities_model("", "", ""), Arcana.TERRA, "normal", 00, 150,
     [
-        {"method": "item", "value": "piedra_fuego", "to": "027"},
-        {"method": "item", "value": "piedra_hielo", "to": "028"},
-        {"method": "item", "value": "piedra_lunar", "to": "029"},
-        {"method": "item", "value": "piedra_dura", "to": "030"}
+      {"method": "item", "value": "piedra_fuego", "to": "027"},
+      {"method": "item", "value": "piedra_hielo", "to": "028"},
+      {"method": "item", "value": "piedra_lunar", "to": "029"},
+      {"method": "item", "value": "piedra_dura", "to": "030"}
     ],
     Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
   ),
@@ -265,7 +265,7 @@ animadex: dict[str, Animadex] = {
     Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
   ),
   Animadex._animadex_entry_model(
-    "Ground1.2", (TypeA.NEUTRO, TypeB.TERRA, TypeB.VENENUM), Animadex._animadex_abilities_model("", "", ""), Arcana.ZENITH, "normal", 00, 90,
+    "Ground1.2", (TypeA.NEUTRO, TypeB.TERRA, TypeB.VENENUM), Animadex._animadex_abilities_model("", "", ""), Arcana.TERRA, "normal", 00, 90,
     [],
     Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
   ),
@@ -289,6 +289,45 @@ animadex: dict[str, Animadex] = {
     [],
     Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
   ),
+  Animadex._animadex_entry_model(
+    "Digimon1", (TypeA.FLUXOR, TypeB.GLACIES), Animadex._animadex_abilities_model("", "", ""), Arcana.ZENITH, "slow", 00, 90,
+    [
+      {"method": "level", "value": "35", "to": "041"},
+      {"method": "level", "value": "37", "to": "043"},
+      {"method": "level", "value": "39", "to": "045"},
+    ],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+  Animadex._animadex_entry_model(
+    "Digimon1.2", (TypeA.FLUXOR, TypeB.GLACIES, TypeB.PLANTA), Animadex._animadex_abilities_model("", "", ""), Arcana.ZENITH, "slow", 00, 90,
+    [],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+  Animadex._animadex_entry_model(
+    "Digimon1.2.2", (TypeA.FLUXOR, TypeB.GLACIES, TypeB.PLANTA), Animadex._animadex_abilities_model("", "", ""), Arcana.ZENITH, "slow", 00, 90,
+    [],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+  Animadex._animadex_entry_model(
+    "Digimon1.3", (TypeA.FLUXOR, TypeB.GLACIES, TypeB.AQUA), Animadex._animadex_abilities_model("", "", ""), Arcana.ZENITH, "slow", 00, 90,
+    [],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+  Animadex._animadex_entry_model(
+    "Digimon1.3.2", (TypeA.FLUXOR, TypeB.GLACIES, TypeB.AQUA), Animadex._animadex_abilities_model("", "", ""), Arcana.ZENITH, "slow", 00, 90,
+    [],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+  Animadex._animadex_entry_model(
+    "Digimon1.4", (TypeA.FLUXOR, TypeB.GLACIES, TypeB.IGNIS), Animadex._animadex_abilities_model("", "", ""), Arcana.ZENITH, "slow", 00, 90,
+    [],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+  Animadex._animadex_entry_model(
+    "Digimon1.4.2", (TypeA.FLUXOR, TypeB.GLACIES, TypeB.IGNIS), Animadex._animadex_abilities_model("", "", ""), Arcana.ZENITH, "slow", 00, 90,
+    [],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
   
   
   
@@ -297,6 +336,7 @@ animadex: dict[str, Animadex] = {
   
   
   
+  #Legendaries
   Animadex._animadex_entry_model(
     "legendary1", (TypeA.ESSENTIA, TypeB.PSYCHICUS), Animadex._animadex_abilities_model("", "", ""), Arcana.ZENITH, "slow", 00, 3,
     [],
