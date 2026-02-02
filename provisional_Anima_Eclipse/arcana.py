@@ -16,7 +16,7 @@ class Arcana(Enum):
     STELLA = "Stella"
     
     # Enemy not enemy
-    HALOS = "Halos"
+    HALOS = "Halos"   # Este sube solo con la historia
     
     # Rival enemy
-    ABYSSUS = "Abyssus"
+    ABYSSUS = "Abyssus" # Este sube solo con la historia

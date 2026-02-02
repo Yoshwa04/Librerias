@@ -39,9 +39,7 @@ def calc_direct_damage(anima_atk: Anima, anima_def: Anima, tech: Technique, crit
     def_ = _calc_def(anima_def, tech)
     eff = _calc_eff(anima_def, tech)
     
-    crit = 1.5 if critical else 1
-    
-    return int(give_just_one_solution(solve_equation(formula_dict["damage"], f"stab = {stab}", f"eff = {eff}", f"lvl = {anima_atk.lvl}", f"atk = {atk}", f"power = {tech.power}", f"def = {def_}"), "damage") * crit)
+    return int(give_just_one_solution(solve_equation(formula_dict["damage"], f"stab = {stab}", f"eff = {eff}", f"lvl = {anima_atk.lvl}", f"atk = {atk}", f"power = {tech.power}", f"def = {def_}"), "damage") * 1.5 if critical else 1)
 
 def calc_residual_damage(anima: Anima):
     return int(anima.hp_max/ELEMENT_STATUS_RESIDUAL_DAMAGE)
@@ -72,13 +70,13 @@ def _calc_def(anima: Anima, tech: Technique, critical: bool) -> float:
         if critical:
             def_ *= stat_inc_dec_dict[anima.stats_inc_dec["def"]] if anima.stats_inc_dec["def"] < 0 else 1
         else:
-             def_ *= stat_inc_dec_dict[anima.stats_inc_dec["def"]]
+            def_ *= stat_inc_dec_dict[anima.stats_inc_dec["def"]]
     else:
         def_ = anima.sp_def
         if critical:
             def_ *= stat_inc_dec_dict[anima.stats_inc_dec["sp_def"]] if anima.stats_inc_dec["sp_def"] < 0 else 1
         else:
-             def_ *= stat_inc_dec_dict[anima.stats_inc_dec["sp_def"]]
+            def_ *= stat_inc_dec_dict[anima.stats_inc_dec["sp_def"]]
             
     return def_
 

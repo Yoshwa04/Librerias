@@ -18,12 +18,12 @@ class Animadex():
   name: str
   id: str
   types: tuple[TypeA, TypeB] | tuple[TypeA, TypeB, TypeB] 
-  abilities: dict[str, str, str]
+  abilities: dict[str, str]
   arcana: Arcana
   growth: Literal["fast", "normal", "slow", "parabolic"] 
   exp_base_given: int
   catch_rate: int
-  evolves: list[dict]
+  evolves: list[dict[str, str]]
   base_stats: dict[str, int]
   technique_learning: dict[int, str]
   technique_capsules: tuple[str]
@@ -39,7 +39,7 @@ class Animadex():
       "spe" : spe,  
     }
       
-  def _animadex_abilities_model(ability1: str, ability2: str, hidden: str) -> dict[str, Ability]:
+  def _animadex_abilities_model(ability1: str, ability2: str, hidden: str) -> dict[str, str]:
     '''This method just returns a dict of the abilitys given'''
     return {
       "001" : ability1,
@@ -119,17 +119,17 @@ animadex: dict[str, Animadex] = {
   Animadex._animadex_entry_model(
     "antagonist_starter", (TypeA.VOLUNTAS, TypeB.COMMUNIS), Animadex._animadex_abilities_model("", "",""), Arcana.HALOS, "parabolic", 64, 45,
     [{"method": "level", "value": "20", "to": "008"}], 
-    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {}, ()
+    Animadex._animadex_base_stats_model(hp=40, atk=37, sp_atk=65, _def=60, sp_def=59, spe=55), {}, ()
   ),
   Animadex._animadex_entry_model(
     "evolved_antagonist_starter", (TypeA.VOLUNTAS, TypeB.PLANTA), Animadex._animadex_abilities_model("", "",""), Arcana.HALOS, "parabolic", 141, 45,
     [{"method": "level", "value": "40", "to": "009"}], 
-    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {}, ()
+    Animadex._animadex_base_stats_model(hp=52, atk=49, sp_atk=83, _def=71, sp_def=69, spe=68), {}, ()
   ),
   Animadex._animadex_entry_model(
     "final_antagonist_starter", (TypeA.VOLUNTAS, TypeB.PLANTA, TypeB.VENENUM), Animadex._animadex_abilities_model("", "",""), Arcana.HALOS, "parabolic", 208, 45,
     [], 
-    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {}, ()
+    Animadex._animadex_base_stats_model(hp=75, atk=58, sp_atk=110, _def=73, sp_def=72, spe=91), {}, ()
   ),
   Animadex._animadex_entry_model(
     "bird1", (TypeA.NEUTRO, TypeB.VENTUS), Animadex._animadex_abilities_model("", "",""), Arcana.AURORA, "parabolic", 1, 200,

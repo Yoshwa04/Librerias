@@ -77,7 +77,9 @@ class Menu:
                 print(self.system_translator.translate("exit")) if self.options[-1].lower() in ("exit", "salir") else print(self.system_translator.translate("go_back"))
                 return
                 
-                
+
+
+# Plantlla:                
 def opcion1():
     print("Has elegido la opción 1")
     

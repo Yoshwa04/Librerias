@@ -5,8 +5,12 @@ def countdown(seconds: int):
         print(f"Tiempo restante: {seconds} segundos")
         time.sleep(1)
         seconds -= 1
-    print("⏰ Tiempo terminado!")
+    print("Tiempo terminado!")
     
 
 def countdown_silent(seconds: int):
     time.sleep(seconds)
+    
+    
+    
+countdown(5)
