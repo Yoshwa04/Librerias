@@ -38,7 +38,7 @@ arcana_mod_dict = {
     7: 1.7,
     8: 1.8,
     9: 1.9,
-    10: 2,
+    10: 2, 
 }
 '''The dictionary to know the multiplier when recieving xp depending on the level of confident of that arcana'''
 
