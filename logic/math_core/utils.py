@@ -8,5 +8,5 @@ def is_valid_expression(expr: str) -> bool:
     except:
         return False
 
-def simplify_expression(expr: str):
+def simplify_expression(expr: str) -> str:
     return simplify(sympify(expr))

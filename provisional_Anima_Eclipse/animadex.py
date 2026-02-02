@@ -334,7 +334,27 @@ animadex: dict[str, Animadex] = {
 
   
   
-  # Evoluciones por arcana máximo (tener 1 de cada arcana)
+  # Evoluciones por arcana nivel máximo (tener 1 de cada arcana)
+  Animadex._animadex_entry_model(
+    "ArcanaEvo", (TypeA.ESSENTIA, TypeB.VENTUS), Animadex._animadex_abilities_model("", "", ""), Arcana.SOL, "slow", 00, 90,
+    [{"method": "arcana", "value": "10", "to": "048"}],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+  Animadex._animadex_entry_model(
+    "ArcanaEvo1.2", (TypeA.ESSENTIA, TypeB.VENTUS), Animadex._animadex_abilities_model("", "", ""), Arcana.SOL, "slow", 00, 90,
+    [],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+  Animadex._animadex_entry_model(
+    "ArcanaEvo", (TypeA.ESSENTIA, TypeB.VENTUS), Animadex._animadex_abilities_model("", "", ""), Arcana.LUNA, "slow", 00, 90,
+    [{"method": "arcana", "value": "10", "to": "048"}],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+  Animadex._animadex_entry_model(
+    "ArcanaEvo1.2", (TypeA.ESSENTIA, TypeB.VENTUS), Animadex._animadex_abilities_model("", "", ""), Arcana.LUNA, "slow", 00, 90,
+    [],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
   Animadex._animadex_entry_model(
     "ArcanaEvo", (TypeA.NEUTRO, TypeB.VENTUS), Animadex._animadex_abilities_model("", "", ""), Arcana.COMETA, "slow", 00, 90,
     [{"method": "arcana", "value": "10", "to": "048"}],
@@ -342,6 +362,96 @@ animadex: dict[str, Animadex] = {
   ),
   Animadex._animadex_entry_model(
     "ArcanaEvo1.2", (TypeA.NEUTRO, TypeB.VENTUS), Animadex._animadex_abilities_model("", "", ""), Arcana.COMETA, "slow", 00, 90,
+    [],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+  Animadex._animadex_entry_model(
+    "ArcanaEvo", (TypeA.FORMA, TypeB.VENTUS), Animadex._animadex_abilities_model("", "", ""), Arcana.TERRA, "slow", 00, 90,
+    [{"method": "arcana", "value": "10", "to": "048"}],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+  Animadex._animadex_entry_model(
+    "ArcanaEvo1.2", (TypeA.FORMA, TypeB.VENTUS), Animadex._animadex_abilities_model("", "", ""), Arcana.TERRA, "slow", 00, 90,
+    [],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+  Animadex._animadex_entry_model(
+    "ArcanaEvo", (TypeA.NEUTRO, TypeB.VENTUS), Animadex._animadex_abilities_model("", "", ""), Arcana.AURORA, "slow", 00, 90,
+    [{"method": "arcana", "value": "10", "to": "048"}],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+  Animadex._animadex_entry_model(
+    "ArcanaEvo1.2", (TypeA.NEUTRO, TypeB.VENTUS), Animadex._animadex_abilities_model("", "", ""), Arcana.AURORA, "slow", 00, 90,
+    [],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+  Animadex._animadex_entry_model(
+    "ArcanaEvo", (TypeA.FORMA, TypeB.VENTUS), Animadex._animadex_abilities_model("", "", ""), Arcana.ECLIPSIS, "slow", 00, 90,
+    [{"method": "arcana", "value": "10", "to": "048"}],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+  Animadex._animadex_entry_model(
+    "ArcanaEvo1.2", (TypeA.FORMA, TypeB.VENTUS), Animadex._animadex_abilities_model("", "", ""), Arcana.ECLIPSIS, "slow", 00, 90,
+    [],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+  Animadex._animadex_entry_model(
+    "ArcanaEvo", (TypeA.VOLUNTAS, TypeB.VENTUS), Animadex._animadex_abilities_model("", "", ""), Arcana.ZENITH, "slow", 00, 90,
+    [{"method": "arcana", "value": "10", "to": "048"}],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+  Animadex._animadex_entry_model(
+    "ArcanaEvo1.2", (TypeA.VOLUNTAS, TypeB.VENTUS), Animadex._animadex_abilities_model("", "", ""), Arcana.ZENITH, "slow", 00, 90,
+    [],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+  Animadex._animadex_entry_model(
+    "ArcanaEvo", (TypeA.ESSENTIA, TypeB.VENTUS), Animadex._animadex_abilities_model("", "", ""), Arcana.UNDAE, "slow", 00, 90,
+    [{"method": "arcana", "value": "10", "to": "048"}],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+  Animadex._animadex_entry_model(
+    "ArcanaEvo1.2", (TypeA.ESSENTIA, TypeB.VENTUS), Animadex._animadex_abilities_model("", "", ""), Arcana.UNDAE, "slow", 00, 90,
+    [],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+  Animadex._animadex_entry_model(
+    "ArcanaEvo", (TypeA.VOLUNTAS, TypeB.VENTUS), Animadex._animadex_abilities_model("", "", ""), Arcana.NEBULA, "slow", 00, 90,
+    [{"method": "arcana", "value": "10", "to": "048"}],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+  Animadex._animadex_entry_model(
+    "ArcanaEvo1.2", (TypeA.VOLUNTAS, TypeB.VENTUS), Animadex._animadex_abilities_model("", "", ""), Arcana.NEBULA, "slow", 00, 90,
+    [],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+  Animadex._animadex_entry_model(
+    "ArcanaEvo", (TypeA.NEUTRO, TypeB.VENTUS), Animadex._animadex_abilities_model("", "", ""), Arcana.STELLA, "slow", 00, 90,
+    [{"method": "arcana", "value": "10", "to": "048"}],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+  Animadex._animadex_entry_model(
+    "ArcanaEvo1.2", (TypeA.NEUTRO, TypeB.VENTUS), Animadex._animadex_abilities_model("", "", ""), Arcana.STELLA, "slow", 00, 90,
+    [],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+  Animadex._animadex_entry_model(
+    "ArcanaEvo", (TypeA.FORMA, TypeB.VENTUS), Animadex._animadex_abilities_model("", "", ""), Arcana.HALOS, "slow", 00, 90,
+    [{"method": "arcana", "value": "10", "to": "048"}],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+  Animadex._animadex_entry_model(
+    "ArcanaEvo1.2", (TypeA.FORMA, TypeB.VENTUS), Animadex._animadex_abilities_model("", "", ""), Arcana.HALOS, "slow", 00, 90,
+    [],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+  Animadex._animadex_entry_model(
+    "ArcanaEvo", (TypeA.FLUXOR, TypeB.VENTUS), Animadex._animadex_abilities_model("", "", ""), Arcana.ABYSSUS, "slow", 00, 90,
+    [{"method": "arcana", "value": "10", "to": "048"}],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+  Animadex._animadex_entry_model(
+    "ArcanaEvo1.2", (TypeA.FLUXOR, TypeB.VENTUS), Animadex._animadex_abilities_model("", "", ""), Arcana.ABYSSUS, "slow", 00, 90,
     [],
     Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
   ),
