@@ -330,9 +330,23 @@ animadex: dict[str, Animadex] = {
   ),
   
   
+
+
   
   
-  
+  # Evoluciones por arcana máximo (tener 1 de cada arcana)
+  Animadex._animadex_entry_model(
+    "ArcanaEvo", (TypeA.NEUTRO, TypeB.VENTUS), Animadex._animadex_abilities_model("", "", ""), Arcana.COMETA, "slow", 00, 90,
+    [{"method": "arcana", "value": "10", "to": "048"}],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+  Animadex._animadex_entry_model(
+    "ArcanaEvo1.2", (TypeA.NEUTRO, TypeB.VENTUS), Animadex._animadex_abilities_model("", "", ""), Arcana.COMETA, "slow", 00, 90,
+    [],
+    Animadex._animadex_base_stats_model(hp=1, atk=1, sp_atk=1, _def=1, sp_def=1, spe=1), {4: techdex["000"]}, ("000")
+  ),
+    
+
   
   
   

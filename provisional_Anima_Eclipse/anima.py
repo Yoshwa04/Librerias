@@ -1,4 +1,6 @@
 import os, sys
+
+from provisional_Anima_Eclipse.confident import Confident
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from typing import Optional
 import random
@@ -174,7 +176,7 @@ class Anima:
         if possible:
             return possible
      
-    def _can_evolve(self, used_item: str | None = None) -> list[str]:
+    def _can_evolve(self, used_item: str | None = None, confident: Confident | None = None) -> list[str]:
         evolutions = animadex[self.animadex]["evolves"]
         possible = []
         
@@ -182,6 +184,8 @@ class Anima:
             if evo["method"] == "level" and self.lvl >= evo["value"]:
                 possible.append(evo["to"])
             elif evo["method"] == "item" and used_item == evo["value"]:
+                possible.append(evo["to"])
+            elif evo["method"] == "arcana" and confident is not None and confident.arcana == self.arcana and confident.lvl >= evo["value"]:
                 possible.append(evo["to"])
                 
         return possible

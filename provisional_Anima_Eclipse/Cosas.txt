@@ -159,7 +159,9 @@ Objetos: Algunos pueden ser usables, otros no, por tanto deben tener un atributo
 ------------------------------------------------
 
 
-Las evoluciones seran como en los Pokemon Leyendas, o Digimon creo, en las que al llegar al nivel requerido para evolucionar, saldra un icono y el jugador le deberá dar a evolucionar manualmente, (así podría meter varias evoluciones por niveles distintos, en la que se cogería la de nivel más alto), mezclando un poco la forma de evolucion que hay en digimon, siendo mucho menos ramificada esta por supuesto
+Las evoluciones seran como en los Pokemon Leyendas, o Digimon creo, en las que al llegar al nivel requerido para evolucionar, saldra un icono y el jugador le deberá dar a evolucionar manualmente, (así podría meter varias evoluciones por niveles distintos, en la que se cogería la de nivel más alto), mezclando un poco la forma de evolucion que hay en digimon, siendo mucho menos ramificada esta por supuesto.
+
+No se si lo haré al final, pero como idea, que para poder evolucionar tambien haya como requisito tener x nivel en una arcana, puede ser una buena manera.
 
 
 ------------------------------------------------

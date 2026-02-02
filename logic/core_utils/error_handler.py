@@ -21,4 +21,4 @@ def safe_execute(func: Callable[..., Any], *args, logger: logging.Logger = None,
             logger.error(f"Error in {func.__name__}: {e}", exc_info=True)
         else:
             print(f"Error in {func.__name__}: {e}")
-        return None
+        return e
