@@ -38,7 +38,7 @@ arcana_mod_dict = {
     7: 1.7,
     8: 1.8,
     9: 1.9,
-    10: 2, 
+    10: 2,
 }
 '''The dictionary to know the multiplier when recieving xp depending on the level of confident of that arcana'''
 
@@ -61,12 +61,12 @@ stat_inc_dec_dict: dict[int, float] = {
 '''A dictionary that contains the min and max increases/decreases a regular stat can have (atk, sp atk, def, sp def, spe)'''
 
 critical_index_dict: dict[int, float] = {   
-    0: 0.0625,
-    1: 0.125,
-    2: 0.25,
-    3: 0.333,
-    4: 0.5,
-    5: 0.75,
+    0: 1/16,
+    1: 1/8,
+    2: 1/4,
+    3: 1/3,
+    4: 1/2,
+    5: 3/4,
     6: 1
 }
 '''A dictionary that contains the critical hit chance percentages based on the index'''
